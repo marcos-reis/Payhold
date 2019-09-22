@@ -21,6 +21,9 @@ Route.get("/", () => {
 });
 
 Route.post("/session", "SessionController.store");
-Route.post("/register", "RegisterController.store");
-Route.post("/partner", "PartnerRegisterController.store");
-Route.get("/partner", "PartnerRegisterController.index");
+Route.post("/user", "UserController.store");
+Route.post("/account", "AccountController.store");
+Route.post("/partner", "PartnerController.store");
+
+Route.get("/partner", "PartnerController.index");
+Route.get("/partner/:id", "PartnerController.show");

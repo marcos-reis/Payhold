@@ -1,6 +1,6 @@
 "use strict";
 const Partner = use("App/Models/Partner");
-class PartnerRegisterController {
+class PartnerController {
   async store({ request, response }) {
     const { name, category, percentage } = request.all();
     const partner = await Partner.create({
@@ -11,9 +11,14 @@ class PartnerRegisterController {
     return { partner };
   }
   async index({ request, response }) {
-    const partner = await Partner.all();
+    const partners = await Partner.all();
+    return { partners };
+  }
+  async show({ request, response }) {
+    const { id } = request.params;
+    const partner = await Partner.find(id);
     return { partner };
   }
 }
 
-module.exports = PartnerRegisterController;
+module.exports = PartnerController;

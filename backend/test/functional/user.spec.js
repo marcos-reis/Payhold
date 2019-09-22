@@ -2,7 +2,7 @@
 
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 
-const { test, trait, ...suite } = use("Test/Suite")("Register");
+const { test, trait, ...suite } = use("Test/Suite")("User");
 
 trait("Test/ApiClient");
 const ace = require("@adonisjs/ace");
@@ -12,14 +12,18 @@ suite.before(async () => {
 });
 test("It shoul register a new user", async ({ assert, client }) => {
   const response = await client
-    .post("/register")
+    .post("/user")
     .send({
       fullname: "Marcos Reis dos Santos",
+      shortname: "Marcos Reis",
       email: "marcosreisdossantos01@gmail.com",
-      cpf: "13245678910",
+      cpf: "12345678910",
+      //saldo: "2.574.900,00",
+      rendimento: "1500,00",
+      //extrato: "Em breve",
       password: "abc123"
     })
     .end();
   response.assertStatus(200);
-  assert.exists(response.body, "user");
+  assert.exists(response.body.user);
 });

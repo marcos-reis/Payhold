@@ -1,23 +1,17 @@
 "use strict";
-const use = global.use;
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 
-const User = use("App/Models/User");
-const { test, trait, ...suite } = use("Test/Suite")("Session");
-
-trait("Test/ApiClient");
-trait("DatabaseTransactions");
-
+const { test, trait, ...suite } = use("Test/Suite")("User");
 const ace = require("@adonisjs/ace");
+const User = use("App/Models/User");
+const Account = use("App/Models/Account");
+trait("Test/ApiClient");
 
 suite.before(async () => {
   await ace.call("migration:refresh", {}, { silent: true });
 });
 
-test("it should receiver a token when authenticated", async ({
-  assert,
-  client
-}) => {
+test("It shoul register a new user account", async ({ assert, client }) => {
   const user = await User.create({
     fullname: "Marcos Reis dos Santos",
     shortname: "Marcos Reis",
@@ -29,12 +23,15 @@ test("it should receiver a token when authenticated", async ({
     password: "abc123"
   });
   const response = await client
-    .post("/session")
+    .post("/account")
     .send({
-      email: user.email,
-      password: "abc123"
+      cod: "060",
+      bank: "Nubank",
+      account: "123456",
+      agency: "1234",
+      owner: user.id
     })
     .end();
   response.assertStatus(200);
-  assert.exists(response.body.token);
+  assert.exists(response.body.bankaccount);
 });

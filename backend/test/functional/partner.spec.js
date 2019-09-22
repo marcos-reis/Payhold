@@ -21,7 +21,7 @@ test("It should register a new partner", async ({ assert, client }) => {
     })
     .end();
   response.assertStatus(200);
-  assert.exists(response.body, "partner");
+  assert.exists(response.body.partner);
 });
 
 test("It should list all partners", async ({ assert, client }) => {
@@ -38,5 +38,21 @@ test("It should list all partners", async ({ assert, client }) => {
   const response = await client.get("/partner").end();
 
   response.assertStatus(200);
-  assert.exists(response.body, "partner");
+  assert.exists(response.body.partners);
+});
+
+test("It should list a only partner, specified by ID", async ({
+  assert,
+  client
+}) => {
+  const partner = await Partner.create({
+    name: "Amazon",
+    category: "E-commerce",
+    percentage: "9,9%"
+  });
+
+  const response = await client.get(`/partner/${partner.id}`).end();
+
+  response.assertStatus(200);
+  assert.exists(response.body.partner);
 });
