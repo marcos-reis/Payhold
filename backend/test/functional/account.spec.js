@@ -29,9 +29,10 @@ test("It shoul register a new user account", async ({ assert, client }) => {
       bank: "Nubank",
       account: "123456",
       agency: "1234",
-      owner: user.id
+      user_id: user.id
     })
     .end();
+  console.log(response.text);
   response.assertStatus(200);
   assert.exists(response.body.bankaccount);
 });

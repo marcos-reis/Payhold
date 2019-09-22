@@ -8,7 +8,7 @@ class AccountSchema extends Schema {
     this.create("accounts", table => {
       table.increments();
       table
-        .integer("owner")
+        .integer("user_id")
         .unsigned()
         .references("id")
         .inTable("users");
