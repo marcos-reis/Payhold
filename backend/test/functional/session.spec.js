@@ -3,7 +3,7 @@ const use = global.use;
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 
 const User = use("App/Models/User");
-const { test, trait, ...suite } = use("Test/Suite")("Session");
+const { test, trait, ...suite } = use("Test/Suite")("Sessions");
 
 trait("Test/ApiClient");
 trait("DatabaseTransactions");

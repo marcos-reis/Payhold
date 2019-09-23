@@ -3,7 +3,7 @@ const Partner = use("App/Models/Partner");
 
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 
-const { test, trait, ...suite } = use("Test/Suite")("Partner");
+const { test, trait, ...suite } = use("Test/Suite")("Partners");
 
 trait("Test/ApiClient");
 const ace = require("@adonisjs/ace");

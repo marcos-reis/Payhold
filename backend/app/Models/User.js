@@ -35,7 +35,7 @@ class User extends Model {
     return this.hasMany("App/Models/Token");
   }
   accounts() {
-    return this.hasMany("App/Models/Account");
+    return this.hasMany("App/Models/BankAccount");
   }
 }
 

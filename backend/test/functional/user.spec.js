@@ -2,7 +2,7 @@
 
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 
-const { test, trait, ...suite } = use("Test/Suite")("User");
+const { test, trait, ...suite } = use("Test/Suite")("Users");
 
 trait("Test/ApiClient");
 const ace = require("@adonisjs/ace");
