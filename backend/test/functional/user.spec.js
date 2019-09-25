@@ -1,27 +1,18 @@
-"use strict";
-
-/** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
-
 const { test, trait, ...suite } = use("Test/Suite")("Users");
+const Factory = use("Factory");
 
 trait("Test/ApiClient");
-const ace = require("@adonisjs/ace");
+trait("DatabaseTransactions");
 
-suite.before(async () => {
-  await ace.call("migration:refresh", {}, { silent: true });
-});
 test("It shoul register a new user", async ({ assert, client }) => {
+  const user = await Factory.model("App/Models/User").make();
   const response = await client
     .post("/user")
     .send({
-      fullname: "Marcos Reis dos Santos",
-      shortname: "Marcos Reis",
-      email: "marcosreisdossantos01@gmail.com",
-      cpf: "12345678910",
-      //saldo: "2.574.900,00",
-      rendimento: "1500,00",
-      //extrato: "Em breve",
-      password: "abc123"
+      fullname: user.fullname,
+      email: user.email,
+      cpf: user.cpf,
+      password: user.password
     })
     .end();
   response.assertStatus(200);

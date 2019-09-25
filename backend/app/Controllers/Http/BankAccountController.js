@@ -1,46 +1,41 @@
-"use strict";
-const BankAccount = use("App/Models/BankAccount");
+/** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
+
+const { validateAll } = use("Validator");
+
 const User = use("App/Models/User");
+const BankAccount = use("App/Models/BankAccount");
+
 class BankAccountController {
-	async store({ request, response }) {
-		const { cod, bank, agency, account, user_id } = request.all();
+  async store({ request, response }) {
+    const data = request.only(["cod", "bank", "agency", "account", "user_id"]);
 
-		if (!cod || !bank || !agency || !account || !user_id) {
-			return response.status(401).json({ mensage: "Enter valid data user." });
-		}
-		const listbankaccountfetch = await BankAccount.query()
-			.where("user_id", user_id)
-			.where("account", account)
-			.fetch();
-		const listbankaccount = listbankaccountfetch.toJSON();
+    const rules = {
+      cod: "required",
+      bank: "required",
+      agency: "required",
+      account: "required|unique:accounts,account",
+      user_id: "required"
+    };
+    const validation = await validateAll(data, rules);
 
-		if (!!listbankaccount[0]) {
-			if (listbankaccount[0].account) {
-				return response
-					.status(401)
-					.json({ message: "Bankaccount already exists." });
-			}
-		}
+    if (validation.fails()) {
+      return validation.messages();
+    }
 
-		const bankaccount = await BankAccount.create({
-			cod,
-			bank,
-			agency,
-			account,
-			user_id
-		});
-		return response.status(200).json({ bankaccount });
-	}
-	async show({ request, response }) {
-		const { id } = request.params;
+    const bankaccount = await BankAccount.create(data);
 
-		const bankaccounts = await User.query()
-			.select("id", "fullname")
-			.where("id", id)
-			.with("accounts")
-			.fetch();
-		return response.status(200).json({ bankaccounts });
-	}
+    return { bankaccount };
+  }
+  async show({ request, response }) {
+    const { id } = request.params;
+
+    const bankaccounts = await User.query()
+      .select("id", "fullname")
+      .where("id", id)
+      .with("accounts")
+      .fetch();
+    return response.status(200).json({ bankaccounts });
+  }
 }
 
 module.exports = BankAccountController;

@@ -10,16 +10,16 @@ class UserSchema extends Schema {
       table.string("fullname", 180).notNullable();
       table.string("shortname", 180);
       table
-        .string("email", 254)
+        .string("email")
         .notNullable()
         .unique();
       table
-        .string("cpf", 254)
+        .string("cpf")
         .notNullable()
         .unique();
-      table.string("saldo", 60).notNullable();
-      table.string("rendimento", 60).notNullable();
-      table.string("extrato", 60).notNullable();
+      table.integer("saldo");
+      table.integer("rendimento");
+      table.string("extrato");
       table.string("password", 60).notNullable();
       table.timestamps();
     });

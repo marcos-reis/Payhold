@@ -1,13 +1,22 @@
-"use strict";
+/** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
+
+const { validateAll } = use("Validator");
+
 const Partner = use("App/Models/Partner");
 class PartnerController {
   async store({ request, response }) {
-    const { name, category, percentage } = request.all();
-    const partner = await Partner.create({
-      name,
-      category,
-      percentage
-    });
+    const data = request.only(["name", "category", "percentage"]);
+    const rules = {
+      name: "required|unique:partners,name",
+      category: "required",
+      percentage: "required"
+    };
+    const validation = await validateAll(data, rules);
+    if (validation.fails()) {
+      return validation.messages();
+    }
+
+    const partner = await Partner.create(data);
     return { partner };
   }
   async index({ request, response }) {

@@ -1,23 +1,18 @@
-"use strict";
-const Partner = use("App/Models/Partner");
-
-/** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
-
 const { test, trait, ...suite } = use("Test/Suite")("Partners");
+const Factory = use("Factory");
 
 trait("Test/ApiClient");
-const ace = require("@adonisjs/ace");
+trait("DatabaseTransactions");
 
-suite.beforeEach(async () => {
-  await ace.call("migration:refresh", {}, { silent: true });
-});
 test("It should register a new partner", async ({ assert, client }) => {
+  const partner = await Factory.model("App/Models/Partner").make();
+
   const response = await client
     .post("/partner")
     .send({
-      name: "Amazon",
-      category: "E-commerce",
-      percentage: "9,9%"
+      name: partner.name,
+      category: partner.category,
+      percentage: partner.percentage
     })
     .end();
   response.assertStatus(200);
@@ -25,18 +20,10 @@ test("It should register a new partner", async ({ assert, client }) => {
 });
 
 test("It should list all partners", async ({ assert, client }) => {
-  await Partner.create({
-    name: "Amazon",
-    category: "E-commerce",
-    percentage: "9,9%"
-  });
-  await Partner.create({
-    name: "Dafiti",
-    category: "E-commerce",
-    percentage: "5,7%"
-  });
-  const response = await client.get("/partner").end();
+  await Factory.model("App/Models/Partner").create();
+  await Factory.model("App/Models/Partner").create();
 
+  const response = await client.get("/partner").end();
   response.assertStatus(200);
   assert.exists(response.body.partners);
 });
@@ -45,11 +32,7 @@ test("It should list a only partner, specified by ID", async ({
   assert,
   client
 }) => {
-  const partner = await Partner.create({
-    name: "Amazon",
-    category: "E-commerce",
-    percentage: "9,9%"
-  });
+  const partner = await Factory.model("App/Models/Partner").create();
 
   const response = await client.get(`/partner/${partner.id}`).end();
 
