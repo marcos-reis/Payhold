@@ -20,8 +20,7 @@ test("It should register a new partner", async ({ assert, client }) => {
 });
 
 test("It should list all partners", async ({ assert, client }) => {
-  await Factory.model("App/Models/Partner").create();
-  await Factory.model("App/Models/Partner").create();
+  await Factory.model("App/Models/Partner").createMany(2);
 
   const response = await client.get("/partner").end();
   response.assertStatus(200);

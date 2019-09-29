@@ -37,6 +37,9 @@ class User extends Model {
   accounts() {
     return this.hasMany("App/Models/BankAccount");
   }
+  financialdatas() {
+    return this.hasMany("App/Models/BankAccount");
+  }
 }
 
 module.exports = User;

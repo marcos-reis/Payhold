@@ -39,7 +39,18 @@ Factory.blueprint("App/Models/BankAccount", (faker, i, data) => {
     bank: faker.company(),
     account: faker.integer({ min: 200000, max: 700000 }),
     agency: faker.integer({ min: 6000, max: 9000 }),
-    user: null,
+    user_id: null,
+    ...data
+  };
+});
+
+Factory.blueprint("App/Models/Financial", (faker, i, data) => {
+  return {
+    operacao: "Cashback",
+    valor: faker.floating({ min: 50, max: 1000, fixed: 2 }),
+    account_id: null,
+    Partner_id: null,
+    user_id: null,
     ...data
   };
 });

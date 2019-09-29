@@ -12,11 +12,11 @@ class AccountSchema extends Schema {
         .unsigned()
         .references("id")
         .inTable("users");
-      table.string("cod", 250).notNullable();
-      table.string("bank", 250).notNullable();
-      table.string("agency", 250).notNullable();
+      table.string("bank").notNullable();
+      table.integer("cod").notNullable();
+      table.integer("agency").notNullable();
       table
-        .string("account", 250)
+        .integer("account")
         .notNullable()
         .unique();
       table.timestamps();
