@@ -46,7 +46,7 @@ export const RowView = styled.View`
   margin-top: 20;
 `;
 
-export const Remember = styled.View`
+export const Remember = styled.TouchableOpacity`
   flex-direction: row;
 `;
 export const TextRemember = styled.Text`
