@@ -1,96 +1,107 @@
-import styled from 'styled-components/native';
-import { Dimensions, Platform, StatusBar } from 'react-native';
+import { StyleSheet, Dimensions, Platform, StatusBar } from 'react-native';
+
 const { width } = Dimensions.get('window');
-
 const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : StatusBar.currentHeight;
-export const Statusbar = styled.StatusBar``;
 
-export const Container = styled.View``;
-export const Containerbg = styled.View`
-  position: absolute;
-`;
-export const Context = styled.View`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-export const Background = styled.Image``;
-
-export const Logo = styled.Image`
-  margin-top: ${STATUSBAR_HEIGHT + width * 0.2};
-`;
-export const Slogan = styled.Text`
-  font-size: 18;
-  color: #fff;
-`;
-export const Form = styled.View`
-  align-items: center;
-`;
-export const ContEmail = styled.View``;
-export const ContPassword = styled.View``;
-export const InputEmail = styled.TextInput`
-  background-color: #fff;
-  width: ${width * 0.75};
-  height: 40;
-  border-radius: 8;
-  margin-top: 60;
-  padding: 0px 15px 0px 40px;
-  font-size: 16px;
-`;
-export const InputPassword = styled.TextInput`
-  background-color: #fff;
-  width: ${width * 0.75};
-  height: 40;
-  border-radius: 8;
-  margin-top: 20;
-  padding: 0px 15px 0px 40px;
-  font-size: 30px;
-`;
-
-export const RowView = styled.View`
-  flex-direction: row;
-  margin-top: 20;
-`;
-
-export const Remember = styled.View`
-  flex-direction: row;
-`;
-export const TextRemember = styled.Text`
-  color: #fff;
-  font-size: 15;
-  margin-left: 10;
-  top: 5;
-`;
-
-export const Forgot = styled.TouchableOpacity``;
-export const TextForgot = styled.Text`
-  color: #fff;
-  font-size: 15;
-  margin-left: 50;
-  top: 5;
-`;
-export const HandleEntry = styled.TouchableOpacity`
-  background-color: #fff;
-  width: ${width * 0.25};
-  height: 40;
-  margin-top: 40;
-  justify-content: center;
-  align-items: center;
-  border-radius: 10;
-`;
-export const TextEntry = styled.Text`
-  color: #5c82ba;
-  font-weight: bold;
-  font-size: 20;
-`;
-export const NotMember = styled.Text`
-  font-size: 15;
-
-  margin-top: 70;
-`;
-export const CreateAccount = styled.TouchableOpacity``;
-export const TextCreate = styled.Text`
-  font-weight: bold;
-  font-size: 15;
-  color: #5c82ba;
-`;
+export const styles = StyleSheet.create({
+  textCreate: {
+    fontWeight: 'bold',
+    fontSize: 15,
+    color: '#5c82ba',
+  },
+  notMember: {
+    fontSize: 15,
+    marginTop: 70,
+  },
+  textEntry: {
+    color: '#5c82ba',
+    fontWeight: 'bold',
+    fontSize: 20,
+  },
+  handleEntry: {
+    backgroundColor: '#fff',
+    width: width * 0.25,
+    height: 40,
+    marginTop: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+  },
+  textForgot: {
+    color: '#fff',
+    fontSize: 15,
+    marginLeft: 50,
+    top: 5,
+  },
+  textRemember: {
+    color: '#fff',
+    fontSize: 15,
+    marginLeft: 10,
+    top: 5,
+  },
+  remember: {
+    flexDirection: 'row',
+  },
+  rowView: {
+    flexDirection: 'row',
+    marginTop: 20,
+  },
+  inputPassword: {
+    backgroundColor: '#fff',
+    width: width * 0.75,
+    height: 40,
+    borderRadius: 8,
+    marginTop: 20,
+    padding: '0 15 0 40',
+    fontSize: 30,
+  },
+  inputEmail: {
+    backgroundColor: '#fff',
+    width: width * 0.75,
+    height: 40,
+    borderRadius: 8,
+    marginTop: 60,
+    paddingTop: 0,
+    paddingRight: 15,
+    paddingLeft: 0,
+    paddingBottom: 40,
+    fontSize: '16px',
+  },
+  form: {
+    alignItems: 'center',
+  },
+  slogan: {
+    fontSize: 18,
+    color: '#fff',
+  },
+  logoImage: {
+    marginTop: STATUSBAR_HEIGHT + width * 0.2,
+  },
+  background: {
+    position: 'absolute',
+  },
+  content: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  email: {
+    top: 95,
+    left: 5,
+    zIndex: 1,
+    elevation: 1,
+  },
+  lock: {
+    top: 55,
+    left: 5,
+    zIndex: 1,
+    elevation: 1,
+  },
+  check: {
+    width: 20,
+    height: 20,
+  },
+  switch: {
+    top: 0,
+  },
+});

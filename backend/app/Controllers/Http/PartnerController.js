@@ -13,7 +13,7 @@ class PartnerController {
     };
     const validation = await validateAll(data, rules);
     if (validation.fails()) {
-      return validation.messages();
+      return response.status(401).json(validation.messages())
     }
 
     const partner = await Partner.create(data);

@@ -30,8 +30,6 @@ export default function Create({ navigation }) {
       password: userpass,
     });
     const { message: messageapi } = response.data[0] || response.data;
-
-    console.log(userpass, response.data);
     messageapi ? setMessage(messageapi) : setMessage(null);
     setConfirmed(!confirmed);
     setTimeout(() => setConfirmed(false), 3000);

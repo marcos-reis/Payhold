@@ -19,12 +19,12 @@ class BankAccountController {
     const validation = await validateAll(data, rules);
 
     if (validation.fails()) {
-      return validation.messages();
+      return response.status(401).json(validation.messages())
     }
 
     const bankaccount = await BankAccount.create(data);
 
-    return { bankaccount };
+    return response.status(200).json({ bankaccount });
   }
   async show({ request, response }) {
     const { id } = request.params;
