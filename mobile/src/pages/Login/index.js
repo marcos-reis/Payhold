@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import CheckBox from '@react-native-community/checkbox';
 
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Switch } from 'react-native';
 import {
   Container,
   Context,
@@ -10,6 +10,8 @@ import {
   Slogan,
   Containerbg,
   Form,
+  ContEmail,
+  ContPassword,
   InputEmail,
   InputPassword,
   HandleEntry,
@@ -46,21 +48,36 @@ export default function Login({ navigation }) {
         <Logo source={logo} />
         <Slogan>Cashback para as suas compras{checked}</Slogan>
         <Form>
-          <Icon
-            style={styles.email}
-            name="perm-identity"
-            size={30}
-            color="#A5A5A5"
-          />
-          <InputEmail />
-          <Icon style={styles.lock} name="lock" size={30} color="#A5A5A5" />
-          <InputPassword />
+          <ContEmail>
+            <Icon
+              style={styles.email}
+              name="perm-identity"
+              size={30}
+              color="#A5A5A5"
+            />
+            <InputEmail
+              defaultValue="marcosreisdossantos01@gmail.com"
+              autoCapitalize="none"
+              returnKeyType="next"
+            />
+          </ContEmail>
+          <ContPassword>
+            <Icon style={styles.lock} name="lock" size={30} color="#A5A5A5" />
+            <InputPassword
+              defaultValue="marcosreis"
+              autoCapitalize="none"
+              returnKeyType="done"
+              secureTextEntry={true}
+            />
+          </ContPassword>
           <RowView>
-            <Remember onPress={() => setChecked(!checked)}>
-              <CheckBox
-                tintColors={{ true: '#fff' }}
+            <Remember>
+              <Switch
+                thumbColor={'#fff'}
+                trackColor={{ true: '#48bd6d', false: null }}
+                style={styles.switch}
                 value={checked}
-                style={styles.check}
+                onChange={() => setChecked(!checked)}
               />
               <TextRemember>Lembrar-me</TextRemember>
             </Remember>
@@ -98,5 +115,8 @@ const styles = StyleSheet.create({
   check: {
     width: 20,
     height: 20,
+  },
+  switch: {
+    top: 0,
   },
 });

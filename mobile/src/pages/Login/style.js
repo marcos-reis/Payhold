@@ -23,14 +23,19 @@ export const Slogan = styled.Text`
   font-size: 18;
   color: #fff;
 `;
-export const Form = styled.View``;
+export const Form = styled.View`
+  align-items: center;
+`;
+export const ContEmail = styled.View``;
+export const ContPassword = styled.View``;
 export const InputEmail = styled.TextInput`
   background-color: #fff;
   width: ${width * 0.75};
   height: 40;
   border-radius: 8;
   margin-top: 60;
-  padding: 0px 5px;
+  padding: 0px 15px 0px 40px;
+  font-size: 16px;
 `;
 export const InputPassword = styled.TextInput`
   background-color: #fff;
@@ -38,7 +43,8 @@ export const InputPassword = styled.TextInput`
   height: 40;
   border-radius: 8;
   margin-top: 20;
-  padding: 0px 5px;
+  padding: 0px 15px 0px 40px;
+  font-size: 30px;
 `;
 
 export const RowView = styled.View`
@@ -46,13 +52,14 @@ export const RowView = styled.View`
   margin-top: 20;
 `;
 
-export const Remember = styled.TouchableOpacity`
+export const Remember = styled.View`
   flex-direction: row;
 `;
 export const TextRemember = styled.Text`
   color: #fff;
   font-size: 15;
   margin-left: 10;
+  top: 5;
 `;
 
 export const Forgot = styled.TouchableOpacity``;
@@ -60,12 +67,13 @@ export const TextForgot = styled.Text`
   color: #fff;
   font-size: 15;
   margin-left: 50;
+  top: 5;
 `;
 export const HandleEntry = styled.TouchableOpacity`
   background-color: #fff;
   width: ${width * 0.25};
   height: 40;
-  margin-top: 50;
+  margin-top: 40;
   justify-content: center;
   align-items: center;
   border-radius: 10;
