@@ -6,6 +6,7 @@ import {
   StatusBar,
   TextInput,
   Text,
+  Alert,
   TouchableOpacity,
 } from 'react-native';
 
@@ -17,17 +18,25 @@ import layout from '../../assets/layout.png';
 import logo from '../../assets/logo.png';
 import api from '../../services/api';
 
-const [checked, setChecked] = useState(false);
-const [useremail, setUserEmail] = useState(null);
-const [userpassword, setUserPassword] = useState(null);
-
 export default function Login({ navigation }) {
+  const [confirmed, setConfirmed] = useState(false);
+  const [message, setMessage] = useState('');
+  const [checked, setChecked] = useState(false);
+  const [useremail, setUserEmail] = useState(null);
+  const [userpassword, setUserPassword] = useState(null);
+
   const callApi = async () => {
     const response = await api.post('/session', {
       email: useremail,
       password: userpassword,
     });
-    console.log(response.data);
+    const { token } = response;
+    const { message: messageapi } = response.data;
+    messageapi
+      ? setMessage(messageapi) + setConfirmed(!confirmed)
+      : setMessage(null);
+
+    console.log(message, confirmed);
   };
 
   return (
@@ -55,7 +64,6 @@ export default function Login({ navigation }) {
               value={useremail}
               onChangeText={setUserEmail}
               style={styles.inputEmail}
-              defaultValue="marcosreisdossantos01@gmail.com"
               autoCapitalize="none"
               returnKeyType="next"
             />
@@ -66,7 +74,6 @@ export default function Login({ navigation }) {
               value={userpassword}
               onChangeText={setUserPassword}
               style={styles.inputPassword}
-              defaultValue="marcosreis"
               autoCapitalize="none"
               returnKeyType="done"
               secureTextEntry={true}
@@ -92,12 +99,26 @@ export default function Login({ navigation }) {
           <Text>Entrar</Text>
         </TouchableOpacity>
         <View style={styles.notMember}>
-          Não é um membro?
+          <Text>Não é um membro?</Text>
           <TouchableOpacity onPress={() => navigation.navigate('Create')}>
             <Text style={styles.textCreate}> Crie sua Conta</Text>
           </TouchableOpacity>
         </View>
       </View>
+      {confirmed &&
+        Alert.alert(
+          message ? 'Sorry' : 'Show',
+          message ? message : 'Cadastro concluido',
+          [
+            {
+              text: 'ok',
+              onPress: () => {
+                setConfirmed(!confirmed);
+                // message ? null : navigation.navigate('Login');
+              },
+            },
+          ]
+        )}
     </View>
   );
 }

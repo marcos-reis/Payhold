@@ -1,5 +1,5 @@
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
-
+const User = use("App/Models/User");
 const { validateAll } = use("Validator");
 
 class SessionController {
@@ -14,11 +14,15 @@ class SessionController {
     const validation = await validateAll(data, rules);
 
     if (validation.fails()) {
-      return response.status(401).json(validation.messages())
+      return validation.messages();
     }
 
-    const { token } = await auth.attempt(email, password);
-    return { token };
+    try {
+      const { token } = await auth.attempt(email, password);
+      return { token };
+    } catch (error) {
+      return { message: "Email ou senha inválido." };
+    }
   }
 }
 

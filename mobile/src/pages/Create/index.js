@@ -6,6 +6,7 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -29,10 +30,10 @@ export default function Create({ navigation }) {
       cpf: usercpf,
       password: userpass,
     });
+
     const { message: messageapi } = response.data[0] || response.data;
     messageapi ? setMessage(messageapi) : setMessage(null);
     setConfirmed(!confirmed);
-    setTimeout(() => setConfirmed(false), 3000);
   };
 
   return (
@@ -57,24 +58,31 @@ export default function Create({ navigation }) {
           style={styles.inputName}
           onChangeText={setUserName}
           value={username}
+          returnKeyType="next"
         />
         <Text style={styles.LabelMail}>Email</Text>
         <TextInput
           onChangeText={setUserEmail}
           value={useremail}
           style={styles.inputMail}
+          autoCapitalize="none"
+          returnKeyType="next"
         />
         <Text style={styles.LabelCPF}>CPF</Text>
         <TextInput
           style={styles.inputCPF}
           onChangeText={setUserCPF}
           value={usercpf}
+          returnKeyType="next"
         />
         <Text style={styles.LabelPassword}>Password</Text>
         <TextInput
           style={styles.inputPassword}
           value={userpass}
           onChangeText={setUserPass}
+          autoCapitalize="none"
+          returnKeyType="done"
+          secureTextEntry={true}
         />
       </View>
 
@@ -82,15 +90,20 @@ export default function Create({ navigation }) {
         <Text style={styles.textCreate}>Confirma</Text>
       </TouchableOpacity>
 
-      {confirmed && (
-        <View style={styles.bgConfirmed}>
-          <View style={styles.boxConfirmed}>
-            <Text style={styles.textConfirmed}>
-              {message ? message : 'Dados Cadastrados com sucesso'}
-            </Text>
-          </View>
-        </View>
-      )}
+      {confirmed &&
+        Alert.alert(
+          message ? 'Sorry' : 'Show',
+          message ? message : 'Cadastro concluido',
+          [
+            {
+              text: 'ok',
+              onPress: () => {
+                setConfirmed(!confirmed);
+                message ? null : navigation.navigate('Login');
+              },
+            },
+          ]
+        )}
     </View>
   );
 }
