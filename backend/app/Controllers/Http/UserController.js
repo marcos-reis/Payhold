@@ -5,7 +5,7 @@ const { validateAll } = use("Validator");
 const User = use("App/Models/User");
 
 class UserController {
-  async store({ request }) {
+  async store({ request, response }) {
     const data = request.only(["fullname", "email", "cpf", "password"]);
 
     const rules = {

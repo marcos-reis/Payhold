@@ -22,21 +22,23 @@ export default function Login({ navigation }) {
   const [confirmed, setConfirmed] = useState(false);
   const [message, setMessage] = useState('');
   const [checked, setChecked] = useState(false);
-  const [useremail, setUserEmail] = useState(null);
-  const [userpassword, setUserPassword] = useState(null);
+  const [useremail, setUserEmail] = useState('marcos@payhold.com');
+  const [userpassword, setUserPassword] = useState('123456');
 
   const callApi = async () => {
     const response = await api.post('/session', {
       email: useremail,
       password: userpassword,
     });
-    const { token } = response;
+    const { token } = response.data;
     const { message: messageapi } = response.data;
     messageapi
       ? setMessage(messageapi) + setConfirmed(!confirmed)
       : setMessage(null);
-
-    console.log(message, confirmed);
+    if (token !== undefined) {
+      navigation.navigate('Dashboard');
+    }
+    console.log(token);
   };
 
   return (
@@ -51,7 +53,7 @@ export default function Login({ navigation }) {
       </View>
       <View style={styles.content}>
         <Image style={styles.logoImage} source={logo} />
-        <Text style={styles.slogan}>Cashback para as suas compras</Text>
+        <Text style={styles.slogan}>Cashback para as suas compras online</Text>
         <View style={styles.form}>
           <View>
             <Icon

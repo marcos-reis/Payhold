@@ -18,24 +18,34 @@ import logo from '../../assets/logo.png';
 export default function Create({ navigation }) {
   const [confirmed, setConfirmed] = useState(false);
   const [message, setMessage] = useState('');
-  const [useremail, setUserEmail] = useState('');
-  const [username, setUserName] = useState('');
-  const [usercpf, setUserCPF] = useState('');
-  const [userpass, setUserPass] = useState('');
-
+  const [useremail, setUserEmail] = useState('marcos@payhold.com');
+  const [username, setUserName] = useState('Marcos Reis');
+  const [usercpf, setUserCPF] = useState('06646456450');
+  const [userpass, setUserPass] = useState('123456');
   const callApi = async () => {
-    const response = await api.post('/user/store', {
-      fullname: username,
-      email: useremail,
-      cpf: usercpf,
-      password: userpass,
-    });
+    try {
+      const response = await api.post(
+        '/user/store',
+        {
+          fullname: username,
+          email: useremail,
+          cpf: usercpf,
+          password: userpass,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
 
-    const { message: messageapi } = response.data[0] || response.data;
-    messageapi ? setMessage(messageapi) : setMessage(null);
-    setConfirmed(!confirmed);
+      const { message: messageapi } = response.data[0] || response.data;
+      messageapi ? setMessage(messageapi) : setMessage(null);
+      setConfirmed(!confirmed);
+    } catch (error) {
+      console.log(error);
+    }
   };
-
   return (
     <View style={styles.container}>
       <StatusBar
@@ -51,7 +61,7 @@ export default function Create({ navigation }) {
         onPress={() => navigation.navigate('Login')}
       />
       <Image source={logo} />
-      <Text style={styles.slogan}>Cashback para suas compras</Text>
+      <Text style={styles.slogan}>Cashback para suas compras online</Text>
       <View>
         <Text style={styles.labelName}>Nome</Text>
         <TextInput
