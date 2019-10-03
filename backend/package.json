@@ -26,12 +26,22 @@
     "@adonisjs/ignitor": "^2.0.8",
     "@adonisjs/lucid": "^6.1.3",
     "@adonisjs/validator": "^5.0.6",
-    "@adonisjs/vow": "^1.0.17"
-  },
-  "devDependencies": {
+    "@adonisjs/vow": "^1.0.17",
     "sqlite3": "^4.1.0"
   },
+  "devDependencies": {},
   "autoload": {
     "App": "./app"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marcos-reis/payhold-backend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/marcos-reis/payhold-backend/issues"
+  },
+  "homepage": "https://github.com/marcos-reis/payhold-backend#readme"
 }

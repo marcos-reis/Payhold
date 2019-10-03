@@ -9,12 +9,15 @@ import {
   Text,
   TouchableOpacity,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import layout from '../../assets/layout2.png';
 import logo from '../../assets/logo.png';
 import amazon from '../../assets/amazon.png';
 import submarino from '../../assets/submarino.png';
 import netshoes from '../../assets/netshoes.png';
+import carrefour from '../../assets/carrefour.png';
+import dafiti from '../../assets/dafiti.png';
 // import { Container } from './styles';
 const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : StatusBar.currentHeight;
 const { width } = Dimensions.get('window');
@@ -40,6 +43,20 @@ export default function Dashboard({ navigation }) {
             <Image source={netshoes} />
             <Image source={submarino} style={styles.logoParceiros} />
           </View>
+          <Text style={styles.destaque}>Retorno</Text>
+          <Icon name="swap-vert" style={styles.swap} />
+          <View style={styles.areaDestaque}>
+            <Image source={amazon} />
+            <Image source={carrefour} style={styles.logoParceiros} />
+          </View>
+          <View style={styles.areaDestaque}>
+            <Image source={dafiti} />
+            <Image source={netshoes} style={styles.logoParceiros} />
+          </View>
+          <View style={styles.areaDestaque}>
+            <Image source={submarino} />
+            <Image source={amazon} style={styles.logoParceiros} />
+          </View>
         </View>
       </View>
     </View>
@@ -64,6 +81,7 @@ const styles = StyleSheet.create({
   destaque: {
     color: 'gray',
     marginLeft: 50,
+    fontWeight: 'bold',
   },
   areaParceiros: {
     width: width * 1,
@@ -75,5 +93,11 @@ const styles = StyleSheet.create({
   },
   logoParceiros: {
     left: -35,
+  },
+  swap: {
+    fontSize: 25,
+    color: 'gray',
+    left: 93,
+    top: -20,
   },
 });
