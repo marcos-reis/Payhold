@@ -3,7 +3,7 @@
 const Route = use("Route");
 
 Route.get("/", () => {
-  return { greeting: "Hello world in JSON" };
+  return { env:`${process.env.APP_URL} `};
 });
 
 Route.post("/session", "SessionController.store").validator("Session");

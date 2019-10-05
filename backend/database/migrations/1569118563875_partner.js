@@ -13,6 +13,7 @@ class PartnerSchema extends Schema {
         .unique();
       table.string("category", 80).notNullable();
       table.string("percentage", 80).notNullable();
+      table.text("url_thumbnail");
       table.timestamps();
     });
   }
