@@ -8,16 +8,15 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
+  ScrollView,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+
+import Partners from '../../components/Partners';
 
 import layout from '../../assets/layout2.png';
 import logo from '../../assets/logo.png';
-import amazon from '../../assets/amazon.png';
 import submarino from '../../assets/submarino.png';
 import netshoes from '../../assets/netshoes.png';
-import carrefour from '../../assets/carrefour.png';
-import dafiti from '../../assets/dafiti.png';
 // import { Container } from './styles';
 const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : StatusBar.currentHeight;
 const { width } = Dimensions.get('window');
@@ -29,41 +28,35 @@ export default function Dashboard({ navigation }) {
         backgroundColor={'#2B6BC8'}
         barStyle={'light-content'}
       />
-      <View>
+      <View style={styles.custonBar}>
         <Image source={layout} style={styles.background} />
-      </View>
-      <View style={styles.content}>
-        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+        <TouchableOpacity
+          style={{ alignItems: 'center' }}
+          onPress={() => navigation.navigate('Login')}
+        >
           <Image source={logo} style={styles.logoImage} />
+          <Text style={styles.slogan}>Cashack para suas compras online</Text>
         </TouchableOpacity>
-        <Text style={styles.slogan}>Cashack para suas compras online</Text>
-        <View style={styles.areaParceiros}>
-          <Text style={styles.destaque}>Destaques</Text>
-          <View style={styles.areaDestaque}>
-            <Image source={netshoes} />
-            <Image source={submarino} style={styles.logoParceiros} />
-          </View>
-          <Text style={styles.destaque}>Retorno</Text>
-          <Icon name="swap-vert" style={styles.swap} />
-          <View style={styles.areaDestaque}>
-            <Image source={amazon} />
-            <Image source={carrefour} style={styles.logoParceiros} />
-          </View>
-          <View style={styles.areaDestaque}>
-            <Image source={dafiti} />
-            <Image source={netshoes} style={styles.logoParceiros} />
-          </View>
-          <View style={styles.areaDestaque}>
-            <Image source={submarino} />
-            <Image source={amazon} style={styles.logoParceiros} />
+      </View>
+      <ScrollView>
+        <View style={styles.content}>
+          <View style={styles.areaParceiros}>
+            <Text style={styles.destaque}>Destaques</Text>
+            <Partners partner="amazon" />
           </View>
         </View>
-      </View>
+      </ScrollView>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  custonBar: {
+    zIndex: 1,
+    elevation: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   content: {
     display: 'flex',
     alignItems: 'center',
