@@ -1,9 +1,15 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 
 const Route = use("Route");
+const Helpers = use("Helpers");
+//const Drive = use("Drive");
 
 Route.get("/", () => {
-  return { env:`${process.env.APP_URL} `};
+  return { message: "Welcome the api payhold " };
+});
+Route.get("/files/:thumbnail", ({ request, response }) => {
+  const thumbnail = request.params.thumbnail;
+  response.download(Helpers.resourcesPath(`../uploads/${thumbnail}`));
 });
 
 Route.post("/session", "SessionController.store").validator("Session");
