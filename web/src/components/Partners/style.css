@@ -1,0 +1,8 @@
+.partner{
+      width: 70%;
+      height: 75%!important;
+    }
+.overflow-auto{  overflow:scroll; } /* limitando altura do box */
+.overflow-auto::-webkit-scrollbar { width:10px; background:#e3e0d6; } /* configurando scroll */
+.overflow-auto::-webkit-scrollbar-track { background: rgba(109, 109, 109, 0.1); }
+.overflow-auto::-webkit-scrollbar-thumb { border-radius:10px; background:#6b8090;  }
