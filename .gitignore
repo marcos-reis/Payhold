@@ -91,3 +91,4 @@ typings/
 android
 ios
 .DS_Store
+web/.DS_Store
