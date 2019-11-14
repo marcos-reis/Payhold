@@ -1,4 +1,12 @@
 import { createStore } from 'redux';
+import api from '../services/api'
+
+async function chamada(){
+  const response = await api.get('/partner')
+  console.log(response)
+}
+chamada()
+
 
 const DESTAKPARTNERS = {
   data: [{
