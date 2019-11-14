@@ -10,6 +10,9 @@ class Partner extends Model {
 
 	getUrlThumbnail({ thumbnail }) {
 		return `https://o4w4m.sse.codesandbox.io/files/${thumbnail}`;
-	}
+  }
+  categories() {
+    return this.hasMany("App/Models/Categorypartner");
+  }
 }
 module.exports = Partner;

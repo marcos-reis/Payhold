@@ -15,6 +15,7 @@ Route.get("/files/:thumbnail", ({ request, response }) => {
 Route.post("/session", "SessionController.store").validator("Session");
 Route.post("/user/store", "UserController.store");
 Route.post("/partner", "PartnerController.store");
+Route.post("/categorypartner", "CategorypartnerController.store");
 
 Route.get("/user/index", "UserController.index");
 
