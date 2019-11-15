@@ -4,8 +4,9 @@ const Route = use("Route");
 const Helpers = use("Helpers");
 //const Drive = use("Drive");
 
+
 Route.get("/", () => {
-  return { message: "W elcome the  api payhold okk " };
+  return { message: process.env.NODE_ENV };
 });
 Route.get("/files/:thumbnail", ({ request, response }) => {
   const thumbnail = request.params.thumbnail;
