@@ -21,7 +21,7 @@ class FinancialSchema extends Schema {
         .integer("partner_id")
         .unsigned()
         .references("id")
-        .inTable("partner");
+        .inTable("partners");
       table.string("operacao");
       table.float("valor");
       table.timestamps();

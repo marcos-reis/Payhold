@@ -10,6 +10,7 @@ services:
       - ./web:/usr/app
     depends_on:
     - api
+    
   api:
     build: ./backend
     command: yarn start
