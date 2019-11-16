@@ -7,7 +7,8 @@ class PartnerSchema extends Schema {
 	up() {
 		this.create("partners", table => {
 			table.increments();
-			table.string("name", 80).notNullable();
+      table.string("name", 80).notNullable();
+      table.string("descricao");
 			table.string("category", 80).notNullable();
 			table.string("percentage", 80).notNullable();
       table.string("thumbnail");

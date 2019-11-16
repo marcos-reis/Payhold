@@ -32,5 +32,6 @@ Route.group(() => {
   Route.delete("/user/delete/:id", "UserController.delete");
 }).middleware("auth");
 
+Route.get("/categorypartner", "categorypartnerController.index");
 Route.get("/partner", "PartnerController.index");
 Route.get("/partner/:id", "PartnerController.show");

@@ -12,7 +12,7 @@ class PartnerController {
     });
 
     var data = request.only(["name", "category", "percentage"]);
-    var { name, category, percentage } = request.all();
+    var { name, descricao, category, percentage } = request.all();
     const rules = {
       name: "required",
       category: "required",
@@ -37,6 +37,7 @@ class PartnerController {
 
     const partner = await Partner.create({
       name,
+      descricao,
       category,
       percentage,
       thumbnail
@@ -44,12 +45,17 @@ class PartnerController {
     return { partner };
   }
   async index({ request, response }) {
-    const partners = await Partner.all();
-    return { partners };
+    const partners = await Partner.query()
+    .select("*")
+    .with("categories")
+    .fetch();
+    return { partners};
   }
   async show({ request, response }) {
     const { id } = request.params;
     const partner = await Partner.find(id);
+
+
     return { partner };
   }
 }

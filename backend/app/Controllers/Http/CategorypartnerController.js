@@ -11,6 +11,20 @@ class CategorypartnerController {
     const category = await Categorypartner.create(data);
     return { category };
   }
+
+  async index({ request, response }) {
+    const category = await Categorypartner.query()
+    .select("*")
+    .fetch();
+
+     return { category };
+  }
+
+
+
+
+
+
 }
 
 module.exports = CategorypartnerController

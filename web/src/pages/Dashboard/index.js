@@ -1,5 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { useSelector } from 'react-redux';
+
+import api from '../../services/api'
+
+
+
+
+
 
 import Navbar from '../../components/Navbar';
 import Sidebar from '../../components/Sidebar';
@@ -11,12 +18,31 @@ import Partners from '../../components/Partners';
 
 
 export default function Dashboard() {
-  const destakpartners = useSelector((state) => state.DESTAKPARTNERS.data);
-  const partners = useSelector((state) => state.PARTNERS.data);
+  const [destakPartners,setDestakPartners] = useState([])
+  const [partners, setPartners ] = useState([])
+
+  useEffect(()=>{
+    async function loadData(){
+      const response = await api.get('/partner')
+      setDestakPartners(response.data.partners)
+      setPartners(response.data.partners)
+      console.log(response.data.partners)
+     }
+    loadData()
+
+  },[])
+
+
+
+  //const destakPartners = useSelector((state) => state.data);
+
 
   const [whatPartner, setWhatPartner] = useState(null);
   const [indexPartners, setIndexPartners] = useState(null);
   const [partnerDetail, setPartnerDetail] = useState(false);
+
+
+
 
   const showPartner = (i, w) => {
     setWhatPartner(w);
@@ -48,9 +74,9 @@ export default function Dashboard() {
                   <Partners
 
                     name={whatPartner[indexPartners].name}
-                    url={whatPartner[indexPartners].url}
-                    desc={whatPartner[indexPartners].desc}
-                    categorias={whatPartner[indexPartners].categorias}
+                    thumbnail={whatPartner[indexPartners].url_thumbnail}
+                    descricao={whatPartner[indexPartners].descricao}
+                    categories={whatPartner[indexPartners].categories}
                   />
                 </>
               )}
@@ -62,9 +88,9 @@ export default function Dashboard() {
                   <div className="col-12">
                     <p className="ml-5 mt-5 font-weight-bold text-grey">Destaques</p>
                   </div>
-                  {destakpartners.map((v, i) => (
-                    <div key={v.url} onClick={() => showPartner(i, destakpartners)} onKeyDown={() => showPartner(i)} role="button" tabIndex="0">
-                      <Featured name={v.name} percentage={v.medPercentage} />
+                  {destakPartners.map((v, i) => (
+                    <div key={v.id} onClick={() => showPartner(i, destakPartners)} onKeyDown={() => showPartner(i)} role="button" tabIndex="0">
+                      <Featured name={v.name} thumbnail={v.url_thumbnail} percentage={v.percentage} />
                     </div>
                   ))}
 
@@ -77,7 +103,7 @@ export default function Dashboard() {
 
                   {partners.map((v, i) => (
                     <div key={v.url} onClick={() => showPartner(i, partners)} onKeyDown={() => showPartner(i)} role="button" tabIndex="0">
-                      <Featured name={v.name} percentage={v.medPercentage} />
+                      <Featured name={v.name} thumbnail={v.url_thumbnail} percentage={v.percentage} />
                     </div>
                   ))}
                 </div>

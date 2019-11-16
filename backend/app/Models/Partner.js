@@ -4,6 +4,7 @@
 const Model = use("Model");
 
 class Partner extends Model {
+
 	static get computed() {
 		return ["url_thumbnail"];
 	}
