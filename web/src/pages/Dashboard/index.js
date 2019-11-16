@@ -1,5 +1,4 @@
 import React, { useState,useEffect } from 'react';
-import { useSelector } from 'react-redux';
 
 import api from '../../services/api'
 
@@ -24,17 +23,14 @@ export default function Dashboard() {
   useEffect(()=>{
     async function loadData(){
       const response = await api.get('/partner')
+
       setDestakPartners(response.data.partners)
       setPartners(response.data.partners)
-      console.log(response.data.partners)
+
      }
     loadData()
 
   },[])
-
-
-
-  //const destakPartners = useSelector((state) => state.data);
 
 
   const [whatPartner, setWhatPartner] = useState(null);
@@ -48,6 +44,7 @@ export default function Dashboard() {
     setWhatPartner(w);
     setIndexPartners(i);
     setPartnerDetail(!partnerDetail);
+
   };
   return (
     <>
@@ -72,7 +69,7 @@ export default function Dashboard() {
                     <span className="position-fixed m-2 bg-light  px-2 font-weight-bold rounded-circle ">x</span>
                   </div>
                   <Partners
-
+                    url={whatPartner[indexPartners].url}
                     name={whatPartner[indexPartners].name}
                     thumbnail={whatPartner[indexPartners].url_thumbnail}
                     descricao={whatPartner[indexPartners].descricao}
@@ -89,7 +86,7 @@ export default function Dashboard() {
                     <p className="ml-5 mt-5 font-weight-bold text-grey">Destaques</p>
                   </div>
                   {destakPartners.map((v, i) => (
-                    <div key={v.id} onClick={() => showPartner(i, destakPartners)} onKeyDown={() => showPartner(i)} role="button" tabIndex="0">
+                    <div key={v.id} onClick={() => showPartner(i, destakPartners)} role="button" tabIndex={v.id}>
                       <Featured name={v.name} thumbnail={v.url_thumbnail} percentage={v.percentage} />
                     </div>
                   ))}
@@ -102,7 +99,7 @@ export default function Dashboard() {
                   </div>
 
                   {partners.map((v, i) => (
-                    <div key={v.url} onClick={() => showPartner(i, partners)} onKeyDown={() => showPartner(i)} role="button" tabIndex="0">
+                    <div key={v.id} onClick={() => showPartner(i, partners)} role="button" tabIndex={v.id}>
                       <Featured name={v.name} thumbnail={v.url_thumbnail} percentage={v.percentage} />
                     </div>
                   ))}
