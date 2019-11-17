@@ -1,5 +1,5 @@
 'use strict'
-
+const Env = use('Env')
 module.exports = {
 
   /*
@@ -17,7 +17,13 @@ module.exports = {
   | Function - Receives the current origin and should return one of the above values.
   |
   */
- origin: 'http://localhost:3000',
+ origin: function (currentOrigin) {
+  if(Env.get('NODE_ENV​') === 'production' ){
+    return currentOrigin === 'mywebsite.com'
+  } else {
+    return true
+  }
+}, //'http://localhost:3000',
 
   /*
   |--------------------------------------------------------------------------

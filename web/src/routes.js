@@ -8,6 +8,10 @@ import Contact from './pages/Contact';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
+import Extrato from './pages/Extrato'
+import Saque from './pages/Saque'
+import Conta from './pages/Conta'
+import Addconta from './pages/Addconta'
 
 export default function Routes() {
   return (
@@ -19,6 +23,10 @@ export default function Routes() {
       <Route path="/Login" component={Login} />
       <Route path="/Register" component={Register} />
       <Route path="/Dashboard" component={Dashboard} />
-    </BrowserRouter>
+      <Route path="/Extrato" component={Extrato} />
+      <Route path="/Saque" component={Saque} />
+      <Route path="/Conta" component={Conta} />
+      <Route path="/Addconta" component={Addconta} />
+   </BrowserRouter>
   );
 }
