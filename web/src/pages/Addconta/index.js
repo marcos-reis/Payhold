@@ -14,21 +14,23 @@ export default function Addconta() {
         <div className="col-xl-2 d-none d-md-block col-0 col-lg-3 col-md-4" />
             <div className="p-0 col-md-8 col-lg-9 col-xl-10">
                <Navbar/>
-               <div className="container text-center row flex-column">
+               <div className="container justify-content-center row ">
+                 <div className="col-12 text-center">
                   <h3 className="my-5 py-5">Cadastre sua conta</h3>
-                  <div>
-                    <label>Cod</label>
+                  </div>
+                  <div className="col-7">
+                    <label>Cod</label><br/>
                     <input/>
                   </div>
-                  <div>
-                    <label>Agência</label>
+                  <div className="col-7 ">
+                    <label>Agência</label><br/>
                     <input/>
                   </div>
-                  <div>
-                    <label>Conta e digito</label>
+                  <div className="col-7">
+                    <label>Conta e digito</label><br/>
                     <input/>
                   </div>
-                  <div>
+                  <div className="col-12 text-center">
                     <button style={{borderRadius:3}} className="bg-primary text-light py-2 px-5" >Confirma</button>
                   </div>
 
