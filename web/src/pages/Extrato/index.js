@@ -27,21 +27,24 @@ export default function Extrato() {
                     <span className="col-12 text-grey">Saldo Disponível</span>
                     <h3 className="col-12 ">R$ 350,00</h3>
                  </div>
-                 <div className="mt-5 col-11 bg-light justify-content-center row">
-
-                <ul className="row col-12  justify-content-center">
-                  <li className="mt-5 col-lg-8  col-9 text-grey"> <strong>Cashback</strong></li>
-                  <li className="mt-5 col-lg-3  col-3 text-grey">15 NOV</li>
+                 <div className="mt-5  col-11 bg-light justify-content-center row">
+                <ul className="row col-10 my-0 py-5 justify-content-center">
+                  <li className="col-lg-8  col-9 text-grey"> <strong>Cashback</strong></li>
+                  <li className="col-lg-3  col-3 text-grey">15 NOV</li>
                   <li className="col-lg-11 col-12">Compras na Amazon</li>
                   <li className="col-lg-11 col-12 text-grey">R$ 10,00</li>
 
-                  <li className="mt-5 col-lg-8  col-9 text-grey"> <strong>Cashback</strong></li>
-                  <li className="mt-5 col-lg-3  col-3 text-grey">15 NOV</li>
+                  <hr className="border w-75"/>
+
+                  <li className="col-lg-8  col-9 text-grey"> <strong>Cashback</strong></li>
+                  <li className="col-lg-3  col-3 text-grey">15 NOV</li>
                   <li className="col-lg-11 col-12">Compras na Amazon</li>
                   <li className="col-lg-11 col-12 text-grey">R$ 10,00</li>
 
-                  <li className="mt-5 col-lg-8  col-9 text-grey"> <strong>Cashback</strong></li>
-                  <li className="mt-5 col-lg-3  col-3 text-grey">15 NOV</li>
+                  <hr className="border w-75"/>
+
+                  <li className="col-lg-8  col-9 text-grey"> <strong>Cashback</strong></li>
+                  <li className="col-lg-3  col-3 text-grey">15 NOV</li>
                   <li className="col-lg-11 col-12">Compras na Amazon</li>
                   <li className="col-lg-11 col-12 text-grey">R$ 10,00</li>
 

@@ -8,7 +8,7 @@ trait("DatabaseTransactions");
 test("It should register a new user", async ({ assert, client }) => {
   const user = await Factory.model("App/Models/User").make();
   const response = await client
-    .post("/user/store")
+    .post("/users")
     .send({
       fullname: user.fullname,
       email: user.email,
@@ -24,7 +24,7 @@ test("It should list all user", async ({ assert, client }) => {
   const user = await Factory.model("App/Models/User").create();
   await Factory.model("App/Models/User").createMany(2);
   const response = await client
-    .get("/user/index")
+    .get("/users")
     .loginVia(user)
     .end();
   response.assertStatus(200);
@@ -35,7 +35,7 @@ test("It should list a user by id", async ({ assert, client }) => {
   const user = await Factory.model("App/Models/User").create();
   await Factory.model("App/Models/User").createMany(2);
   const response = await client
-    .get(`/user/show/${user.id}`)
+    .get(`/users/${user.id}`)
     .loginVia(user)
     .end();
 
@@ -46,7 +46,7 @@ test("It should list a user by id", async ({ assert, client }) => {
 test("It should delete a user", async ({ assert, client }) => {
   const user = await Factory.model("App/Models/User").create();
   const response = await client
-    .delete(`/user/delete/${user.id}`)
+    .delete(`/users/${user.id}`)
     .loginVia(user)
     .end();
   response.assertStatus(204);

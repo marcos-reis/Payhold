@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../Styles/Colors.css';
 import '../../Styles/Fonts.css';
+import './style.css'
 
 
 export default function Navbar() {

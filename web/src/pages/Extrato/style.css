@@ -1,3 +1,7 @@
 ul,li{
   list-style: none;
 }
+hr.border{
+  border: 0.5px solid #e9edf1!important;
+}
+

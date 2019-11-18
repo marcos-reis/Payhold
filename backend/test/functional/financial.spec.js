@@ -10,7 +10,7 @@ test("It should create hitory data fake", async ({ assert, client }) => {
   const bankaccount = await Factory.model("App/Models/BankAccount").create();
   const financial = await Factory.model("App/Models/Financial").make({});
   const response = await client
-    .post("/financialdata")
+    .post("/financials")
     .loginVia(user)
     .send({
       user_id: user.id,

@@ -8,7 +8,7 @@ test('it should register categories of Partners', async ({ assert,client }) => {
   const user = await Factory.model("App/Models/User").create();
    const partner = await Factory.model("App/Models/Partner").create();
   const response = await client
-  .post("/categorypartner")
+  .post("/category-partners")
   .loginVia(user)
   .send({
     category:"Sport",
@@ -17,6 +17,5 @@ test('it should register categories of Partners', async ({ assert,client }) => {
   })
   .end();
 response.assertStatus(200);
-console.log(response.body.category)
 assert.exists(response.body.category);
 })

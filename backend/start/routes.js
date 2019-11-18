@@ -13,25 +13,25 @@ Route.get("/files/:thumbnail", ({ request, response }) => {
   response.download(Helpers.resourcesPath(`../uploads/${thumbnail}`));
 });
 
-Route.post("/session", "SessionController.store").validator("Session");
-Route.post("/user/store", "UserController.store");
-Route.post("/partner", "PartnerController.store");
-Route.post("/categorypartner", "CategorypartnerController.store");
+Route.post("/sessions", "SessionController.store").validator("Session");
+Route.post("/users", "UserController.store");
+Route.post("/partners", "PartnerController.store");
+Route.post("/category-partners", "CategorypartnerController.store");
 
-Route.get("/user/index", "UserController.index");
+Route.get("/users", "UserController.index");
 
 Route.group(() => {
-  Route.post("/bankaccount", "BankAccountController.store");
+  Route.post("/bankaccounts", "BankAccountController.store");
 
-  Route.post("/financialdata", "FinancialController.store");
+  Route.post("/financials", "FinancialController.store");
 
-  Route.get("/user/show/:id", "UserController.show");
+  Route.get("/users/:id", "UserController.show");
 
-  Route.get("/bankaccount/:id", "BankAccountController.show");
+  Route.get("/bankaccounts/:id", "BankAccountController.show");
 
-  Route.delete("/user/delete/:id", "UserController.delete");
+  Route.delete("/users/:id", "UserController.delete");
 }).middleware("auth");
 
-Route.get("/categorypartner", "categorypartnerController.index");
-Route.get("/partner", "PartnerController.index");
-Route.get("/partner/:id", "PartnerController.show");
+Route.get("/category-partners", "categorypartnerController.index");
+Route.get("/partners", "PartnerController.index");
+Route.get("/partners/:id", "PartnerController.show");

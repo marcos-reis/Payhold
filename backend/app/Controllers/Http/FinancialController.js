@@ -6,7 +6,8 @@ class FinancialController {
       "account_id",
       "partner_id",
       "user_id",
-      "operacao"
+      "operacao",
+      "descricao"
     ]);
 
     const financial = await Financial.create(data);

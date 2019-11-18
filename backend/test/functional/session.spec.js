@@ -13,7 +13,7 @@ test("it should receiver a token when authenticated", async ({
   });
 
   const response = await client
-    .post("/session")
+    .post("/sessions")
     .send({
       email: user.email,
       password: "abc123"

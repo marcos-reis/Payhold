@@ -8,7 +8,7 @@ test("It should register a new user account", async ({ assert, client }) => {
   const user = await Factory.model("App/Models/User").create();
   const bankaccount = await Factory.model("App/Models/BankAccount").make();
   const response = await client
-    .post("/bankaccount")
+    .post("/bankaccounts")
     .loginVia(user, "jwt")
     .send({
       cod: bankaccount.cod,
@@ -32,7 +32,7 @@ test("It should list all account of a user", async ({ assert, client }) => {
   });
 
   const response = await client
-    .get(`/bankaccount/${user.id}`)
+    .get(`/bankaccounts/${user.id}`)
     .loginVia(user)
     .end();
 

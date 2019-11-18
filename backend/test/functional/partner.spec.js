@@ -9,7 +9,7 @@ test("It should register a new partner", async ({ assert, client }) => {
   const partner = await Factory.model("App/Models/Partner").make();
 
   const response = await client
-    .post("/partner")
+    .post("/partners")
     .field('name', partner.name)
       .field('category', partner.category)
       .field('percentage', partner.percentage)
@@ -22,7 +22,7 @@ test("It should register a new partner", async ({ assert, client }) => {
 test("It should list all partners", async ({ assert, client }) => {
   await Factory.model("App/Models/Partner").createMany(2);
 
-  const response = await client.get("/partner").end();
+  const response = await client.get("/partners").end();
   response.assertStatus(200);
   assert.exists(response.body.partners);
 });
@@ -33,7 +33,7 @@ test("It should list a only partner, specified by ID", async ({
 }) => {
   const partner = await Factory.model("App/Models/Partner").create();
 
-  const response = await client.get(`/partner/${partner.id}`).end();
+  const response = await client.get(`/partners/${partner.id}`).end();
 
   response.assertStatus(200);
   assert.exists(response.body.partner);

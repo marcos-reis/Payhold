@@ -23,6 +23,7 @@ class FinancialSchema extends Schema {
         .references("id")
         .inTable("partners");
       table.string("operacao");
+      table.string("descricao");
       table.float("valor");
       table.timestamps();
     });
