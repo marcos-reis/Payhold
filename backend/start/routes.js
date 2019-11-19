@@ -24,6 +24,7 @@ Route.group(() => {
   Route.post("/bankaccounts", "BankAccountController.store");
 
   Route.post("/financials", "FinancialController.store");
+  Route.get("/financials/:id", "FinancialController.show");
 
   Route.get("/users/:id", "UserController.show");
 

@@ -16,8 +16,25 @@ test("It should create hitory data fake", async ({ assert, client }) => {
       user_id: user.id,
       account_id: bankaccount.id,
       operacao: financial.operacao,
+      descricao: financial.descricao,
       valor: financial.valor
     })
+    .end();
+  response.assertStatus(200);
+});
+
+test("It should list hitory data fake", async ({ assert, client }) => {
+  const user = await Factory.model("App/Models/User").create();
+  const partner = await Factory.model("App/Models/Partner").create();
+  const bankaccount = await Factory.model("App/Models/BankAccount").create();
+  const financial = await Factory.model("App/Models/Financial").create({
+    user_id: user.id,
+    partner_id:partner.id,
+    account_id: bankaccount.id,
+  });
+  const response = await client
+    .get(`/financials/${user.id}`)
+    .loginVia(user)
     .end();
   response.assertStatus(200);
 });

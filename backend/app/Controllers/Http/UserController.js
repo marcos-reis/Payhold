@@ -7,6 +7,9 @@ const User = use("App/Models/User");
 class UserController {
   async store({ request, response }) {
     const data = request.only(["fullname", "email", "cpf", "password"]);
+    const fullname =request.only(["fullname"])
+    const shortname = fullname.fullname.split(" ")
+    shortname
 
     const rules = {
       email: "required|email|unique:users,email",
@@ -28,13 +31,17 @@ class UserController {
   }
   async show({ request }) {
     const { id } = request.params;
-    const user = await User.find(id);
+    const user = await User.query()
+      .select("*")
+      .where("id", id)
+      .with("financials")
+      .with("accounts")
+      .fetch();
     return { user };
   }
 
   async delete({ request, response }) {
     const { id } = await request.params;
-
     const user = await User.find(id);
     await user.delete();
   }

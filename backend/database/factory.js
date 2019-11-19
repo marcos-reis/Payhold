@@ -47,9 +47,10 @@ Factory.blueprint("App/Models/BankAccount", (faker, i, data) => {
 Factory.blueprint("App/Models/Financial", (faker, i, data) => {
   return {
     operacao: "Cashback",
+    descricao:"Compras na Amazon",
     valor: faker.floating({ min: 50, max: 1000, fixed: 2 }),
     account_id: null,
-    Partner_id: null,
+    partner_id: null,
     user_id: null,
     ...data
   };

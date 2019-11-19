@@ -16,6 +16,7 @@ test("It should register a new user", async ({ assert, client }) => {
       password: user.password
     })
     .end();
+    console.log(response.text)
   response.assertStatus(200);
   assert.exists(response.body.user);
 });
@@ -38,7 +39,6 @@ test("It should list a user by id", async ({ assert, client }) => {
     .get(`/users/${user.id}`)
     .loginVia(user)
     .end();
-
   response.assertStatus(200);
   assert.exists(response.body.user);
 });
