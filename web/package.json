@@ -40,7 +40,8 @@
     "eslint-config-airbnb": "^18.0.1",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-react": "^7.14.3"
+    "eslint-plugin-react": "^7.16.0",
+    "prettier": "^1.19.1"
   },
   "main": "index.js",
   "repository": "https://github.com/marcos-reis/payhold-react.git",

@@ -15,9 +15,9 @@ test("It should create hitory data fake", async ({ assert, client }) => {
     .send({
       user_id: user.id,
       account_id: bankaccount.id,
-      operacao: financial.operacao,
-      descricao: financial.descricao,
-      valor: financial.valor
+      operation: financial.operation,
+      description: financial.description,
+      value: financial.value
     })
     .end();
   response.assertStatus(200);

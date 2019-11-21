@@ -22,9 +22,9 @@ class FinancialSchema extends Schema {
         .unsigned()
         .references("id")
         .inTable("partners");
-      table.string("operacao");
-      table.string("descricao");
-      table.float("valor");
+      table.string("operation");
+      table.string("description");
+      table.float("value");
       table.timestamps();
     });
   }

@@ -7,9 +7,13 @@ const User = use("App/Models/User");
 class UserController {
   async store({ request, response }) {
     const data = request.only(["fullname", "email", "cpf", "password"]);
-    const fullname =request.only(["fullname"])
-    const shortname = fullname.fullname.split(" ")
-    shortname
+    const {fullname, email, cpf, password} = request.all()
+
+    const firstName = fullname.split(" ")[0]
+    const lastName = fullname.split(" ").splice(-1)[0]
+
+    const shortname = `${firstName} ${lastName}`
+
 
     const rules = {
       email: "required|email|unique:users,email",
@@ -22,7 +26,9 @@ class UserController {
       return validation.messages();
     }
 
-    const user = await User.create(data);
+    const user = await User.create({
+      fullname,email,cpf,password,shortname
+    });
     return { user };
   }
   async index() {

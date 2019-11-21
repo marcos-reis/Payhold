@@ -15,6 +15,7 @@ class AccountSchema extends Schema {
       table.string("bank").notNullable();
       table.integer("cod").notNullable();
       table.integer("agency").notNullable();
+      table.string("thumbnail");
       table
         .integer("account")
         .notNullable()

@@ -2,16 +2,16 @@ import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 
 
-import Home from './pages/Home';
-import About from './pages/About';
-import Contact from './pages/Contact';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import Dashboard from './pages/Dashboard';
-import Extrato from './pages/Extrato'
-import Saque from './pages/Saque'
-import Conta from './pages/Conta'
-import Addconta from './pages/Addconta'
+import Home from './Pages/Web/Home';
+import About from './Pages/Web/About';
+import Contact from './Pages/Web/Contact';
+import Login from './Pages/Web/Login';
+import Register from './Pages/Web/Register';
+import Dashboard from './Pages/Client/Dashboard';
+import Extrato from './Pages/Client/Extrato'
+import Saque from './Pages/Client/Saque'
+import Conta from './Pages/Client/Conta'
+import Addconta from './Pages/Client/Addconta'
 
 export default function Routes() {
   return (

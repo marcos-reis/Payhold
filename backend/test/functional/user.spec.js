@@ -16,7 +16,6 @@ test("It should register a new user", async ({ assert, client }) => {
       password: user.password
     })
     .end();
-    console.log(response.text)
   response.assertStatus(200);
   assert.exists(response.body.user);
 });

@@ -38,7 +38,7 @@ class User extends Model {
     return this.hasMany("App/Models/BankAccount");
   }
   financials() {
-    return this.hasMany("App/Models/BankAccount");
+    return this.hasMany("App/Models/Financial");
   }
 }
 
