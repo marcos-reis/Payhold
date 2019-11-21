@@ -31,6 +31,9 @@ Route.group(() => {
   Route.get("/bankaccounts/:id", "BankAccountController.show");
 
   Route.delete("/users/:id", "UserController.delete");
+
+  Route.post("/transactions","TransactionController.store")
+
 }).middleware("auth");
 
 Route.get("/category-partners", "categorypartnerController.index");

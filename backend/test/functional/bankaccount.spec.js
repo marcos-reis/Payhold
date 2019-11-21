@@ -19,7 +19,7 @@ test("It should register a new bank account", async ({ assert, client }) => {
     .field('user_id', user.id)
     .attach('thumbnail', Helpers.tmpPath('../uploads/Inter.png'))
     .end();
-    console.log(response.text)
+
   response.assertStatus(200);
   assert.exists(response.body.bankaccount);
 });
