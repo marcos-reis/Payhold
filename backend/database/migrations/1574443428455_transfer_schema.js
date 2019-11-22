@@ -3,35 +3,28 @@
 /** @type {import('@adonisjs/lucid/src/Schema')} */
 const Schema = use('Schema')
 
-class TransactionsSchema extends Schema {
+class TransferSchema extends Schema {
   up () {
-    this.create('transactions', (table) => {
+    this.create('transfers', (table) => {
       table.increments();
       table
         .integer("user_id")
         .unsigned()
         .references("id")
         .inTable("users");
-      table
+        table
         .integer("account_id")
         .unsigned()
         .references("id")
         .inTable("accounts");
-      table
-        .integer("partner_id")
-        .unsigned()
-        .references("id")
-        .inTable("partners");
-      table.string("operation");
-      table.string("description");
       table.float("value");
       table.timestamps();
-    });
+    })
   }
 
   down () {
-    this.drop('transactions')
+    this.drop('transfers')
   }
 }
 
-module.exports = TransactionsSchema
+module.exports = TransferSchema

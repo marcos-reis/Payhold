@@ -1,11 +1,11 @@
-"use strict";
+'use strict'
 
 /** @type {import('@adonisjs/lucid/src/Schema')} */
-const Schema = use("Schema");
+const Schema = use('Schema')
 
-class FinancialSchema extends Schema {
-  up() {
-    this.create("financials", table => {
+class CashbackSchema extends Schema {
+  up () {
+    this.create('cashbacks', (table) => {
       table.increments();
       table
         .integer("user_id")
@@ -13,25 +13,19 @@ class FinancialSchema extends Schema {
         .references("id")
         .inTable("users");
       table
-        .integer("account_id")
-        .unsigned()
-        .references("id")
-        .inTable("accounts");
-      table
         .integer("partner_id")
         .unsigned()
         .references("id")
         .inTable("partners");
-      table.string("operation");
       table.string("description");
       table.float("value");
       table.timestamps();
-    });
+    })
   }
 
-  down() {
-    this.drop("financials");
+  down () {
+    this.drop('cashbacks')
   }
 }
 
-module.exports = FinancialSchema;
+module.exports = CashbackSchema

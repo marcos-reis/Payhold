@@ -43,6 +43,12 @@ class User extends Model {
   transactions() {
     return this.hasMany("App/Models/Transaction");
   }
+  cashbacks() {
+    return this.hasMany("App/Models/Cashback");
+  }
+  transfers() {
+    return this.hasMany("App/Models/Transfer");
+  }
 }
 
 module.exports = User;

@@ -40,7 +40,6 @@ class UserController {
     const user = await User.query()
       .select("*")
       .where("id", id)
-      .with("financials")
       .with("accounts")
       .fetch();
     return { user };

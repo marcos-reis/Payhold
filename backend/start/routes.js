@@ -34,6 +34,12 @@ Route.group(() => {
 
   Route.post("/transactions","TransactionController.store")
 
+  Route.post("/cashbacks","CashbackController.store")
+
+  Route.post("/transfers","TransferController.store")
+
+  Route.post("/request-transfers","RequestTransferController.store")
+
 }).middleware("auth");
 
 Route.get("/category-partners", "categorypartnerController.index");
