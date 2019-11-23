@@ -12,6 +12,14 @@ class RequestTransferController {
     const RequestTransfers = await RequestTransfer.create(data);
     return { RequestTransfers };
   }
+  async show({ request }) {
+    const { id } = request.params;
+    const RequestTransfers = await RequestTransfer.query()
+      .select("*")
+      .where("id", id)
+      .fetch();
+    return { RequestTransfers };
+  }
 }
 
 module.exports = RequestTransferController

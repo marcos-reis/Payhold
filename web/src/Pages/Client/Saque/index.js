@@ -20,9 +20,9 @@ export default function Saque() {
                     <h3 className="col-12 ">R$ 350,00</h3>
                  </div>
                  <div className="mt-5 py-5 col-11 bg-light justify-content-center text-center flex-column row">
-<h2 className="mb-5">Quanto você deseja<br/> retirar?</h2>
-<input style={{fontSize:35}} className="border-0 text-center mb-5 text-grey" defaultValue="R$ 0,00"/>
-<span style={{fontSize:10}}  className="text-grey">Valor mínimo <br/>para retirada R$ 20,00</span>
+        <h2 className="mb-5">Quanto você deseja<br/> retirar?</h2>
+        <input style={{fontSize:35}} className="border-0 text-center mb-5 text-grey" defaultValue="R$ 0,00"/>
+        <span style={{fontSize:10}}  className="text-grey">Valor mínimo <br/>para retirada R$ 20,00</span>
 
               </div>
               <button style={{borderRadius:3}} className="my-4 text-light py-2 px-5  bg-primary">Confirma</button>

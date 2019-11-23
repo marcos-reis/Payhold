@@ -17,20 +17,31 @@ export default function Addconta() {
                  <div className="col-12 text-center">
                   <h3 className="my-5 py-5">Cadastre sua conta</h3>
                   </div>
-                  <div className="col-7">
-                    <label>Cod</label><br/>
-                    <input/>
-                  </div>
-                  <div className="col-7 ">
-                    <label>Agência</label><br/>
-                    <input/>
-                  </div>
-                  <div className="col-7">
-                    <label>Conta e digito</label><br/>
-                    <input/>
-                  </div>
+<form>
+  <div class="row justify-content-center">
+  <div class="form-group col-7">
+      <label for="inputEstado">Qual o seu banco?</label>
+      <select id="inputEstado" class="form-control">
+        <option selected>237 - Bradesco</option>
+        <option >260 - Nubank</option>
+        <option >237 - Next</option>
+        <option >077 - Inter</option>
+      </select>
+    </div>
+
+    <div class="form-group col-7">
+    <label for="inputAddress">Agência</label>
+    <input type="text" class="form-control" id="inputAddress" placeholder="Ex: 0001"/>
+  </div>
+  <div class="form-group col-7">
+    <label for="inputAddress2">Conta e dígito (Sem hífen)</label>
+    <input type="text" class="form-control" id="inputAddress2" placeholder="Ex: 55587655"/>
+  </div>
+
+  </div>
+</form>
                   <div className="col-12 text-center">
-                    <button style={{borderRadius:3}} className="bg-primary text-light py-2 px-5" >Confirma</button>
+                    <button style={{borderRadius:3}} className="bg-primary text-light mt-4   py-2 px-5" >Confirma</button>
                   </div>
 
                </div>

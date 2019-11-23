@@ -22,23 +22,26 @@ Route.get("/users", "UserController.index");
 
 Route.group(() => {
   Route.post("/bankaccounts", "BankAccountController.store");
+  Route.get("/bankaccounts/:id", "BankAccountController.show");
 
   Route.post("/financials", "FinancialController.store");
   Route.get("/financials/:id", "FinancialController.show");
 
   Route.get("/users/:id", "UserController.show");
-
-  Route.get("/bankaccounts/:id", "BankAccountController.show");
-
   Route.delete("/users/:id", "UserController.delete");
 
-  Route.post("/transactions","TransactionController.store")
 
   Route.post("/cashbacks","CashbackController.store")
+  Route.get("/cashbacks/:id", "CashbackController.show");
+
 
   Route.post("/transfers","TransferController.store")
+  Route.get("/transfers/:id", "TransferController.show");
+
 
   Route.post("/request-transfers","RequestTransferController.store")
+  Route.get("/request-transfers/:id", "RequestTransferController.show");
+
 
 }).middleware("auth");
 

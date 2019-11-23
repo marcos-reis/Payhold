@@ -6,19 +6,27 @@ const Schema = use('Schema')
 class TransferSchema extends Schema {
   up () {
     this.create('transfers', (table) => {
+
       table.increments();
+
       table
         .integer("user_id")
         .unsigned()
         .references("id")
         .inTable("users");
+
         table
         .integer("account_id")
         .unsigned()
         .references("id")
         .inTable("accounts");
+
+      table.string("description").defaultTo('Transferência')
+
       table.float("value");
+
       table.timestamps();
+
     })
   }
 

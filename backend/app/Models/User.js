@@ -37,17 +37,15 @@ class User extends Model {
   accounts() {
     return this.hasMany("App/Models/BankAccount");
   }
-  financials() {
-    return this.hasMany("App/Models/Financial");
-  }
-  transactions() {
-    return this.hasMany("App/Models/Transaction");
-  }
+
   cashbacks() {
     return this.hasMany("App/Models/Cashback");
   }
   transfers() {
     return this.hasMany("App/Models/Transfer");
+  }
+  requestTransfers() {
+    return this.hasMany("App/Models/RequestTransfer");
   }
 }
 

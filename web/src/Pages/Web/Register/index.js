@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom'
 import MaterialIcon from 'material-icons-react';
 
 
@@ -28,7 +29,7 @@ export default function Register() {
               <input className="form-control mb-5" placeholder="Senha" />
             </div>
             <div className="col-8">
-              <a href="/Login" className="btn btn-gradient-primary rounded-pill font-weight-bold w-100 mb-3">Cadastrar</a>
+              <Link to="/Login" className="btn btn-gradient-primary rounded-pill font-weight-bold w-100 mb-3">Cadastrar</Link>
             </div>
           </div>
         </div>

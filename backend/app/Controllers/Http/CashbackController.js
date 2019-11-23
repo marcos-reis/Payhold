@@ -14,6 +14,14 @@ class CashbackController {
     const Cashbacks = await Cashback.create(data);
     return { Cashbacks };
   }
+  async show({ request }) {
+    const { id } = request.params;
+    const Cashbacks = await Cashback.query()
+      .select("*")
+      .where("id", id)
+      .fetch();
+    return { Cashbacks };
+  }
 }
 
 module.exports = CashbackController

@@ -1,7 +1,10 @@
 import React from 'react';
-
+import {Link} from 'react-router-dom'
 
 import User from '../../../Assets/marcos-reis.jpg';
+
+import {logout} from '../../../services/auth'
+
 // import { Container } from './styles';
 export default function Navbar() {
   return (
@@ -15,6 +18,7 @@ export default function Navbar() {
           <h6 className="text-grey font-weight-bold">Founder</h6>
 
         </div>
+        <Link to='/dashboard' className="btn btn-outline-danger ml-5" onClick={()=>{logout()}}>sair</Link>
 
       </nav>
 

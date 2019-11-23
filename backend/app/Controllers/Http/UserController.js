@@ -41,6 +41,9 @@ class UserController {
       .select("*")
       .where("id", id)
       .with("accounts")
+      .with("cashbacks")
+      .with("transfers")
+      .with("requestTransfers")
       .fetch();
     return { user };
   }

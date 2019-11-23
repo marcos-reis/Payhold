@@ -12,6 +12,14 @@ class TransferController {
     const Transfers = await Transfer.create(data);
     return { Transfers };
   }
+  async show({ request }) {
+    const { id } = request.params;
+    const Transfers = await Transfer.query()
+      .select("*")
+      .where("id", id)
+      .fetch();
+    return { Transfers };
+  }
 }
 
 module.exports = TransferController
