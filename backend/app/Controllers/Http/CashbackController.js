@@ -1,26 +1,27 @@
 'use strict'
-const Cashback = use("App/Models/Cashback");
+const Cashback = use('App/Models/Cashback')
 
 class CashbackController {
-  async store({ request, response }) {
+  async store ({ request, response }) {
     const data = await request.only([
-      "value",
-      "partner_id",
-      "user_id",
-      "operation",
-      "description"
-    ]);
+      'value',
+      'partner_id',
+      'user_id',
+      'operation',
+      'description'
+    ])
 
-    const Cashbacks = await Cashback.create(data);
-    return { Cashbacks };
+    const Cashbacks = await Cashback.create(data)
+    return { Cashbacks }
   }
-  async show({ request }) {
-    const { id } = request.params;
+
+  async show ({ request }) {
+    const { id } = request.params
     const Cashbacks = await Cashback.query()
-      .select("*")
-      .where("id", id)
-      .fetch();
-    return { Cashbacks };
+      .select('*')
+      .where('id', id)
+      .fetch()
+    return { Cashbacks }
   }
 }
 

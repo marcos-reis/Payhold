@@ -1,30 +1,24 @@
-const Categorypartner = use("App/Models/Categorypartner");
+const Categorypartner = use('App/Models/Categorypartner')
 
 class CategorypartnerController {
-  async store({ request, response }) {
+  async store ({ request, response }) {
     const data = await request.only([
-      "category",
-      "percentage",
-      "partner_id",
-    ]);
+      'category',
+      'percentage',
+      'partner_id'
+    ])
 
-    const category = await Categorypartner.create(data);
-    return { category };
+    const category = await Categorypartner.create(data)
+    return { category }
   }
 
-  async index({ request, response }) {
+  async index ({ request, response }) {
     const category = await Categorypartner.query()
-    .select("*")
-    .fetch();
+      .select('*')
+      .fetch()
 
-     return { category };
+    return { category }
   }
-
-
-
-
-
-
 }
 
 module.exports = CategorypartnerController

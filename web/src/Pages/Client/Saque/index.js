@@ -39,7 +39,8 @@ loadData()
 
   async function requestTransfer(){
      const response = await api.post('/request-transfers',{
-      account_id:localStorage.getItem("AccountID"),
+      account_id: localStorage.getItem("AccountID"),
+      user_id:1,
       value:valueTransfer
     })
 console.log(response.data)

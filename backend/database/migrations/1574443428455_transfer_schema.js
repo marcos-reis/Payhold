@@ -6,27 +6,27 @@ const Schema = use('Schema')
 class TransferSchema extends Schema {
   up () {
     this.create('transfers', (table) => {
-
-      table.increments();
+      table.increments()
 
       table
-        .integer("user_id")
+        .integer('user_id')
         .unsigned()
-        .references("id")
-        .inTable("users");
+        .references('id')
+        .inTable('users')
+        .notNullable()
 
-        table
-        .integer("account_id")
+      table
+        .integer('account_id')
         .unsigned()
-        .references("id")
-        .inTable("accounts");
+        .references('id')
+        .inTable('accounts')
+        .notNullable()
 
-      table.string("description").defaultTo('Transferência')
+      table.string('description').defaultTo('Transferência')
 
-      table.float("value");
+      table.float('value').notNullable()
 
-      table.timestamps();
-
+      table.timestamps()
     })
   }
 

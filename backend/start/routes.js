@@ -15,10 +15,9 @@ Route.get("/files/:thumbnail", ({ request, response }) => {
 
 Route.post("/sessions", "SessionController.store").validator("Session");
 Route.post("/users", "UserController.store");
-Route.post("/partners", "PartnerController.store");
-Route.post("/category-partners", "CategorypartnerController.store");
 
-Route.get("/users", "UserController.index");
+
+
 
 Route.group(() => {
   Route.post("/bankaccounts", "BankAccountController.store");
@@ -27,6 +26,7 @@ Route.group(() => {
   Route.post("/financials", "FinancialController.store");
   Route.get("/financials/:id", "FinancialController.show");
 
+  Route.get("/users", "UserController.index");
   Route.get("/users/:id", "UserController.show");
   Route.delete("/users/:id", "UserController.delete");
 
@@ -42,9 +42,14 @@ Route.group(() => {
   Route.post("/request-transfers","RequestTransferController.store")
   Route.get("/request-transfers/:id", "RequestTransferController.show");
 
+  Route.post("/partners", "PartnerController.store");
+  Route.get("/partners", "PartnerController.index");
+  Route.get("/partners/:id", "PartnerController.show");
+
+  Route.post("/category-partners", "CategorypartnerController.store");
+  Route.get("/category-partners", "categorypartnerController.index");
 
 }).middleware("auth");
 
-Route.get("/category-partners", "categorypartnerController.index");
-Route.get("/partners", "PartnerController.index");
-Route.get("/partners/:id", "PartnerController.show");
+
+

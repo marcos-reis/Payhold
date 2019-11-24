@@ -1,24 +1,24 @@
-const { test, trait, ...suite } = use("Test/Suite")("Sessions");
-const Factory = use("Factory");
+const { test, trait, ...suite } = use('Test/Suite')('Sessions')
+const Factory = use('Factory')
 
-trait("Test/ApiClient");
-trait("DatabaseTransactions");
+trait('Test/ApiClient')
+trait('DatabaseTransactions')
 
-test("it should receiver a token when authenticated", async ({
+test('it should receiver a token when authenticated', async ({
   assert,
   client
 }) => {
-  const user = await Factory.model("App/Models/User").create({
-    password: "abc123"
-  });
+  const user = await Factory.model('App/Models/User').create({
+    password: 'abc123'
+  })
 
   const response = await client
-    .post("/sessions")
+    .post('/sessions')
     .send({
       email: user.email,
-      password: "abc123"
+      password: 'abc123'
     })
-    .end();
-  response.assertStatus(200);
-  assert.exists(response.body.token);
-});
+    .end()
+  response.assertStatus(200)
+  assert.exists(response.body.token)
+})

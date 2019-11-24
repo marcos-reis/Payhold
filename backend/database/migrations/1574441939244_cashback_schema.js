@@ -6,27 +6,27 @@ const Schema = use('Schema')
 class CashbackSchema extends Schema {
   up () {
     this.create('cashbacks', (table) => {
-
-      table.increments();
-
-      table
-        .integer("user_id")
-        .unsigned()
-        .references("id")
-        .inTable("users");
+      table.increments()
 
       table
-        .integer("partner_id")
+        .integer('user_id')
         .unsigned()
-        .references("id")
-        .inTable("partners");
+        .references('id')
+        .inTable('users')
+        .notNullable()
 
-      table.string("description");
+      table
+        .integer('partner_id')
+        .unsigned()
+        .references('id')
+        .inTable('partners')
+        .notNullable()
 
-      table.float("value");
+      table.string('description').notNullable()
 
-      table.timestamps();
+      table.float('value').notNullable()
 
+      table.timestamps()
     })
   }
 

@@ -1,4 +1,4 @@
-"use strict";
+'use strict'
 
 /*
 |--------------------------------------------------------------------------
@@ -12,28 +12,28 @@
 */
 
 /** @type {import('@adonisjs/lucid/src/Factory')} */
-const Factory = use("Factory");
+const Factory = use('Factory')
 
-Factory.blueprint("App/Models/User", (faker, i, data) => {
+Factory.blueprint('App/Models/User', (faker, i, data) => {
   return {
     fullname: faker.name({ middle: true }),
-    email: faker.email({ domain: "gmail.com" }),
+    email: faker.email({ domain: 'gmail.com' }),
     cpf: faker.cpf(),
-    password: faker.string({ length: 8, pool: "abc123" }),
+    password: faker.string({ length: 8, pool: 'abc123' }),
     ...data
-  };
-});
+  }
+})
 
-Factory.blueprint("App/Models/Partner", (faker, i, data) => {
+Factory.blueprint('App/Models/Partner', (faker, i, data) => {
   return {
     name: faker.company(),
-    category: "E-commerce",
+    category: 'E-commerce',
     percentage: `${faker.floating({ min: 0, max: 20, fixed: 1 })}%`,
     ...data
-  };
-});
+  }
+})
 
-Factory.blueprint("App/Models/BankAccount", (faker, i, data) => {
+Factory.blueprint('App/Models/BankAccount', (faker, i, data) => {
   return {
     cod: faker.integer({ min: 200, max: 300 }),
     bank: faker.company(),
@@ -41,33 +41,33 @@ Factory.blueprint("App/Models/BankAccount", (faker, i, data) => {
     agency: faker.integer({ min: 6000, max: 9000 }),
     user_id: null,
     ...data
-  };
-});
+  }
+})
 
-Factory.blueprint("App/Models/Cashback", (faker, i, data) => {
+Factory.blueprint('App/Models/Cashback', (faker, i, data) => {
   return {
-    description:"Compras na Amazon",
+    description: 'Compras na Amazon',
     value: faker.floating({ min: 50, max: 1000, fixed: 2 }),
     partner_id: null,
     user_id: null,
     ...data
-  };
-});
+  }
+})
 
-Factory.blueprint("App/Models/Transfer", (faker, i, data) => {
+Factory.blueprint('App/Models/Transfer', (faker, i, data) => {
   return {
     value: faker.floating({ min: 50, max: 1000, fixed: 2 }),
     account_id: null,
     user_id: null,
     ...data
-  };
-});
+  }
+})
 
-Factory.blueprint("App/Models/RequestTransfer", (faker, i, data) => {
+Factory.blueprint('App/Models/RequestTransfer', (faker, i, data) => {
   return {
     value: faker.floating({ min: 50, max: 1000, fixed: 2 }),
     account_id: null,
     user_id: null,
     ...data
-  };
-});
+  }
+})

@@ -24,17 +24,15 @@ export default function Extrato({history}) {
 
 
 var total = 0
-const {cashbacks,transfers,requestTransfers} = response.data.user[0];
+const {cashbacks,requestTransfers} = response.data.user[0];
 
 cashbacks
     .concat(
-      transfers,
       requestTransfers
       ).map((v)=>  total += v.value)
 
 setHistoryData(cashbacks
   .concat(
-    transfers,
     requestTransfers))
 setBalance(total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }))
 
@@ -72,7 +70,7 @@ loadData()
 
                       <div className="justify-content-center row">
                         <div className="row text-center col-12">
-                          <span className="col-12 text-grey">Saldo Disponível</span>
+  <span className="col-12 text-grey">Saldo Disponível}</span>
                       <h3 className="col-12 ">{balance}</h3>
                       </div>
                       <div className="mt-5  col-11 bg-light justify-content-center row">
@@ -82,9 +80,12 @@ loadData()
                         historyData.map((v,i)=>(
 
                           <div key={i} className="row mx-0 col-10 my-0 pt-5 justify-content-center">
-                            <li className="col-lg-8  col-9 text-grey"><strong>{v.operation}</strong></li>
+                            <li className="col-lg-8  col-9 text-grey"><strong>Cashback</strong></li>
                             <li className="col-lg-3  col-3 text-grey">15 NOV</li>
-                            <li className="col-lg-11  col-12 "> {v.description}</li>
+                            {v.description === 'Solicitação de Transferência' ?
+                            <> <li className="col-lg-8 col-9 "> {v.description}</li> <li className="col-3"> Pendente </li> </>:
+                             <li className="col-lg-11  col-12 "> {v.description}</li> }
+
                             <li className="col-lg-11 col-12 text-grey">{v.value.toLocaleString('pt-br',{style:'currency', currency:'BRL'})}</li>
                             <hr className="border w-75 mt-5 my-0"/>
                           </div>

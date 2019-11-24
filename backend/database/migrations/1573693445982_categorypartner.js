@@ -7,13 +7,16 @@ class CategorypartnerSchema extends Schema {
   up () {
     this.create('categorypartners', (table) => {
       table.increments()
-			table.string("category", 80).notNullable();
-      table.string("percentage", 80).notNullable();
+      table.string('category', 80).notNullable()
+      table.string('percentage', 80).notNullable()
+
       table
-      .integer("partner_id")
-      .unsigned()
-      .references("id")
-      .inTable("partners");
+        .integer('partner_id')
+        .unsigned()
+        .references('id')
+        .inTable('partners')
+        .notNullable()
+
       table.timestamps()
     })
   }

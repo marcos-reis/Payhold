@@ -6,27 +6,32 @@ const Schema = use('Schema')
 class RequestTransferSchema extends Schema {
   up () {
     this.create('request_transfers', (table) => {
-
-      table.increments();
+      table.increments()
 
       table
-        .integer("user_id")
+        .integer('user_id')
         .unsigned()
-        .references("id")
-        .inTable("users");
+        .references('id')
+        .inTable('users')
+        .notNullable()
 
-        table
-        .integer("account_id")
+      table
+        .integer('account_id')
         .unsigned()
-        .references("id")
-        .inTable("accounts");
+        .references('id')
+        .inTable('accounts')
+        .notNullable()
 
-      table.string("description").defaultTo('Solicitação de Transferência')
+      table.string('description').defaultTo('Solicitação de Transferência') // Transferencia Realizada
 
-      table.float("value");
+      table.string('operation').defaultTo('Transferência')
 
-      table.timestamps();
+      table.string('status').defaultTo('Pendente')// null
 
+      table.float('value')
+        .notNullable()
+
+      table.timestamps()
     })
   }
 
