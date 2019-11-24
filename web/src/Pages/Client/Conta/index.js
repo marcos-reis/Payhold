@@ -9,7 +9,7 @@ import Sidebar from '../../../Components/Client/Sidebar';
 
 import './style.css';
 
-export default function Conta() {
+export default function Conta({history}) {
 
 
 
@@ -29,6 +29,10 @@ export default function Conta() {
     loadData()
 
   },[])
+  function confirmAccountOFTransfer(v){
+    localStorage.setItem('AccountID',v.id)
+    history.push('/saque')
+  }
 
   return (<>
     <Sidebar />
@@ -48,7 +52,7 @@ export default function Conta() {
                  <div className="row justify-content-center">
 
 {conta.map((v)=>(
-            <div key={v.id} className="mt-5  col-lg-3 col-md-5 col-sm-6 col-7  justify-contatiner-center">
+            <div  key={v.id} onClick={()=>confirmAccountOFTransfer(v)} style={{cursor:'pointer'}} className="mt-5  col-lg-3 col-md-5 col-sm-6 col-7  justify-contatiner-center">
             <img  src={v.url_thumbnail} alt={v.bank}/>
             <div className=" row p-2 m-0 flex-column text-light justify-content-center bg-gray">
               <h4><strong>{v.bank}</strong></h4>

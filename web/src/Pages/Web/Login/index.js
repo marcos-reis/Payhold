@@ -11,15 +11,15 @@ export default function Login({history}) {
   const dispatch = useDispatch()
   const {login:authlogin} = useSelector(state => state)
 
-  const [email,setEmail] = useState("marcos@payhold.com")
-  const [password,setPassword] = useState('123456789')
+  const [email,setEmail] = useState()
+  const [password,setPassword] = useState()
 
   async function authentication(){
     const response = await api.post("/sessions",{
-      email,
-      password
+      email:"marcos@payhold.com",
+      password:'123456789'
     })
-if (response.data.message == undefined){
+if (response.data.message === undefined){
     dispatch({type:"INITIAL_SESSION",data:response.data})
     login(response.data.token)
     history.push('/dashboard')

@@ -9,6 +9,7 @@ export default function Pages() {
   const dispatch = useDispatch()
   const login = useSelector(state => state.login)
 
+
   async function authentication(){
     const response = await api.post("/sessions",{
       email:"marcos@payhold.com",
@@ -21,7 +22,7 @@ export default function Pages() {
 
   return (
     <div>
-       <button onClick={()=>authentication()}>CALL API</button>
+       <button onClick={()=>authentication()}>CALL API {login}</button>
 
     </div>
   );
