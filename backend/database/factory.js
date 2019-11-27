@@ -17,6 +17,7 @@ const Factory = use('Factory')
 Factory.blueprint('App/Models/User', (faker, i, data) => {
   return {
     fullname: faker.name({ middle: true }),
+    shortname: faker.name(),
     email: faker.email({ domain: 'gmail.com' }),
     cpf: faker.cpf(),
     password: faker.string({ length: 8, pool: 'abc123' }),
@@ -28,7 +29,9 @@ Factory.blueprint('App/Models/Partner', (faker, i, data) => {
   return {
     name: faker.company(),
     category: 'E-commerce',
-    percentage: `${faker.floating({ min: 0, max: 20, fixed: 1 })}%`,
+    percentage: `${faker.floating({ min: 0, max: 1, fixed: 2 })}`,
+    description: faker.paragraph(),
+    url: faker.url(),
     ...data
   }
 })
@@ -57,6 +60,7 @@ Factory.blueprint('App/Models/Cashback', (faker, i, data) => {
 Factory.blueprint('App/Models/Transfer', (faker, i, data) => {
   return {
     value: faker.floating({ min: 50, max: 1000, fixed: 2 }),
+    description: 'Solicitação de Transferência',
     account_id: null,
     user_id: null,
     ...data

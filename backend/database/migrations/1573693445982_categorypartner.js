@@ -8,7 +8,7 @@ class CategorypartnerSchema extends Schema {
     this.create('categorypartners', (table) => {
       table.increments()
       table.string('category', 80).notNullable()
-      table.string('percentage', 80).notNullable()
+      table.float('percentage', 80).notNullable()
 
       table
         .integer('partner_id')

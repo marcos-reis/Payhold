@@ -19,12 +19,14 @@ class TransferSchema extends Schema {
         .integer('account_id')
         .unsigned()
         .references('id')
-        .inTable('accounts')
+        .inTable('bankaccounts')
         .notNullable()
 
-      table.string('description').defaultTo('Transferência')
+      table.string('description').defaultTo('Transferencia')
 
       table.float('value').notNullable()
+
+      table.boolean('confirmed').defaultTo(0).notNullable()
 
       table.timestamps()
     })

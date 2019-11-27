@@ -15,7 +15,7 @@ class BankAccountController {
       cod: 'required',
       bank: 'required',
       agency: 'required',
-      account: 'required|unique:accounts,account',
+      account: 'required',
       user_id: 'required'
     }
     const file = request.file('thumbnail', {
@@ -36,11 +36,12 @@ class BankAccountController {
       return response.status(401).json(validation.messages())
     }
     const thumbnail = `${file.fileName}`
-    const bankaccount = await BankAccount.create({
+
+    const bankaccounts = await BankAccount.create({
       bank, cod, agency, account, user_id, thumbnail
     })
 
-    return response.status(200).json({ bankaccount })
+    return response.status(200).json({ bankaccounts })
   }
 
   async show ({ request, response }) {
@@ -52,6 +53,25 @@ class BankAccountController {
       // .with('accounts')
       .fetch()
     return response.status(200).json({ bankaccounts })
+  }
+
+  async update ({ request, response }) {
+    const data = await request.only([
+      'agency', 'account'
+    ])
+
+    const { id } = request.params
+    const bankaccounts = await BankAccount.findOrFail(id)
+    await bankaccounts.merge(data)
+    await bankaccounts.save()
+    return { bankaccounts }
+  }
+
+  async destroy ({ request, response }) {
+    const { id } = request.params
+    const bankaccounts = await BankAccount.findOrFail(id)
+    await bankaccounts.delete(id)
+    return { deleted: true }
   }
 }
 

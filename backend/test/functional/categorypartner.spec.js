@@ -18,6 +18,5 @@ test('it should register categories of Partners', async ({ assert, client }) => 
     .end()
   response.assertStatus(200)
 
-  console.log(response.text)
   assert.exists(response.body.category)
 })

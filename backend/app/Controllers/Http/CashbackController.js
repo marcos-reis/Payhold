@@ -7,7 +7,6 @@ class CashbackController {
       'value',
       'partner_id',
       'user_id',
-      'operation',
       'description'
     ])
 

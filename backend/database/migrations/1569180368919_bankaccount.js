@@ -3,9 +3,9 @@
 /** @type {import('@adonisjs/lucid/src/Schema')} */
 const Schema = use('Schema')
 
-class AccountSchema extends Schema {
+class BankAccountSchema extends Schema {
   up () {
-    this.create('accounts', table => {
+    this.create('bankaccounts', table => {
       table.increments()
       table
         .integer('user_id')
@@ -20,14 +20,13 @@ class AccountSchema extends Schema {
       table
         .integer('account')
         .notNullable()
-        .unique()
       table.timestamps()
     })
   }
 
   down () {
-    this.drop('accounts')
+    this.drop('bankaccounts')
   }
 }
 
-module.exports = AccountSchema
+module.exports = BankAccountSchema

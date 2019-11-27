@@ -3,7 +3,7 @@
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model')
 
-class Account extends Model {
+class bankaccount extends Model {
   static get computed () {
     return ['url_thumbnail']
   }
@@ -13,4 +13,4 @@ class Account extends Model {
   }
 }
 
-module.exports = Account
+module.exports = bankaccount

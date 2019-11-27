@@ -11,8 +11,8 @@ class PartnerController {
       size: '2mb'
     })
 
-    var data = request.only(['name', 'category', 'percentage'])
-    var { name, descricao, category, percentage } = request.all()
+    var data = request.only(['name', 'url', 'category', 'percentage', 'description'])
+    var { name, description, url, category, percentage } = request.all()
     const rules = {
       name: 'required',
       category: 'required',
@@ -36,9 +36,10 @@ class PartnerController {
 
     const partner = await Partner.create({
       name,
-      descricao,
+      description,
       category,
       percentage,
+      url,
       thumbnail
     })
     return { partner }

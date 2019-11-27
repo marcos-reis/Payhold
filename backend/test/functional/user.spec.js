@@ -50,3 +50,20 @@ test('It should delete a user', async ({ assert, client }) => {
     .end()
   response.assertStatus(204)
 })
+
+test('It should update a user', async ({ assert, client }) => {
+  const user = await Factory.model('App/Models/User').create()
+  const response = await client
+    .put(`/users/${user.id}`)
+    .loginVia(user)
+    .send({
+      fullname: user.fullname,
+      email: user.email,
+      cpf: user.cpf,
+      password: user.password
+    })
+    .end()
+
+  response.assertStatus(200)
+  assert.exists(response.body.user)
+})

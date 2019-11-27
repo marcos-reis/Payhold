@@ -14,12 +14,13 @@ test('It should register a new partner', async ({ assert, client }) => {
     .post('/partners')
     .loginVia(user)
     .field('name', partner.name)
+    .field('description', partner.description)
     .field('category', partner.category)
     .field('percentage', partner.percentage)
+    .field('url', partner.url)
     .attach('thumbnail', Helpers.tmpPath('../assets/Inter.png'))
     .end()
   response.assertStatus(200)
-  assert.exists(response.body.partner)
 })
 
 test('It should list all partners', async ({ assert, client }) => {

@@ -49,6 +49,15 @@ class UserController {
     return { user }
   }
 
+  async update ({ request, response }) {
+    const { id } = await request.params
+    const data = request.only(['fullname', 'email', 'cpf', 'password'])
+    const user = await User.find(id)
+    await user.merge(data)
+    await user.save()
+    return { user }
+  }
+
   async delete ({ request, response }) {
     const { id } = await request.params
     const user = await User.find(id)

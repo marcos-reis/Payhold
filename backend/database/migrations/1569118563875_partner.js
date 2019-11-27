@@ -8,11 +8,11 @@ class PartnerSchema extends Schema {
     this.create('partners', table => {
       table.increments()
       table.string('name', 80).notNullable()
-      table.string('descricao')
+      table.string('description').notNullable()
       table.string('category', 80).notNullable()
-      table.string('percentage', 80).notNullable()
+      table.float('percentage', 80).notNullable()
       table.string('thumbnail')
-      table.string('url_partner')
+      table.string('url').notNullable()
       table.timestamps()
     })
   }
