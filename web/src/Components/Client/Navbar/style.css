@@ -1,0 +1,13 @@
+.bg-custom-primary{
+  background: linear-gradient(338.7deg, rgb(84, 172, 254) 1.5%, rgb(18, 104, 184) 100%);
+}
+
+.custom-sidebar-off{
+  transform: translateX(-100%);
+  transition: all 0.5s ease-out;
+
+}
+.custom-sidebar-on{
+  transform: translateX(0%);
+  transition: all 0.5s ease-out;
+}
