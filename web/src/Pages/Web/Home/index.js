@@ -9,13 +9,18 @@ import google from '../../../Assets/google-play-store.png';
 import shape from '../../../Assets/liquid-shape.png';
 import payholdApp from '../../../Assets/iPhoneX.png';
 
-// import { Container } from './styles';
 
 export default function Home() {
-  const [totalCash, setTotalCash] = useState(100);
+  const [valueCash, setValueCash] = useState(100);
+  const [totalCash, setTotalCash] = useState(12);
   const [percentCash, setPercentCash] = useState(12);
-  const moneyFormat = (n) => setTotalCash(n.toFixed(2).replace('.', ','));
-  const percentFormat = (n) => setPercentCash(`${n}%`);
+  const moneyFormat = (n) => {
+      setValueCash(n.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
+    setTotalCash(valueCash*totalCash/100)
+
+
+  }
+  const percentFormat = (n) => setPercentCash(`${n}`);
   return (
 
     <>
@@ -34,8 +39,8 @@ export default function Home() {
               <img className="mt-5 " style={{ width: '200px' }} alt="Google Play Store" src={google} />
 
             </div>
-            <div className="d-lg-block d-none pb-5">
-              <img src={shape} className="w-100" alt="none" />
+            <div className="d-lg-block bg-shape w-25 d-none pb-5">
+              <img src={shape} className="" alt="none" />
             </div>
           </div>
         </div>
@@ -47,7 +52,7 @@ export default function Home() {
           <h5 className="text-grey text-justify  mx-md-5 px-5 mb-5 pb-5 font-weight-normal">
           Acesse nossa plataforma, crie uma conta,
           escolha um parceiro e realize sua compra.
-          Cada parceiro ofertara um percentual de retorno
+          Cada parceiro ofertará um percentual de retorno
           em nossa plataforma que pode variar por categorias de produtos.
           O valor do cashback poderá ser sacado ou mantidos rendendo 100% do CDI.
 
@@ -61,11 +66,11 @@ export default function Home() {
             <p className="font-weight-light">Escolha o parceiro que está em nossa lista</p>
             <MaterialIcon icon="shopping_cart" color="#2B6BCB" size="large" />
             <p className="font-weight-light">Escolha o produto que deseja e realize sua compra</p>
-
+            <MaterialIcon icon="monetization_on" color="#2B6BCB" size="large" />
             <p className="font-weight-light">Receba o cashback</p>
           </div>
           <div className="col text-center">
-            <img src={payholdApp} alt="App Payhold" />
+            <img src={payholdApp} style={{width:'250px'}} alt="App Payhold" />
           </div>
         </div>
       </div>
@@ -73,28 +78,28 @@ export default function Home() {
       <div className="py-5" style={{ backgroundColor: '#3C86F6' }}>
         <div className="container">
           <div className="row">
-            <div className=" col-md-8 col-lg-6 col-sm-10 col-10 bg-white mx-auto px-sm-5 py-5">
+            <div className=" col-md-8 col-lg-7 col-sm-10 col-10 bg-white text-center mx-auto px-sm-5 py-5">
               <h3 className=" text-justify px-sm-5 font-weight-bold text-gray"> Veja o total de CashBack concedido em tempo real!</h3>
               <h6 className=" text-justify px-sm-5 mb-4 font-weight-light">Cashback que retorna para você melhor investir.</h6>
-              <div className="border border-primary w-75 mx-auto mb-5">
+              <div className="border border-primary w-100 mx-auto mb-5">
 
                 <p className="text-center my-3">
-R$
-                  <input onChange={(e) => setTotalCash(e.target.value)} className="font-weight-bold text-grey ml-3 w-50 border-0" onBlur={() => moneyFormat(totalCash)} style={{ fontSize: 40 }} value={totalCash} />
+                  <input onChange={(e) => setValueCash(e.target.value)} className="font-weight-bold text-grey text-center ml-3 w-75  border-0" onBlur={() => moneyFormat(valueCash)} style={{ fontSize: 40 }} value={valueCash} />
 
                 </p>
               </div>
-
-              <h5 className="font-weight-bold mt-4 ml-5">
+<div className=" text-center ">
+              <h5 className="font-weight-bold  mt-4  text-center">
 Cash:
-                <input onChange={(e) => setPercentCash(e.target.value)} className="font-weight-bold text-grey w-25 border-0" onBlur={() => percentFormat(percentCash)} value={percentCash} />
+                <input onChange={(e) => setPercentCash(e.target.value)} className="font-weight-bold text-grey w-25 border-0" onBlur={() => percentFormat(percentCash)} value={`${percentCash}%`} />
               </h5>
 
-              <h5 className="font-weight-bold ml-5">
+              <h5 className="font-weight-bold ">
 Retorno:
                 <span className="font-weight-bold ml-1">R$</span>
-                <span className="font-weight-bold ml-2 text-primary">12,00</span>
+                <span className="font-weight-bold ml-2 text-primary">{totalCash}</span>
               </h5>
+              </div>
             </div>
           </div>
 

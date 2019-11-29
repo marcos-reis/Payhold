@@ -24,7 +24,7 @@ setMain(!main)
 
       <div className="d-flex flex-column h-75 justify-content-center px-5  ">
 
-      <Link to="/dashboard"><h5 className="text-dark ">Início</h5></Link>
+      <Link to="/dashboard"><h5 className="text-dark ">INÍCIO</h5></Link>
       <Link to="/extrato"><h5 className="text-dark ">Extrato</h5></Link>
       <Link to="/conta" ><h5 className="text-dark ">Contas</h5></Link>
       <Link to="/saque"> <h5 className="text-dark ">Retiradas</h5></Link>
