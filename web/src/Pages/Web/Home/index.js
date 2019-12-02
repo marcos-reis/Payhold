@@ -13,18 +13,42 @@ import appMobile from '../../../Assets/iPhoneX.png';
 export default function Home() {
 
   const [paymentFake, setPaymentFake] = useState('R$ 100,00');
-  const [percentCash, setPercentCash] = useState(12);
+  const [cashBackFake, setCashBackFake] = useState('R$ 100,00');
+  const [percentCash, setPercentCash] = useState('12%');
 
-  const moneyFormat = (n)=> {
-    console.log(numberFormat(n))
-          return setPaymentFake(numberFormat(n).toLocaleString('pt-br',{style:'currency',currency:'BRL'}))
+  const formatASMoney = (n)=> {
+    const numberFormated = formatASNumber(n)
+    const moneyFormated = numberFormated.toLocaleString('pt-br',{style:'currency',currency:'BRL'})
+    setPaymentFake(moneyFormated)
  }
-  const percentFormat = (n) => setPercentCash(`${n}%`);
-  const numberFormat = (n)=> parseInt(n.replace(/\D/g, ''))
+ const percentFormat = (n) =>{
+  const numberFormated = formatASNumber(n)
+  const percentageFormated = numberFormated.toLocaleString('pt-br',{style:'percent'});
+  setPercentCash(percentageFormated)
+
+
+  }
+
+  const returnCashBack = (v,i)=>{
+    const valueCashBackFormated = formatASNumber(v)
+    const taxaCashBack = formatASNumber(i)
+    setCashBackFake(valueCashBackFormated*taxaCashBack)
+
+  }
+
+  const formatASNumber = (n)=> {
+    if(typeof(n)!== 'number'){
+    return  parseInt(n.replace(/\D/g, ''))/100
+  }
+
+  if(typeof(n)=== 'number'){
+  return  n/100
+  }
+
+}
+
 
   return (
-
-
     <>
       <Navbar />
       <div className="bg-primary">
@@ -74,7 +98,7 @@ export default function Home() {
           <div className="col text-center">
 
 
-            <img src={payholdApp} style={{width:'250px'}} alt="App Payhold" />
+            <img src={appMobile} style={{width:'250px'}} alt="App Payhold" />
 
           </div>
         </div>
@@ -91,9 +115,9 @@ export default function Home() {
                 <p className="text-center my-3">
 
                   <input
-                        onChange={(e) => setPaymentFake(e.target.value)}
+                        onChange={(e) => formatASMoney(e.target.value)}
                         className="font-weight-bold text-grey ml-3 w-50 border-0"
-                        onBlur={() => moneyFormat(paymentFake)}
+                        onBlur={() => formatASMoney(paymentFake)}
                         style={{ fontSize: 10 }} value={paymentFake} />
 
                 </p>
@@ -101,13 +125,13 @@ export default function Home() {
 <div className=" text-center ">
               <h5 className="font-weight-bold  mt-4  text-center">
 Cash:
-                <input onChange={(e) => setPercentCash(e.target.value)} className="font-weight-bold text-grey w-25 border-0" onBlur={() => percentFormat(percentCash)} value={`${percentCash}%`} />
+                <input onChange={(e) => setPercentCash(e.target.value)} className="font-weight-bold text-grey w-25 border-0" onBlur={() => percentFormat(percentCash)} value={percentCash}/>
               </h5>
 
               <h5 className="font-weight-bold ">
 Retorno:
                 <span className="font-weight-bold ml-1">R$</span>
-                <span className="font-weight-bold ml-2 text-primary">{totalCash}</span>
+                <span className="font-weight-bold ml-2 text-primary">{paymentFake}</span>
               </h5>
               </div>
             </div>
