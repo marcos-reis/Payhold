@@ -8,7 +8,6 @@ import api from '../../../services/api'
 
 
 import Navbar from '../../../Components/Client/Navbar';
-import Sidebar from '../../../Components/Client/Sidebar';
 import Featured from '../../../Components/Client/Featured';
 import Partners from '../../../Components/Client/Partners';
 
@@ -17,14 +16,13 @@ import Partners from '../../../Components/Client/Partners';
 
 
 export default function Dashboard() {
-  const [destakPartners,setDestakPartners] = useState([])
   const [partners, setPartners ] = useState([])
+
 
   useEffect(()=>{
     async function loadData(){
       const response = await api.get('/partners')
 
-      setDestakPartners(response.data.partners)
       setPartners(response.data.partners)
 
      }
@@ -46,15 +44,16 @@ export default function Dashboard() {
     setPartnerDetail(!partnerDetail);
 
   };
+
+
   return (
     <>
 
-      <Sidebar />
       <div className="row" style={{ backgroundColor: '#E4E7EA' }}>
-        <div className="col-xl-2 col-lg-3 col-md-4" />
-        <div className="p-0 col-md-8 col-lg-9 col-xl-10">
+
+        <div className="col-12 ">
           <Navbar />
-          <div className="container">
+          <div className="col-8 container">
             <div className="row justify-content-center">
               {partnerDetail && (
                 <>
@@ -72,7 +71,7 @@ export default function Dashboard() {
                     url={whatPartner[indexPartners].url}
                     name={whatPartner[indexPartners].name}
                     thumbnail={whatPartner[indexPartners].url_thumbnail}
-                    descricao={whatPartner[indexPartners].descricao}
+                    description={whatPartner[indexPartners].description}
                     categories={whatPartner[indexPartners].categories}
                   />
                 </>
@@ -81,20 +80,9 @@ export default function Dashboard() {
 
               <div className="container d-block">
 
-                <div className="row  justify-content-center">
-                  <div className="col-12">
-                    <p className="ml-5 mt-5 font-weight-bold text-grey">Destaques</p>
-                  </div>
-                  {destakPartners.map((v, i) => (
-                    <div key={v.id} onClick={() => showPartner(i, destakPartners)} role="button" tabIndex={v.id}>
-                      <Featured name={v.name} thumbnail={v.url_thumbnail} percentage={v.percentage} />
-                    </div>
-                  ))}
 
-
-                </div>
                 <div className="row justify-content-center">
-                  <div className="col-12">
+                  <div className="mt-5 pl-5 ml-5 col-12">
                     <p className="ml-5 mt-5 font-weight-bold text-grey">Todos os Parceiros</p>
                   </div>
 

@@ -7,15 +7,15 @@ export default function Footer() {
     <div style={{ backgroundColor: '#2B6BCB' }}>
       <div className="container">
         <div className="row py-3">
-          <div className="col-6  text-center">
+          <a href="mailto:contato@payhold.com.br" target="_newtab" className="col-6  text-center">
             <MaterialIcon icon="mail_outline" color="#fff" size="60" />
             <p className="text-light">contato@payhold.com.br</p>
-          </div>
+          </a>
 
-          <div className="col-6  text-center">
+          <a href="https://api.whatsapp.com/send?phone=+5575991535951" className="col-6  text-center">
             <MaterialIcon icon=" call" color="#fff" size="60" />
-            <p className="text-light">(75) 9 0000 - 0000</p>
-          </div>
+            <p className="text-light">(75) 9 9153 - 5951</p>
+          </a>
 
         </div>
 

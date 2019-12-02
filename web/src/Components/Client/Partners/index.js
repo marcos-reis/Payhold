@@ -2,7 +2,7 @@ import React from 'react';
 
 import './style.css';
 
-export default function Partners({ categories, descricao,thumbnail,name,url }) {
+export default function Partners({ categories, description,thumbnail,name,url }) {
   return (
     <div style={{zIndex:1}} className="mt-5 overflow-auto partner bg-grey position-fixed vh-100 flex-column">
 
@@ -13,7 +13,7 @@ export default function Partners({ categories, descricao,thumbnail,name,url }) {
       <div className=" mt-5 mx-auto text-justify  col-10 col-md-8">
 
         <span className=" text-light font-weight-bold  ">
-          {descricao}
+          {description}
         </span>
       </div>
       <div className="container">
