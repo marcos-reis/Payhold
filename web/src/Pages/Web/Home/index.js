@@ -7,16 +7,27 @@ import Footer from '../../../Components/Web/Footer';
 import apple from '../../../Assets/apple-play-store.png';
 import google from '../../../Assets/google-play-store.png';
 import shape from '../../../Assets/liquid-shape.png';
-import payholdApp from '../../../Assets/iPhoneX.png';
+import appMobile from '../../../Assets/iPhoneX.png';
 
 // import { Container } from './styles';
 
 export default function Home() {
-  const [totalCash, setTotalCash] = useState(100);
+  const [paymentFake, setPaymentFake] = useState('R$ 100,00');
   const [percentCash, setPercentCash] = useState(12);
-  const moneyFormat = (n) => setTotalCash(n.toFixed(2).replace('.', ','));
+
+  const moneyFormat = (n)=> {
+    console.log(numberFormat(n))
+          return setPaymentFake(numberFormat(n).toLocaleString('pt-br',{style:'currency',currency:'BRL'}))
+ }
   const percentFormat = (n) => setPercentCash(`${n}%`);
+
+
+  const numberFormat = (n)=> parseInt(n.replace(/\D/g, ''))
+
+
+
   return (
+
 
     <>
       <Navbar />
@@ -65,7 +76,7 @@ export default function Home() {
             <p className="font-weight-light">Receba o cashback</p>
           </div>
           <div className="col text-center">
-            <img src={payholdApp} alt="App Payhold" />
+            <img src={appMobile} alt="App Payhold" />
           </div>
         </div>
       </div>
@@ -79,9 +90,11 @@ export default function Home() {
               <div className="border border-primary w-75 mx-auto mb-5">
 
                 <p className="text-center my-3">
-R$
-                  <input onChange={(e) => setTotalCash(e.target.value)} className="font-weight-bold text-grey ml-3 w-50 border-0" onBlur={() => moneyFormat(totalCash)} style={{ fontSize: 40 }} value={totalCash} />
-
+                  <input
+                        onChange={(e) => setPaymentFake(e.target.value)}
+                        className="font-weight-bold text-grey ml-3 w-50 border-0"
+                        onBlur={() => moneyFormat(paymentFake)}
+                        style={{ fontSize: 10 }} value={paymentFake} />
                 </p>
               </div>
 
