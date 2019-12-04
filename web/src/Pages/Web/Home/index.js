@@ -12,27 +12,28 @@ import appMobile from '../../../Assets/iPhoneX.png';
 
 export default function Home() {
 
-  const [paymentFake, setPaymentFake] = useState('R$ 100,00');
-  const [cashBackFake, setCashBackFake] = useState('R$ 100,00');
-  const [percentCash, setPercentCash] = useState('12%');
+  const [payment, setPayment] = useState('R$ 100,00');
+  const [cashBack, setCashBack] = useState('R$ 100,00');
+  const [percent, setPercent] = useState('12%');
 
   const formatASMoney = (n)=> {
     const numberFormated = formatASNumber(n)
     const moneyFormated = numberFormated.toLocaleString('pt-br',{style:'currency',currency:'BRL'})
-    setPaymentFake(moneyFormated)
+    setPayment(moneyFormated)
+    returnCashBack(payment,percent)
  }
  const percentFormat = (n) =>{
   const numberFormated = formatASNumber(n)
   const percentageFormated = numberFormated.toLocaleString('pt-br',{style:'percent'});
-  setPercentCash(percentageFormated)
-
+  setPercent(percentageFormated)
+  returnCashBack(payment,percent)
 
   }
 
   const returnCashBack = (v,i)=>{
-    const valueCashBackFormated = formatASNumber(v)
-    const taxaCashBack = formatASNumber(i)
-    setCashBackFake(valueCashBackFormated*taxaCashBack)
+    const paymentFormated = formatASNumber(v)
+    const percentFormated = formatASNumber(i)
+    setCashBack(paymentFormated*percentFormated)
 
   }
 
@@ -117,21 +118,21 @@ export default function Home() {
                   <input
                         onChange={(e) => formatASMoney(e.target.value)}
                         className="font-weight-bold text-grey ml-3 w-50 border-0"
-                        onBlur={() => formatASMoney(paymentFake)}
-                        style={{ fontSize: 10 }} value={paymentFake} />
+                        onBlur={() => formatASMoney(payment)}
+                        style={{ fontSize: 10 }} value={payment} />
 
                 </p>
               </div>
 <div className=" text-center ">
               <h5 className="font-weight-bold  mt-4  text-center">
 Cash:
-                <input onChange={(e) => setPercentCash(e.target.value)} className="font-weight-bold text-grey w-25 border-0" onBlur={() => percentFormat(percentCash)} value={percentCash}/>
+                <input onChange={(e) => setPercent(e.target.value)} className="font-weight-bold text-grey w-25 border-0" onBlur={() => percentFormat(percent)} value={percent}/>
               </h5>
 
               <h5 className="font-weight-bold ">
 Retorno:
                 <span className="font-weight-bold ml-1">R$</span>
-                <span className="font-weight-bold ml-2 text-primary">{paymentFake}</span>
+                <span className="font-weight-bold ml-2 text-primary">{cashBack}</span>
               </h5>
               </div>
             </div>
