@@ -4,14 +4,13 @@ const Transfer = use('App/Models/Transfer')
 
 class TransferController {
   async store ({ request, response }) {
-    const data = await request.only([
-      'value',
-      'user_id',
-      'description',
-      'account_id'
-    ])
+    let { value, user_id, description, account_id } = await request.all()
 
-    const Transfers = await Transfer.create(data)
+    value *= (-1)
+
+    const Transfers = await Transfer.create({
+      value, user_id, description, account_id
+    })
     return Transfers
   }
 
