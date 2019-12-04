@@ -1,7 +1,6 @@
 import React,{useState,useEffect} from 'react';
 
 import Navbar from '../../../Components/Client/Navbar';
-import Sidebar from '../../../Components/Client/Sidebar';
 
 import api from '../../../services/api'
 
@@ -24,8 +23,7 @@ export default function Saque({history}) {
 var total = 0
 response.data.user[0].cashbacks
     .concat(
-      response.data.user[0].transfers,
-      response.data.user[0].requestTransfers
+      response.data.user[0].transfers
       ).map((v)=>  total += v.value)
 
 setBalance(total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }))
@@ -38,14 +36,14 @@ loadData()
   },[])
 
   async function requestTransfer(){
-     const response = await api.post('/request-transfers',{
+    await api.post('/transfers',{
       account_id: localStorage.getItem("AccountID"),
       user_id:1,
       value:valueTransfer
     })
-console.log(response.data)
     //localStorage.removeItem("valueTransfer")
-    //localStorage.removeItem("AccountID")
+	//localStorage.removeItem("AccountID")
+	history.push('/extrato')
   }
 
   function confirmValueTransfer(){
@@ -54,11 +52,11 @@ requestTransfer()
 
   return (<>
 
-    <Sidebar />
      <div className="row" style={{ backgroundColor: '#E4E7EA' }}>
+
          <div className="col-xl-2 col-lg-3 col-md-4" />
-             <div className="p-0 col-md-8 col-lg-9 col-xl-10">
-                <Navbar/>
+		 <Navbar/>
+
 
                <div className="container">
 
@@ -79,7 +77,7 @@ requestTransfer()
                </div>
 
                </div>
-            </div>
+
 
 
     </>

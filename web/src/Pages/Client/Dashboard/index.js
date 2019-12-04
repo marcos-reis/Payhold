@@ -2,11 +2,6 @@ import React, { useState,useEffect } from 'react';
 
 import api from '../../../services/api'
 
-
-
-
-
-
 import Navbar from '../../../Components/Client/Navbar';
 import Featured from '../../../Components/Client/Featured';
 import Partners from '../../../Components/Client/Partners';
@@ -17,12 +12,16 @@ import Partners from '../../../Components/Client/Partners';
 
 export default function Dashboard() {
   const [partners, setPartners ] = useState([])
+  const [Partner, setPartner] = useState(null);
+  const [indexPartners, setIndexPartner] = useState(null);
+  const [showDetailPartner, setShowDetailPartner] = useState(false);
+
+
 
 
   useEffect(()=>{
     async function loadData(){
       const response = await api.get('/partners')
-
       setPartners(response.data.partners)
 
      }
@@ -31,17 +30,13 @@ export default function Dashboard() {
   },[])
 
 
-  const [whatPartner, setWhatPartner] = useState(null);
-  const [indexPartners, setIndexPartners] = useState(null);
-  const [partnerDetail, setPartnerDetail] = useState(false);
 
 
 
-
-  const showPartner = (i, w) => {
-    setWhatPartner(w);
-    setIndexPartners(i);
-    setPartnerDetail(!partnerDetail);
+  const showPartner = (index, partner) => {
+    setPartner(partner);
+    setIndexPartner(index);
+    setShowDetailPartner(!showDetailPartner);
 
   };
 
@@ -55,7 +50,7 @@ export default function Dashboard() {
           <Navbar />
           <div className="col-8 container">
             <div className="row justify-content-center">
-              {partnerDetail && (
+              {showDetailPartner && (
                 <>
                   <div
                     onClick={() => showPartner()}
@@ -68,11 +63,11 @@ export default function Dashboard() {
                     <span className="position-fixed m-2 bg-light  px-2 font-weight-bold rounded-circle ">x</span>
                   </div>
                   <Partners
-                    url={whatPartner[indexPartners].url}
-                    name={whatPartner[indexPartners].name}
-                    thumbnail={whatPartner[indexPartners].url_thumbnail}
-                    description={whatPartner[indexPartners].description}
-                    categories={whatPartner[indexPartners].categories}
+                    url={Partner[indexPartners].url}
+                    name={Partner[indexPartners].name}
+                    thumbnail={Partner[indexPartners].url_thumbnail}
+                    description={Partner[indexPartners].description}
+                    categories={Partner[indexPartners].categories}
                   />
                 </>
               )}

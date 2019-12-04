@@ -3,8 +3,6 @@ import React,{useState,useEffect} from 'react';
 import api from '../../../services/api'
 
 import Navbar from '../../../Components/Client/Navbar';
-import Sidebar from '../../../Components/Client/Sidebar';
-
 
 import './style.css';
 
@@ -13,7 +11,6 @@ export default function Extrato({history}) {
 
 
   const [historyData,setHistoryData] = useState([])
-  const [request,setRequest] = useState(false)
   const [balance,setBalance] =useState([])
 
   useEffect(()=>{
@@ -22,21 +19,18 @@ export default function Extrato({history}) {
     const response = await api.get('/users/1');
 
 
-
 var total = 0
-const {cashbacks,requestTransfers} = response.data.user[0];
+const {cashbacks,transfers} = response.data.user[0];
 
 cashbacks
     .concat(
-      requestTransfers
+      transfers
       ).map((v)=>  total += v.value)
 
 setHistoryData(cashbacks
   .concat(
-    requestTransfers))
+    transfers))
 setBalance(total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }))
-
-console.log(response.data.user)
 }
 
 
@@ -45,7 +39,6 @@ loadData()
   },[])
 
   function requestTransfer(){
-    setRequest(true)
     history.push('/conta')
 
   }
@@ -53,13 +46,11 @@ loadData()
 
   return (<>
 
-   <Sidebar />
     <div className="row" style={{ backgroundColor: '#E4E7EA' }}>
-        <div className="col-xl-2 col-lg-3 col-md-4" />
-            <div className="p-0 col-md-8 col-lg-9 col-xl-10">
-               <Navbar/>
-
-                    <div className="container">
+        <div className="col-12" />
+        <Navbar/>
+            <div className="col-12 pt-5">
+                    <div className="container mt-5">
 
                       <select>
                         <option>Mês Atual</option>
@@ -70,7 +61,7 @@ loadData()
 
                       <div className="justify-content-center row">
                         <div className="row text-center col-12">
-  <span className="col-12 text-grey">Saldo Disponível}</span>
+  <span className="col-12 text-grey">Saldo Disponível</span>
                       <h3 className="col-12 ">{balance}</h3>
                       </div>
                       <div className="mt-5  col-11 bg-light justify-content-center row">
@@ -80,11 +71,17 @@ loadData()
                         historyData.map((v,i)=>(
 
                           <div key={i} className="row mx-0 col-10 my-0 pt-5 justify-content-center">
-                            <li className="col-lg-8  col-9 text-grey"><strong>Cashback</strong></li>
-                            <li className="col-lg-3  col-3 text-grey">15 NOV</li>
-                            {v.description === 'Solicitação de Transferência' ?
-                            <> <li className="col-lg-8 col-9 "> {v.description}</li> <li className="col-3"> Pendente </li> </>:
-                             <li className="col-lg-11  col-12 "> {v.description}</li> }
+
+                          <li className="col-lg-8  col-9 text-grey">
+                            <strong>Cashback</strong>
+                          </li>
+
+                           {v.confirmed === 0 ?
+                        <> <li className="col-lg-3  col-3 text-grey">{v.created_at}</li>
+
+                            <li className="col-lg-8 col-9 "> {v.description}</li> <li className="col-3"> Pendente </li> </>:
+                            <> <li className="col-lg-3  col-3 text-grey">{v.updated_at}</li>
+                            <li className="col-lg-8  col-9 "> {v.description}</li> <li className="col-3"> Confirmado </li></> }
 
                             <li className="col-lg-11 col-12 text-grey">{v.value.toLocaleString('pt-br',{style:'currency', currency:'BRL'})}</li>
                             <hr className="border w-75 mt-5 my-0"/>

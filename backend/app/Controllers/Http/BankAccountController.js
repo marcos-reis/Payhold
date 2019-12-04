@@ -47,8 +47,8 @@ class BankAccountController {
   async show ({ request, response }) {
     const { id } = request.params
 
-    const bankaccounts = await User.query()
-      .select('id', 'fullname')
+    const bankaccounts = await BankAccount.query()
+      .select('*')
       .where('id', id)
       // .with('accounts')
       .fetch()

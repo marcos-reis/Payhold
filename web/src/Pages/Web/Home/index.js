@@ -8,42 +8,36 @@ import apple from '../../../Assets/apple-play-store.png';
 import google from '../../../Assets/google-play-store.png';
 import shape from '../../../Assets/liquid-shape.png';
 import appMobile from '../../../Assets/iPhoneX.png';
+import { isNumber } from 'util';
 
 
 export default function Home() {
 
   const [paymentFake, setPaymentFake] = useState('R$ 100,00');
-  const [cashBackFake, setCashBackFake] = useState('R$ 100,00');
+  const [cashBackFake, setCashBackFake] = useState('R$ 12,00');
   const [percentCash, setPercentCash] = useState('12%');
 
-  const formatASMoney = (n)=> {
-    const numberFormated = formatASNumber(n)
-    const moneyFormated = numberFormated.toLocaleString('pt-br',{style:'currency',currency:'BRL'})
-    setPaymentFake(moneyFormated)
- }
- const percentFormat = (n) =>{
+const formatASMoney = (n) => {
+  const numberFormated = formatASNumber(n)
+  const moneyFormated = numberFormated.toLocaleString('pt-br',{style:'currency',currency:'BRL'})
+  setPaymentFake(moneyFormated)
+  returnCashBack(paymentFake,percentCash)
+}
+const formatASPercentage = (n) =>{
   const numberFormated = formatASNumber(n)
   const percentageFormated = numberFormated.toLocaleString('pt-br',{style:'percent'});
   setPercentCash(percentageFormated)
-
-
-  }
-
-  const returnCashBack = (v,i)=>{
-    const valueCashBackFormated = formatASNumber(v)
-    const taxaCashBack = formatASNumber(i)
-    setCashBackFake(valueCashBackFormated*taxaCashBack)
-
-  }
-
-  const formatASNumber = (n)=> {
-    if(typeof(n)!== 'number'){
-    return  parseInt(n.replace(/\D/g, ''))/100
-  }
-
-  if(typeof(n)=== 'number'){
-  return  n/100
-  }
+  returnCashBack(paymentFake,percentCash)
+}
+const returnCashBack = (v,i)=>{
+  const valueCashBackFormated = formatASNumber(v)
+  const taxaCashBack = formatASNumber(i)
+  const result = (valueCashBackFormated*taxaCashBack).toLocaleString('pt-br',{style:'currency',currency:'BRL'})
+  setCashBackFake(result)
+}
+const formatASNumber = (n)=> {
+  if(!isNumber(n)){return  parseInt(n.replace(/\D/g, ''))/100}
+  if(isNumber(n)){return  n/100}
 
 }
 
@@ -118,20 +112,20 @@ export default function Home() {
                         onChange={(e) => formatASMoney(e.target.value)}
                         className="font-weight-bold text-grey ml-3 w-50 border-0"
                         onBlur={() => formatASMoney(paymentFake)}
-                        style={{ fontSize: 10 }} value={paymentFake} />
+                        style={{ fontSize: 40 }} value={paymentFake} />
 
                 </p>
               </div>
 <div className=" text-center ">
               <h5 className="font-weight-bold  mt-4  text-center">
 Cash:
-                <input onChange={(e) => setPercentCash(e.target.value)} className="font-weight-bold text-grey w-25 border-0" onBlur={() => percentFormat(percentCash)} value={percentCash}/>
+                <input onChange={(e) => setPercentCash(e.target.value)} className="font-weight-bold text-grey w-25 border-0" onBlur={() => formatASPercentage(percentCash)} value={percentCash}/>
               </h5>
 
               <h5 className="font-weight-bold ">
 Retorno:
-                <span className="font-weight-bold ml-1">R$</span>
-                <span className="font-weight-bold ml-2 text-primary">{paymentFake}</span>
+
+                <span className="font-weight-bold ml-2 text-primary">{cashBackFake}</span>
               </h5>
               </div>
             </div>

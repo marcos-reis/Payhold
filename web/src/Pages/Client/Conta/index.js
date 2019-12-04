@@ -15,20 +15,23 @@ export default function Conta({history}) {
 
   const [conta,setConta] =useState([])
   const [isNull,setIsNull] = useState(true)
-  useEffect(()=>{
-    async function loadData(){
-     const response = await api.get('/bankaccounts/1',{headers:{
-       Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjEsImlhdCI6MTU3NDE5NjQ4NX0.t2qqq_pNt7fC5TSVim8en70j68zsBtQ7oQdQCxrEm7E"
-     }})
-     setConta(response.data.bankaccounts[0].accounts)
-    if(response.data.bankaccounts[0].accounts !== undefined){
 
-    setIsNull(!true)
+useEffect(()=>{
+  async function loadData(){
+    const response = await api.get('/bankaccounts/1',{
+			headers:{
+				Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjEsImlhdCI6MTU3NDE5NjQ4NX0.t2qqq_pNt7fC5TSVim8en70j68zsBtQ7oQdQCxrEm7E"
+      }
+})
+const {bankaccounts: accounts } = response.data
+	setConta(accounts)
+if(accounts !== undefined){
+	setIsNull(!true)
+	}
+}
+loadData()
 
-    }}
-    loadData()
-
-  },[])
+},[])
   function confirmAccountOFTransfer(v){
     localStorage.setItem('AccountID',v.id)
     history.push('/saque')

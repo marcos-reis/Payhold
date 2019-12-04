@@ -41,9 +41,9 @@ class UserController {
     const user = await User.query()
       .select('*')
       .where('id', id)
-      // .with('accounts')
-      // .with('cashbacks')
-      // .with('transfers')
+      .with('accounts')
+      .with('cashbacks')
+      .with('transfers')
       // .with('requestTransfers')
       .fetch()
     return { user }

@@ -11,13 +11,13 @@ export default function Login({history}) {
   const dispatch = useDispatch()
   const {login:authlogin} = useSelector(state => state)
 
-  const [email,setEmail] = useState()
-  const [password,setPassword] = useState()
+  const [email,setEmail] = useState("")
+  const [password,setPassword] = useState('')
 
   async function authentication(){
     const response = await api.post("/sessions",{
-      email:"marcos@payhold.com",
-      password:'123456789'
+      email,
+      password
     })
 if (response.data.message === undefined){
     dispatch({type:"INITIAL_SESSION",data:response.data})
@@ -43,8 +43,8 @@ if (response.data.message === undefined){
               <Link to="/" className="text-decoration-none"><h1 className="text-primary text-center font-weight-bold ">Payhold</h1></Link>
             </div>
             <div className="col-11 mb-5">
-              <input className="form-control mb-4" type="text"  placeholder="Email" value={email} />
-              <input className="form-control " type="password" placeholder="Senha" value={password}/>
+              <input className="form-control mb-4" onChange={(e)=>setEmail(e.target.value)} type="text"  placeholder="Email" value={email} />
+              <input className="form-control " onChange={(e)=>setPassword(e.target.value)} type="password" placeholder="Senha" value={password}/>
             <span className="text-danger position-absolute">{authlogin.message}</span>
             </div>
             <div className="col-10 text-center">
