@@ -1,4 +1,5 @@
 import React,{useState,useEffect} from 'react';
+import { isNumber } from 'util';
 
 import Navbar from '../../../Components/Client/Navbar';
 
@@ -8,9 +9,22 @@ import './style.css';
 
 
 export default function Saque({history}) {
+	const formatASMoney = (n) => {
+		const numberFormated = formatASNumber(n)
+		const moneyFormated = numberFormated.toLocaleString('pt-br',{style:'currency',currency:'BRL'})
+		return moneyFormated
+	}
+	const formatASNumber = (n)=> {
+		if(!isNumber(n)){return  parseInt(n.replace(/\D/g, ''))/100}
+		if(isNumber(n)){return  n/100}
+
+	}
+	const changeState = (setState,State) =>{
+		setState(State)
+	}
 
   const [balance,setBalance] = useState(null)
-  const [valueTransfer, setValueTransfer] = useState(0)
+  const [valueTransfer, setValueTransfer] = useState('R$ 0,00')
 
   useEffect(()=>{
 
@@ -21,10 +35,7 @@ export default function Saque({history}) {
     });
 
 var total = 0
-response.data.user[0].cashbacks
-    .concat(
-      response.data.user[0].transfers
-      ).map((v)=>  total += v.value)
+response.data.user[0].cashbacks.concat(response.data.user[0].transfers).map((v)=>  total += v.value)
 
 setBalance(total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }))
 
@@ -39,7 +50,7 @@ loadData()
     await api.post('/transfers',{
       account_id: localStorage.getItem("AccountID"),
       user_id:1,
-      value:valueTransfer
+      value:formatASNumber(valueTransfer)
     })
     //localStorage.removeItem("valueTransfer")
 	//localStorage.removeItem("AccountID")
@@ -54,11 +65,10 @@ requestTransfer()
 
      <div className="row" style={{ backgroundColor: '#E4E7EA' }}>
 
-         <div className="col-xl-2 col-lg-3 col-md-4" />
 		 <Navbar/>
 
 
-               <div className="container">
+               <div className="container mt-5 pt-5">
 
                  <div className="justify-content-center row">
                    <div className="row text-center col-12">
@@ -67,7 +77,7 @@ requestTransfer()
                  </div>
                  <div className="mt-5 py-5 col-11 bg-light justify-content-center text-center flex-column row">
         <h2 className="mb-5">Quanto você deseja<br/> retirar?</h2>
-        <input style={{fontSize:35}} className="border-0 text-center mb-5 text-grey" onChange={(v)=>setValueTransfer(v.target.value)} value={valueTransfer}/>
+  <input style={{fontSize:35}} className="border-0 text-center mb-5 text-grey" onChange={/*(v)=>setValueTransfer(v.target.value)*/ (e)=>changeState(setValueTransfer,formatASMoney(e.target.value))} value={valueTransfer}/>
         <span style={{fontSize:10}}  className="text-grey">Valor mínimo <br/>para retirada R$ 20,00</span>
 
               </div>
