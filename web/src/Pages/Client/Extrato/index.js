@@ -9,39 +9,33 @@ import './style.css';
 
 export default function Extrato({history}) {
 
+	const [historyData,setHistoryData] = useState([])
+	const [balance,setBalance] =useState([])
 
-  const [historyData,setHistoryData] = useState([])
-  const [balance,setBalance] =useState([])
+useEffect(()=>{
 
-  useEffect(()=>{
-
-    async function loadData(){
-    const response = await api.get('/users/1');
+	async function loadData(){
+	const response = await api.get('/users/1');
 
 
-var total = 0
-const {cashbacks,transfers} = response.data.user[0];
+	let total = 0
+	const {cashbacks,transfers} = response.data.user[0];
 
-cashbacks
-    .concat(
-      transfers
-      ).map((v)=>  total += v.value)
+	cashbacks.concat(transfers).map((v)=>  total += v.value)
 
-setHistoryData(cashbacks
-  .concat(
-    transfers))
-setBalance(total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }))
+	setHistoryData(cashbacks.concat(transfers))
+
+	setBalance(total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }))}
+
+
+	loadData()
+
+},[])
+
+function requestTransfer(){
+history.push('/conta')
+
 }
-
-
-loadData()
-
-  },[])
-
-  function requestTransfer(){
-    history.push('/conta')
-
-  }
 
 
   return (<>
