@@ -49,8 +49,7 @@ class BankAccountController {
 
     const bankaccounts = await BankAccount.query()
       .select('*')
-      .where('id', id)
-      // .with('accounts')
+      .where('user_id', id)
       .fetch()
     return response.status(200).json({ bankaccounts })
   }
