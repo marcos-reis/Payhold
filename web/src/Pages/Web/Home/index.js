@@ -9,7 +9,9 @@ import google from '../../../Assets/google-play-store.png';
 import shape from '../../../Assets/liquid-shape.png';
 import appMobile from '../../../Assets/iPhoneX.png';
 
-import { isNumber } from 'util';
+import './style.css'
+
+import { isNumber, isUndefined, isNull } from 'util';
 
 
 export default function Home() {
@@ -30,13 +32,16 @@ const formatASPercentage = (n) =>{
 	return percentageFormated
 }
 const formatASNumber = (n)=> {
+	if(isUndefined(n)){return  0}
+	if(isNull(n)){return  0}
+	if(n==='%'){return 0}
 	if(!isNumber(n)){return  parseInt(n.replace(/\D/g, ''))/100}
 	if(isNumber(n)){return  n/100}
-
 }
 const changeState = (setState,State) =>{
 	setState(State)
 	calculateCashBack(payment,percentOFCash)
+
 }
 
 const calculateCashBack = (v,i)=>{
@@ -116,24 +121,31 @@ Faça seu registro e baixe o nosso app.
 <p className="text-center my-3">
 
 <input
-onChange={/*(e) => formatASMoney(e.target.value)*/ (e)=>  changeState(setPayment,formatASMoney(e.target.value))}
-className="font-weight-bold text-grey ml-3 w-50 border-0"
-onBlur={/*() => formatASMoney(payment)*/ ()=>  changeState(setPayment,formatASMoney(payment))}
+onChange={ (e)=>  changeState(setPayment,formatASMoney(e.target.value))}
+className="font-weight-bold text-grey noFocus ml-3 w-50 border-0"
+onBlur={()=>  changeState(setPayment,formatASMoney(payment))}
 style={{ fontSize: 40 }} value={payment} />
 
 </p>
 </div>
-<div className=" text-center ">
-<h5 className="font-weight-bold  mt-4  text-center">
+<div className=" text-left ">
+<label>Digite um percentual de cashback</label>
+<h5 className="font-weight-bold   text-left">
 Cash:
-<input onChange={/*(e) => setPercentOFCash(e.target.value)*/(e)=>changeState(setPercentOFCash,formatASPercentage(e.target.value))} className="font-weight-bold text-grey w-25 border-0" onBlur={/*() => formatASPercentage(percentOFCash)*/ ()=>changeState(setPercentOFCash,formatASPercentage(percentOFCash))} value={percentOFCash}/>
+<input
+	onChange={(e)=>changeState(setPercentOFCash,formatASPercentage(e.target.value))}
+	className="font-weight-bold text-grey noFocus w-25 border-0"
+	onBlur={()=>changeState(setPercentOFCash,formatASPercentage(percentOFCash))}
+	value={percentOFCash}/>
+
 </h5>
 
-<h5 className="font-weight-bold ">
+<h5 className="font-weight-bold text-left">
 Retorno:
 
 <span className="font-weight-bold ml-2 text-primary">{cashBack}</span>
 </h5>
+
 </div>
 </div>
 </div>

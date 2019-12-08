@@ -1,12 +1,53 @@
-import React from 'react';
+import React,{useState} from 'react';
 import {Link} from 'react-router-dom'
 import MaterialIcon from 'material-icons-react';
-
+import api from '../../../services/api'
+import { isNumber, isUndefined, isNull } from 'util';
 
 import './style.css';
 
 export default function Register() {
+	const [NameOfUser,setNameOfUser] = useState('')
+	const [EmailOfUser,setEmailOfUser] = useState('')
+	const [CPFOfUser,setCPFOfUser] = useState('')
+	const [FormattedCPFOfUser,setFormattedCPFOfUser] = useState('')
+	const [PasswordOfUser,setPasswordOfUser] = useState('')
+
+	const formatASNumber = (n)=> {
+		if(isUndefined(n)){return  0}
+		if(isNull(n)){return  0}
+		if(n==='%'){return 0}
+		if(!isNumber(n)){return  parseInt(n.replace(/\D/g, ''))}
+		if(isNumber(n)){return  n}
+	}
+
+	const FormatCPF=(value)=>{
+		value = value
+		.replace(/\D/g, '') // substitui qualquer caracter que nao seja numero por nada
+		.replace(/(\d{3})(\d)/, '$1.$2') // captura 2 grupos de numero o primeiro de 3 e o segundo de 1, apos capturar o primeiro grupo ele adiciona um ponto antes do segundo grupo de numero
+		.replace(/(\d{3})(\d)/, '$1.$2')
+		.replace(/(\d{3})(\d{1,2})/, '$1-$2')
+		.replace(/(-\d{2})\d+?$/, '$1') // captura 2 numeros seguidos de um traço e não deixa ser digitado mais nada
+		setFormattedCPFOfUser(value)
+		console.log(value)
+		value = formatASNumber(value)
+		setCPFOfUser(value)
+		console.log(value)
+
+	}
+
+	const RegisterUser=async()=>{
+		const result = await api.post('/users',{
+			fullname:NameOfUser,
+			cpf:CPFOfUser,
+			email:EmailOfUser,
+			password:PasswordOfUser
+		})
+	}
+
+
   return (
+
     <div className="bg-gradient-primary">
       <div className="container p-5">
         <div className="row justify-content-center">
@@ -14,6 +55,7 @@ export default function Register() {
             <div className="col-12">
               <h1 className="text-primary text-center font-weight-bold pb-5">Payhold</h1>
             </div>
+{			/*
             <div style={{ cursor: 'pointer' }} className="col-8 text-center border py-5 mb-5">
               <label style={{ cursor: 'pointer' }} htmlFor="inThumbnail" id="thumbnail">
                 <input id="inThumbnail" type="file" className="form-control" />
@@ -21,15 +63,16 @@ export default function Register() {
               </label>
 
             </div>
-            <div className="col-12">
+			*/}
+            <form  className="col-12">
 
-              <input className="form-control mb-4" placeholder="Nome Completo" />
-              <input className="form-control mb-4" placeholder="Email" />
-              <input className="form-control mb-4" placeholder="CPF" />
-              <input className="form-control mb-5" placeholder="Senha" />
-            </div>
+              <input  type="text" onChange={(e)=>setNameOfUser(e.target.value)} value={NameOfUser} className="form-control mb-4" placeholder="Nome Completo" />
+              <input type="email" onChange={(e)=>setEmailOfUser(e.target.value)} value={EmailOfUser} className="form-control mb-4" placeholder="Email" />
+              <input autoComplete="off" onChange={(e)=>FormatCPF(e.target.value)} value={FormattedCPFOfUser} className="form-control mb-4" placeholder="CPF" />
+              <input type="password" onChange={(e)=>setPasswordOfUser(e.target.value)} value={PasswordOfUser} className="form-control mb-5" placeholder="Senha" />
+            </form>
             <div className="col-8">
-              <Link to="/Login" className="btn btn-gradient-primary rounded-pill font-weight-bold w-100 mb-3">Cadastrar</Link>
+              <button onClick={()=>(RegisterUser())} className="btn btn-gradient-primary rounded-pill font-weight-bold w-100 mb-3">Cadastrar</button>
             </div>
           </div>
         </div>
