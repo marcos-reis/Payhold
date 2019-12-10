@@ -8,6 +8,7 @@ class CashbackController {
       'partner_id',
       'user_id',
       'description'
+
     ])
 
     const Cashbacks = await Cashback.create(data)

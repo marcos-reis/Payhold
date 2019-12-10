@@ -47,5 +47,6 @@
   "main": "index.js",
   "repository": "https://github.com/marcos-reis/payhold-react.git",
   "author": "Marcos Reis <42407618+marcos-reis@users.noreply.github.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "homepage": "https://payhold.com.br"
 }

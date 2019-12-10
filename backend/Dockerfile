@@ -1,11 +1,11 @@
 FROM node
 
-WORKDIR /usr/app
+WORKDIR /usr/api
 
-COPY package.json ./
-RUN yarn install
+COPY package*.json ./
+COPY yarn.lock ./
+
+RUN yarn add dotenv
+RUN yarn global add @adonisjs/cli nodemon
 
 COPY . .
-
-EXPOSE 3000
-CMD ["yarn", "start"]

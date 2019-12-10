@@ -1,11 +1,10 @@
 version: "3"
 
 services:
-
-  web:
+  api:
     build: .
     command: yarn start
     ports:
-      - "80:3000"
+      - "3333:3131"
     volumes:
-      - .:/usr/app
+      - .:/usr/api

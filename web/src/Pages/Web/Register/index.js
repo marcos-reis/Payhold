@@ -1,6 +1,4 @@
 import React,{useState} from 'react';
-import {Link} from 'react-router-dom'
-import MaterialIcon from 'material-icons-react';
 import api from '../../../services/api'
 import { isNumber, isUndefined, isNull } from 'util';
 
@@ -29,15 +27,13 @@ export default function Register() {
 		.replace(/(\d{3})(\d{1,2})/, '$1-$2')
 		.replace(/(-\d{2})\d+?$/, '$1') // captura 2 numeros seguidos de um traço e não deixa ser digitado mais nada
 		setFormattedCPFOfUser(value)
-		console.log(value)
 		value = formatASNumber(value)
 		setCPFOfUser(value)
-		console.log(value)
 
 	}
 
 	const RegisterUser=async()=>{
-		const result = await api.post('/users',{
+	 await api.post('/users',{
 			fullname:NameOfUser,
 			cpf:CPFOfUser,
 			email:EmailOfUser,

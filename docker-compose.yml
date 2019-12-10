@@ -13,8 +13,8 @@ services:
     
   api:
     build: ./backend
-    command: yarn start
+    command: adonis serve --dev --polling
     ports:
-      - "3333:3333"
+      - "3333:3131"
     volumes:
       - ./backend:/usr/api
