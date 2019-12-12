@@ -1,34 +1,31 @@
-import React, { useState } from 'react';
-import {Link} from 'react-router-dom'
-import {useDispatch,useSelector} from "react-redux"
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
-import api from '../../../services/api'
-import {login} from '../../../services/auth'
+import api from "../../../services/api";
+import { login } from "../../../services/auth";
 
-import './style.css';
+import "./style.css";
 
-export default function Login({history}) {
-  const dispatch = useDispatch()
-  const {login:authlogin} = useSelector(state => state)
+export default function Login({ history }) {
+  const dispatch = useDispatch();
+  const { login: authlogin } = useSelector((state) => state);
 
-  const [email,setEmail] = useState("")
-  const [password,setPassword] = useState('')
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  async function authentication(){
-    const response = await api.post("/sessions",{
+  async function authentication() {
+    const response = await api.post("/sessions", {
       email,
-      password
-    })
-if (response.data.message === undefined){
-    dispatch({type:"INITIAL_SESSION",data:response.data})
-    login(response.data.token)
-    history.push('/dashboard')
-
-  }else{
-    dispatch({type:"ERROR_SESSION",data:response.data})
-  }
-
-
+      password,
+    });
+    if (response.data.message === undefined) {
+      dispatch({ type: "INITIAL_SESSION", data: response.data });
+      login(response.data.token);
+      history.push("/dashboard");
+    } else {
+      dispatch({ type: "ERROR_SESSION", data: response.data });
+    }
   }
 
   return (
@@ -43,12 +40,12 @@ if (response.data.message === undefined){
               <Link to="/" className="text-decoration-none"><h1 className="text-primary text-center font-weight-bold ">Payhold</h1></Link>
             </div>
             <div className="col-11 mb-5">
-              <input className="form-control mb-4" onChange={(e)=>setEmail(e.target.value)} type="text"  placeholder="Email" value={email} />
-              <input className="form-control " onChange={(e)=>setPassword(e.target.value)} type="password" placeholder="Senha" value={password}/>
-            <span className="text-danger position-absolute">{authlogin.message}</span>
+              <input className="form-control mb-4" onChange={(e) => setEmail(e.target.value)} type="text" placeholder="Email" value={email} />
+              <input className="form-control " onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Senha" value={password} />
+              <span className="text-danger position-absolute">{authlogin.message}</span>
             </div>
             <div className="col-10 text-center">
-              <button onClick={()=>authentication()} className="btn btn-gradient-primary w-75 mb-3 rounded-pill">Entrar</button>
+              <button type="button" onClick={() => authentication()} className="btn btn-gradient-primary w-75 mb-3 rounded-pill">Entrar</button>
               <Link to="/" className="btn text-primary w-100 mb-5 font-weight-bold">Esqueçeu a senha?</Link>
               <Link to="/Register" className="btn ">
             Não é um membro?

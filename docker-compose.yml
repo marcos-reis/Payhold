@@ -13,8 +13,19 @@ services:
     
   api:
     build: ./backend
+    command: adonis migration:run
     command: adonis serve --dev --polling
     ports:
       - "3333:3131"
     volumes:
       - ./backend:/usr/api
+
+  database:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: mydb
+      MYSQL_USER: payhold
+      MYSQL_PASSWORD: payhold
+    ports: 
+      - "3306:3306"
