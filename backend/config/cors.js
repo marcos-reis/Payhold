@@ -19,7 +19,7 @@ module.exports = {
   */
  origin: function (currentOrigin) {
   if(Env.get('NODE_ENV​') === 'production' ){
-    return currentOrigin === 'mywebsite.com'
+    return currentOrigin === 'payhold.com.br'
   } else {
     return true
   }
