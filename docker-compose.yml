@@ -10,7 +10,7 @@ services:
     volumes:
       - ./web:/usr/app
     depends_on:
-    - api
+      - api
     
   api:
     build: ./backend
