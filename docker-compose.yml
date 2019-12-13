@@ -1,6 +1,7 @@
 version: "3"
 
 services:
+    
   web:
     build: ./web
     command: yarn start
@@ -15,6 +16,8 @@ services:
     build: ./backend
     command: adonis migration:run
     command: adonis serve --dev --polling
+    environment: 
+       DB_HOST: database
     ports:
       - "3333:3131"
     volumes:
@@ -29,3 +32,4 @@ services:
       MYSQL_PASSWORD: payhold
     ports: 
       - "3306:3306"
+
