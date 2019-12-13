@@ -7,6 +7,7 @@
     "plugins": ["react", "jsx-a11y", "import"],
     "extends": "airbnb",
     "rules": {
+
       "react/jsx-filename-extension": [
         "error",
         {
@@ -15,11 +16,17 @@
       ],
       "global-require": "off",
       "import/prefer-default-export": "off",
-      "no-unused-expressions": ["error", { "allowTaggedTemplates": true }],
+	  "no-unused-expressions": ["error",
+		{ "allowTaggedTemplates": true }],
       "no-param-reassign":"error",
-      "react/prop-types": "off",
       "consistent-return":"off",
-      "quotes":["error","double"]
-      
+	  "quotes":["error","double"],
+	  "jsx-a11y/label-has-associated-control": [ 2, {
+		"required": {
+			"some": [ "nesting", "id" ]
+		}
+	  }]
+
       }
-    }
+	}
+
