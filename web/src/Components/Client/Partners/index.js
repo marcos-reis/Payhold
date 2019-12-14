@@ -1,14 +1,31 @@
-import React from 'react';
+import React from "react";
 
-import './style.css';
+import "./style.css";
 
-export default function Partners({ categories, description,thumbnail,name,url }) {
+export default function Partners({
+  categories, description, thumbnail, name, url,
+}) {
   return (
-    <div style={{zIndex:1}} className="mt-5 overflow-auto partner bg-grey position-fixed vh-100 flex-column">
+    <div style={{ zIndex: 1 }} className="mt-5 overflow-auto partner bg-grey position-fixed vh-100 flex-column">
 
-      <div className=" mt-5 text-center  ">
-        <img className=" col-8 col-md-6" src={thumbnail}  alt={name} />
-        <a href={url}>{name}</a>
+      <div className=" mt-5 d-flex text-center flex-column  ">
+
+
+        <img className=" text-center mx-auto col-8 col-md-6" src={thumbnail} alt={name} />
+
+        <a
+          style={{
+            maxWidth: "100%",
+            fontSize: "75px",
+            fontWeight: "bold",
+            color: "#0bcdcdc",
+            textDecoration: "none",
+          }}
+          href={url}
+        >
+Acessar
+
+        </a>
       </div>
       <div className=" mt-5 mx-auto text-justify  col-10 col-md-8">
 

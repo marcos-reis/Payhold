@@ -1,32 +1,32 @@
-import React, { useState } from 'react';
-import { isNumber, isUndefined, isNull } from 'util';
-import api from '../../../services/api';
+import React, { useState } from "react";
+import { isNumber, isUndefined, isNull } from "util";
+import api from "../../../services/api";
 
-import './style.css';
+import "./style.css";
 
 export default function Register({ history }) {
-  const [NameOfUser, setNameOfUser] = useState('');
-  const [EmailOfUser, setEmailOfUser] = useState('');
-  const [CPFOfUser, setCPFOfUser] = useState('');
-  const [FormattedCPFOfUser, setFormattedCPFOfUser] = useState('');
-  const [PasswordOfUser, setPasswordOfUser] = useState('');
-  const [MessageErrorRegister, setMessageErrorRegister] = useState('');
+  const [NameOfUser, setNameOfUser] = useState("");
+  const [EmailOfUser, setEmailOfUser] = useState("");
+  const [CPFOfUser, setCPFOfUser] = useState("");
+  const [FormattedCPFOfUser, setFormattedCPFOfUser] = useState("");
+  const [PasswordOfUser, setPasswordOfUser] = useState("");
+  const [MessageErrorRegister, setMessageErrorRegister] = useState("");
 
   const formatASNumber = (n) => {
     if (isUndefined(n)) { return 0; }
     if (isNull(n)) { return 0; }
-    if (n === '%') { return 0; }
-    if (!isNumber(n)) { return parseInt(n.replace(/\D/g, ''), 10); }
+    if (n === "%") { return 0; }
+    if (!isNumber(n)) { return parseInt(n.replace(/\D/g, ""), 10); }
     if (isNumber(n)) { return n; }
   };
 
   const FormatCPF = (cpf) => {
     const FormattedCPF = cpf
-      .replace(/\D/g, '') // substitui qualquer caracter que nao seja numero por nada
-      .replace(/(\d{3})(\d)/, '$1.$2') // captura 2 grupos de numero o primeiro de 3 e o segundo de 1, apos capturar o primeiro grupo ele adiciona um ponto antes do segundo grupo de numero
-      .replace(/(\d{3})(\d)/, '$1.$2')
-      .replace(/(\d{3})(\d{1,2})/, '$1-$2')
-      .replace(/(-\d{2})\d+?$/, '$1'); // captura 2 numeros seguidos de um traço e não deixa ser digitado mais nada
+      .replace(/\D/g, "") // substitui qualquer caracter que nao seja numero por nada
+      .replace(/(\d{3})(\d)/, "$1.$2") // captura 2 grupos de numero o primeiro de 3 e o segundo de 1, apos capturar o primeiro grupo ele adiciona um ponto antes do segundo grupo de numero
+      .replace(/(\d{3})(\d)/, "$1.$2")
+      .replace(/(\d{3})(\d{1,2})/, "$1-$2")
+      .replace(/(-\d{2})\d+?$/, "$1"); // captura 2 numeros seguidos de um traço e não deixa ser digitado mais nada
     setFormattedCPFOfUser(FormattedCPF);
     const FormattedCPFAtNumber = formatASNumber(FormattedCPF);
     setCPFOfUser(FormattedCPFAtNumber);
@@ -34,7 +34,7 @@ export default function Register({ history }) {
 
 
   const RegisterUser = async () => {
-    const response = await api.post('/users', {
+    const response = await api.post("/users", {
       fullname: NameOfUser,
       cpf: CPFOfUser,
       email: EmailOfUser,
@@ -42,10 +42,10 @@ export default function Register({ history }) {
 
     });
     if (response.data.message === undefined) {
-      history.push('/login');
+      history.push("/login");
     }
     if (response.data.user === undefined) {
-      setMessageErrorRegister('Email/CPF já está em uso');
+      setMessageErrorRegister("Email/CPF já está em uso");
     }
   };
 
@@ -71,13 +71,13 @@ export default function Register({ history }) {
             <form className="col-12 mb-5">
 
               <input type="text" onChange={(e) => setNameOfUser(e.target.value)} value={NameOfUser} className="form-control mb-4" placeholder="Nome Completo" />
-              <input type="email" onChange={(e) => setEmailOfUser(e.target.value)} value={EmailOfUser} className="form-control mb-4" placeholder="Email" />
-              <input autoComplete="off" onChange={(e) => FormatCPF(e.target.value)} value={FormattedCPFOfUser} className="form-control mb-4" placeholder="CPF" />
+              <input type="text" onChange={(e) => FormatCPF(e.target.value)} value={FormattedCPFOfUser} className="form-control mb-4" placeholder="CPF" />
+              <input type="text" onChange={(e) => setEmailOfUser(e.target.value)} value={EmailOfUser} className="form-control mb-4" placeholder="Email" />
               <input type="password" onChange={(e) => setPasswordOfUser(e.target.value)} value={PasswordOfUser} className="form-control mb-2 " placeholder="Senha" />
               <span className="text-danger position-absolute">{MessageErrorRegister}</span>
             </form>
             <div className="col-8">
-              <button onClick={() => (RegisterUser())} className="btn btn-gradient-primary rounded-pill font-weight-bold w-100 mb-3">Cadastrar</button>
+              <button type="button" onClick={() => (RegisterUser())} className="btn btn-gradient-primary rounded-pill font-weight-bold w-100 mb-3">Cadastrar</button>
             </div>
           </div>
         </div>

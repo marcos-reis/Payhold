@@ -1,50 +1,42 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
-import api from '../../../services/api'
+import api from "../../../services/api";
 
-import Navbar from '../../../Components/Client/Navbar';
-import Featured from '../../../Components/Client/Featured';
-import Partners from '../../../Components/Client/Partners';
+import Navbar from "../../../Components/Client/Navbar";
+import Featured from "../../../Components/Client/Featured";
+import Partners from "../../../Components/Client/Partners";
 
 
 // import { Container } from './styles';
 
 
 export default function Dashboard() {
-  const [partners, setPartners ] = useState([])
+  const [partners, setPartners] = useState([]);
   const [Partner, setPartner] = useState(null);
   const [indexPartners, setIndexPartner] = useState(null);
   const [showDetailPartner, setShowDetailPartner] = useState(false);
 
 
-
-
-  useEffect(()=>{
-    async function loadData(){
-      const response = await api.get('/partners')
-      setPartners(response.data.partners)
-
-     }
-    loadData()
-
-  },[])
-
-
-
+  useEffect(() => {
+    async function loadData() {
+      const response = await api.get("/partners");
+      setPartners(response.data.partners);
+    }
+    loadData();
+  }, []);
 
 
   const showPartner = (index, partner) => {
     setPartner(partner);
     setIndexPartner(index);
     setShowDetailPartner(!showDetailPartner);
-
   };
 
 
   return (
     <>
 
-      <div className="row" style={{ backgroundColor: '#E4E7EA' }}>
+      <div className="row" style={{ backgroundColor: "#E4E7EA" }}>
 
         <div className="col-12 ">
           <Navbar />
@@ -55,7 +47,7 @@ export default function Dashboard() {
                   <div
                     onClick={() => showPartner()}
                     onKeyDown={() => showPartner()}
-                    style={{ cursor: 'pointer', zIndex: 1 }}
+                    style={{ cursor: "pointer", zIndex: 1 }}
                     className="text-right position-fixed w-75"
                     tabIndex={indexPartners}
                     role="button"
