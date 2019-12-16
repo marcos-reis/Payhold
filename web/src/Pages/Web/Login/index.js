@@ -25,6 +25,7 @@ export default function Login({ history }) {
       history.push("/dashboard");
     } else {
       dispatch({ type: "ERROR_SESSION", data: response.data });
+      setTimeout(() => dispatch({ type: "ERROR_SESSION", data: "" }), 3000);
     }
   }
 
@@ -42,7 +43,9 @@ export default function Login({ history }) {
             <div className="col-11 mb-5">
               <input className="form-control mb-4" onChange={(e) => setEmail(e.target.value)} type="text" placeholder="Email" value={email} />
               <input className="form-control " onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Senha" value={password} />
-              <span className="text-danger position-absolute">{authlogin.message}</span>
+              <span className="text-danger position-absolute">
+                {authlogin.message}
+              </span>
             </div>
             <div className="col-10 text-center">
               <button type="button" onClick={() => authentication()} className="btn btn-gradient-primary w-75 mb-3 rounded-pill">Entrar</button>

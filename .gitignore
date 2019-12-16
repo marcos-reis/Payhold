@@ -1,3 +1,4 @@
 docker-compose.yml
 web/src/Assets/.DS_Store
 *.log
+backend/database/PayholdDB.sqlite

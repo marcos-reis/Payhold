@@ -41,11 +41,12 @@ export default function Register({ history }) {
       password: PasswordOfUser,
 
     });
-    if (response.data.message === undefined) {
-      history.push("/login");
+    if (response.data[0].message === undefined) {
+      // history.push("/login");
     }
     if (response.data.user === undefined) {
-      setMessageErrorRegister("Email/CPF já está em uso");
+	  setMessageErrorRegister("Email/CPF já está em uso");
+	  setTimeout(() => setMessageErrorRegister(""), 3000);
     }
   };
 
