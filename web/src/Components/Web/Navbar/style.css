@@ -4,3 +4,39 @@
  .navbar-light .navbar-toggler {
   border-color: white;
 }
+
+
+.navbar-light .navbar-brand{
+
+  font-size:2rem;
+}
+.navbar-light .navbar-brand:hover {
+  color:#fff!important;
+}
+
+.navbar-light .navbar-nav .nav-link{
+font-size:1rem;
+font-weight:500;
+margin-right: 1rem!important;
+margin-left: 1rem!important;
+
+}
+.navbar-light .navbar-nav a.new-member{
+	border-radius: 3px;
+	font-weight: 700;
+}
+
+.navbar-light .navbar-nav a.new-member:hover{
+
+background:rgb(238, 237, 237)!important;
+color: #2B6BCB!important;
+border-radius: 3px;
+}
+
+
+.navbar-light .navbar-nav .nav-link:hover {
+  color: #fff!important;
+  background-color: rgba(0,0,0,.15);
+  border-radius: 5px;
+}
+
