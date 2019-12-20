@@ -31,21 +31,20 @@ class UserController {
     return { user }
   }
 
-  async index ({auth,response}) {
+  async index ({ auth, response }) {
     const users = await User.all()
-    if(auth.user.profile === 3){
-      return response.status(403).json({message:"Forbidden"})
+    if (auth.user.profile === 3) {
+      return response.status(403).json({ message: 'Forbidden' })
     }
 
     return { users }
   }
 
-  async show ({ auth,params,request,response }) {
+  async show ({ auth, params, request, response }) {
     const { id } = request.params
-    if(auth.user.profile === 3){
-      return response.status(403).json({message:"Forbidden"})
+    if (auth.user.profile === 3) {
+      return response.status(403).json({ message: 'Forbidden' })
     }
-
 
     const user = await User.query()
       .select('*')
@@ -58,17 +57,17 @@ class UserController {
     return { user }
   }
 
-  async update ({ auth,params,request, response }) {
+  async update ({ auth, params, request, response }) {
     const { id } = await request.params
-    if(auth.user.profile === 3){
-      if(auth.user.id !== parseInt(params.id)){
-      return response.status(403).json({message:"Forbidden"})
+    if (auth.user.profile === 3) {
+      if (auth.user.id !== parseInt(params.id)) {
+        return response.status(403).json({ message: 'Forbidden' })
+      }
     }
-    }
-    if(auth.user.profile === 2){
-      if(auth.user.id !== parseInt(params.id)){
-      return response.status(403).json({message:"Forbidden"})
-    }
+    if (auth.user.profile === 2) {
+      if (auth.user.id !== parseInt(params.id)) {
+        return response.status(403).json({ message: 'Forbidden' })
+      }
     }
     const data = request.only(['fullname', 'email', 'cpf', 'password'])
     const user = await User.find(id)
@@ -77,17 +76,17 @@ class UserController {
     return { user }
   }
 
-  async delete ({auth, params, request, response }) {
+  async delete ({ auth, params, request, response }) {
     const { id } = await request.params
-    if(auth.user.profile === 3){
-      if(auth.user.id !== parseInt(params.id)){
-      return response.status(403).json({message:"Forbidden"})
+    if (auth.user.profile === 3) {
+      if (auth.user.id !== parseInt(params.id)) {
+        return response.status(403).json({ message: 'Forbidden' })
+      }
     }
-    }
-    if(auth.user.profile === 2){
-      if(auth.user.id !== parseInt(params.id)){
-      return response.status(403).json({message:"Forbidden"})
-    }
+    if (auth.user.profile === 2) {
+      if (auth.user.id !== parseInt(params.id)) {
+        return response.status(403).json({ message: 'Forbidden' })
+      }
     }
     const user = await User.find(id)
     await user.delete()

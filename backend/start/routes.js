@@ -12,7 +12,8 @@ Route.get('/files/:thumbnail', ({ request, response }) => {
   response.download(Helpers.resourcesPath(`../uploads/${thumbnail}`))
 })
 
-Route.post('/sessions', 'SessionController.store').validator('Session')
+Route.post('/sessions', 'SessionController.store')
+Route.put('/sessions', 'SessionController.update')
 Route.post('/users', 'UserController.store')
 
 Route.group(() => {

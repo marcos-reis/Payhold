@@ -14,14 +14,12 @@ test('It should register a new user', async ({ assert, client }) => {
       email: user.email,
       cpf: user.cpf,
       password: user.password,
-      profile:user.profile
+      profile: user.profile
 
     })
     .end()
   response.assertStatus(200)
   assert.exists(response.body.user)
-
-
 })
 
 test('It should list all user', async ({ assert, client }) => {
@@ -36,7 +34,7 @@ test('It should list all user', async ({ assert, client }) => {
 })
 
 test('It not should list all user', async ({ assert, client }) => {
-  const user = await Factory.model('App/Models/User').create({profile:3})
+  const user = await Factory.model('App/Models/User').create({ profile: 3 })
   await Factory.model('App/Models/User').createMany(2)
   const response = await client
     .get('/users')
@@ -56,10 +54,10 @@ test('It should list a user by id', async ({ assert, client }) => {
   assert.exists(response.body.user)
 })
 test('It not should list a user by id', async ({ assert, client }) => {
-  const user = await Factory.model('App/Models/User').create({profile:3})
+  const user = await Factory.model('App/Models/User').create({ profile: 3 })
   await Factory.model('App/Models/User').createMany(2)
   const response = await client
-    .get(`/users/8`)
+    .get('/users/8')
     .loginVia(user)
     .end()
   response.assertStatus(403)
@@ -74,9 +72,9 @@ test('It should delete a user', async ({ assert, client }) => {
   response.assertStatus(204)
 })
 test('It should delete a user', async ({ assert, client }) => {
-  const user = await Factory.model('App/Models/User').create({profile:3})
+  const user = await Factory.model('App/Models/User').create({ profile: 3 })
   const response = await client
-    .delete(`/users/8`)
+    .delete('/users/8')
     .loginVia(user)
     .end()
   response.assertStatus(403)
@@ -99,9 +97,9 @@ test('It should update a user', async ({ assert, client }) => {
   assert.exists(response.body.user)
 })
 test('It not should update a user', async ({ assert, client }) => {
-  const user = await Factory.model('App/Models/User').create({profile:3})
+  const user = await Factory.model('App/Models/User').create({ profile: 3 })
   const response = await client
-    .put(`/users/8`)
+    .put('/users/8')
     .loginVia(user)
     .send({
       fullname: user.fullname,

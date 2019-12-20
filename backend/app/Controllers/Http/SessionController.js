@@ -4,7 +4,7 @@ const { validateAll } = use('Validator')
 
 class SessionController {
   async store ({ auth, request }) {
-    const { email, password } = request.all()
+    const { email, password, withRefreshToken } = request.all()
     const data = request.only(['email', 'password'])
     const rules = {
       email: 'required|email',
@@ -18,11 +18,22 @@ class SessionController {
     }
 
     try {
+      if (withRefreshToken === true) {
+        const { token, refreshToken } = await auth.withRefreshToken().attempt(email, password)
+        return { token, refreshToken }
+      }
       const { token } = await auth.attempt(email, password)
       return { token }
     } catch (error) {
-      return { message: 'Email ou senha inválido.'}
+      return { message: 'Email ou senha inválido.' }
     }
+  }
+
+  async update ({ auth, request }) {
+    const { refreshToken } = request.all()
+
+    const token = await auth.generateForRefreshToken(refreshToken)
+    return token
   }
 }
 
