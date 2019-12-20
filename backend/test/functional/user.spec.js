@@ -13,11 +13,15 @@ test('It should register a new user', async ({ assert, client }) => {
       fullname: user.fullname,
       email: user.email,
       cpf: user.cpf,
-      password: user.password
+      password: user.password,
+      profile:user.profile
+
     })
     .end()
   response.assertStatus(200)
   assert.exists(response.body.user)
+
+
 })
 
 test('It should list all user', async ({ assert, client }) => {
@@ -31,6 +35,16 @@ test('It should list all user', async ({ assert, client }) => {
   assert.exists(response.body.users)
 })
 
+test('It not should list all user', async ({ assert, client }) => {
+  const user = await Factory.model('App/Models/User').create({profile:3})
+  await Factory.model('App/Models/User').createMany(2)
+  const response = await client
+    .get('/users')
+    .loginVia(user)
+    .end()
+  response.assertStatus(403)
+})
+
 test('It should list a user by id', async ({ assert, client }) => {
   const user = await Factory.model('App/Models/User').create()
   await Factory.model('App/Models/User').createMany(2)
@@ -41,6 +55,15 @@ test('It should list a user by id', async ({ assert, client }) => {
   response.assertStatus(200)
   assert.exists(response.body.user)
 })
+test('It not should list a user by id', async ({ assert, client }) => {
+  const user = await Factory.model('App/Models/User').create({profile:3})
+  await Factory.model('App/Models/User').createMany(2)
+  const response = await client
+    .get(`/users/8`)
+    .loginVia(user)
+    .end()
+  response.assertStatus(403)
+})
 
 test('It should delete a user', async ({ assert, client }) => {
   const user = await Factory.model('App/Models/User').create()
@@ -49,6 +72,14 @@ test('It should delete a user', async ({ assert, client }) => {
     .loginVia(user)
     .end()
   response.assertStatus(204)
+})
+test('It should delete a user', async ({ assert, client }) => {
+  const user = await Factory.model('App/Models/User').create({profile:3})
+  const response = await client
+    .delete(`/users/8`)
+    .loginVia(user)
+    .end()
+  response.assertStatus(403)
 })
 
 test('It should update a user', async ({ assert, client }) => {
@@ -66,4 +97,18 @@ test('It should update a user', async ({ assert, client }) => {
 
   response.assertStatus(200)
   assert.exists(response.body.user)
+})
+test('It not should update a user', async ({ assert, client }) => {
+  const user = await Factory.model('App/Models/User').create({profile:3})
+  const response = await client
+    .put(`/users/8`)
+    .loginVia(user)
+    .send({
+      fullname: user.fullname,
+      email: user.email,
+      cpf: user.cpf,
+      password: user.password
+    })
+    .end()
+  response.assertStatus(403)
 })

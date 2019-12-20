@@ -20,6 +20,7 @@ Factory.blueprint('App/Models/User', (faker, i, data) => {
     shortname: faker.name(),
     email: faker.email({ domain: 'gmail.com' }),
     cpf: faker.cpf(),
+    profile:faker.integer({ min: 1, max: 2}),
     password: faker.string({ length: 8, pool: 'abc123' }),
     ...data
   }

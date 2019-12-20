@@ -144,7 +144,7 @@ concedido em tempo real!
 Cash:
                   <input
                     onChange={(e) => changeState(setPercentOFCash, formatASPercentage(e.target.value))}
-                    className="font-weight-bold bg-dark text-grey noFocus border-0"
+                    className="font-weight-bold text-grey noFocus border-0"
                     style={{ width: "50px" }}
                     onBlur={() => changeState(setPercentOFCash, formatASPercentage(percentOFCash))}
                     value={percentOFCash}

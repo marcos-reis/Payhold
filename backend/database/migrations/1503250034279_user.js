@@ -13,6 +13,9 @@ class UserSchema extends Schema {
         .string('email')
         .notNullable()
         .unique()
+        table
+        .integer('profile')
+        .notNullable()
       table
         .string('cpf')
         .notNullable()
