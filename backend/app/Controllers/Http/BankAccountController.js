@@ -5,6 +5,7 @@ const { validateAll } = use('Validator')
 const Helpers = use('Helpers')
 const User = use('App/Models/User')
 const BankAccount = use('App/Models/BankAccount')
+const Drive = use ('Drive')
 
 class BankAccountController {
   async store ({ request, response }) {
@@ -23,9 +24,10 @@ class BankAccountController {
       size: '2mb'
     })
     const validation = await validateAll(data, rules)
+    const fileRenamed = `${new Date().getTime() + bank.toLowerCase()}.${file.subtype}`
 
     await file.move(Helpers.tmpPath('../uploads'), {
-      name: `${new Date().getTime() + bank.toLowerCase()}.${file.subtype}`,
+      name: fileRenamed,
       overwrite: true
     })
 
@@ -35,6 +37,8 @@ class BankAccountController {
     if (validation.fails()) {
       return response.status(401).json(validation.messages())
     }
+    const removed = await Drive.delete(`../uploads/${fileRenamed}`)
+
     const thumbnail = `${file.fileName}`
 
     const bankaccounts = await BankAccount.create({

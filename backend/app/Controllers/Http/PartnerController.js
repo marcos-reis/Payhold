@@ -2,6 +2,7 @@
 
 const { validateAll } = use('Validator')
 const Helpers = use('Helpers')
+const Drive = use ('Drive')
 
 const Partner = use('App/Models/Partner')
 class PartnerController {
@@ -19,8 +20,10 @@ class PartnerController {
       percentage: 'required'
     }
 
+    const fileRenamed = `${new Date().getTime() + name.toLowerCase()}.${file.subtype}`
+
     await file.move(Helpers.tmpPath('../uploads'), {
-      name: `${new Date().getTime() + name.toLowerCase()}.${file.subtype}`,
+      name: fileRenamed,
       overwrite: true
     })
 
@@ -32,6 +35,8 @@ class PartnerController {
       return response.status(401).json(validation.messages())
     }
 
+    const removed = await Drive.delete(`../uploads/${fileRenamed}`)
+
     const thumbnail = `${file.fileName}`
 
     const partner = await Partner.create({
@@ -42,7 +47,7 @@ class PartnerController {
       url,
       thumbnail
     })
-    return { partner }
+    return { partner, removed,fileRenamed }
   }
 
   async index ({ request, response }) {

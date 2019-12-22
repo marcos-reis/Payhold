@@ -71,7 +71,7 @@ test('It should delete a user', async ({ assert, client }) => {
     .end()
   response.assertStatus(204)
 })
-test('It should delete a user', async ({ assert, client }) => {
+test('It not should delete a user', async ({ assert, client }) => {
   const user = await Factory.model('App/Models/User').create({ profile: 3 })
   const response = await client
     .delete('/users/8')
