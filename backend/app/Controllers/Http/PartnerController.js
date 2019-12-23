@@ -2,7 +2,7 @@
 
 const { validateAll } = use('Validator')
 const Helpers = use('Helpers')
-const Drive = use ('Drive')
+const Drive = use('Drive')
 
 const Partner = use('App/Models/Partner')
 class PartnerController {
@@ -12,12 +12,13 @@ class PartnerController {
       size: '2mb'
     })
 
-    var data = request.only(['name', 'url', 'category', 'percentage', 'description'])
-    var { name, description, url, category, percentage } = request.all()
+    var data = request.only(['name', 'url', 'category', 'percentageAverage', 'description', 'theme'])
+    var { name, description, url, category, percentageAverage, theme } = request.all()
     const rules = {
       name: 'required',
       category: 'required',
-      percentage: 'required'
+      percentageAverage: 'required',
+      theme: 'required'
     }
 
     const fileRenamed = `${new Date().getTime() + name.toLowerCase()}.${file.subtype}`
@@ -43,11 +44,12 @@ class PartnerController {
       name,
       description,
       category,
-      percentage,
+      percentageAverage,
       url,
-      thumbnail
+      thumbnail,
+      theme
     })
-    return { partner, removed,fileRenamed }
+    return { partner, removed, fileRenamed }
   }
 
   async index ({ request, response }) {

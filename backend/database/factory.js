@@ -30,9 +30,10 @@ Factory.blueprint('App/Models/Partner', (faker, i, data) => {
   return {
     name: faker.company(),
     category: 'E-commerce',
-    percentage: `${faker.floating({ min: 0, max: 1, fixed: 2 })}`,
+    percentageAverage: `${faker.floating({ min: 0, max: 1, fixed: 2 })}`,
     description: faker.paragraph(),
     url: faker.url(),
+    theme: '#501970',
     ...data
   }
 })

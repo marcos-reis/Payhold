@@ -10,9 +10,10 @@ class PartnerSchema extends Schema {
       table.string('name', 80).notNullable()
       table.string('description').notNullable()
       table.string('category', 80).notNullable()
-      table.float('percentage', 80).notNullable()
+      table.float('percentageAverage', 80).notNullable()
       table.string('thumbnail')
       table.string('url').notNullable()
+      table.string('theme').notNullable()
       table.timestamps()
     })
   }
