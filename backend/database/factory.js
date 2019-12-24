@@ -25,6 +25,13 @@ Factory.blueprint('App/Models/User', (faker, i, data) => {
     ...data
   }
 })
+Factory.blueprint('App/Models/Token', (faker, i, data) => {
+  return {
+    type: data.type || 'refreshToken',
+    token: faker.string({length:20}),
+    ...data
+  }
+})
 
 Factory.blueprint('App/Models/Partner', (faker, i, data) => {
   return {

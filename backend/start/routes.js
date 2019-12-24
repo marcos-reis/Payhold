@@ -15,6 +15,7 @@ Route.get('/files/:thumbnail', ({ request, response }) => {
 Route.post('/sessions', 'SessionController.store')
 Route.put('/sessions', 'SessionController.update')
 Route.post('/forgotpassword', 'ForgotPasswordController.store')
+Route.post('/resetpassword', 'ResetpasswordController.store')
 Route.post('/users', 'UserController.store')
 
 Route.group(() => {
