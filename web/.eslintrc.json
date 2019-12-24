@@ -6,6 +6,7 @@
     },
     "plugins": ["react", "jsx-a11y", "import"],
     "extends": "airbnb",
+    "plugins": ["eslint-plugin-import-helpers"],
     "rules": {
 
       "react/jsx-filename-extension": [
@@ -25,7 +26,8 @@
 		"required": {
 			"some": [ "nesting", "id" ]
 		}
-	  }]
+    }],
+    "import-helpers/order-imports": "warn"
 
       }
 	}

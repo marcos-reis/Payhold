@@ -1,14 +1,14 @@
-const { test, trait, ...suite } = use('Test/Suite')('Accounts')
-const Factory = use('Factory')
-const Helpers = use('Helpers')
+const { test, trait } = use('Test/Suite')('Accounts');
+const Factory = use('Factory');
+const Helpers = use('Helpers');
 
-trait('Test/ApiClient')
-trait('Auth/Client')
-trait('DatabaseTransactions')
+trait('Test/ApiClient');
+trait('Auth/Client');
+trait('DatabaseTransactions');
 
 test('It should register a new bank account', async ({ assert, client }) => {
-  const user = await Factory.model('App/Models/User').create()
-  const bankaccount = await Factory.model('App/Models/BankAccount').make()
+  const user = await Factory.model('App/Models/User').create();
+  const bankaccount = await Factory.model('App/Models/BankAccount').make();
   const response = await client
     .post('/bankaccounts')
     .loginVia(user, 'jwt')
@@ -18,61 +18,61 @@ test('It should register a new bank account', async ({ assert, client }) => {
     .field('agency', bankaccount.agency)
     .field('user_id', user.id)
     .attach('thumbnail', Helpers.tmpPath('../assets/Inter.png'))
-    .end()
+    .end();
 
-  const { bankaccounts } = response.body
-  response.assertStatus(200)
-  assert.exists(bankaccounts)
-})
+  const { bankaccounts } = response.body;
+  response.assertStatus(200);
+  assert.exists(bankaccounts);
+}).timeout(0);
 
 test('It should list all account of a user', async ({ assert, client }) => {
-  const user = await Factory.model('App/Models/User').create()
+  const user = await Factory.model('App/Models/User').create();
   await Factory.model('App/Models/BankAccount').create({
-    user_id: user.id
-  })
+    user_id: user.id,
+  });
   await Factory.model('App/Models/BankAccount').create({
-    user_id: user.id
-  })
+    user_id: user.id,
+  });
 
   const response = await client
     .get(`/bankaccounts/${user.id}`)
     .loginVia(user)
-    .end()
+    .end();
 
-  const { bankaccounts } = response.body
-  response.assertStatus(200)
-  assert.exists(bankaccounts)
-})
+  const { bankaccounts } = response.body;
+  response.assertStatus(200);
+  assert.exists(bankaccounts);
+}).timeout(0);
 
 test('It should update a account of a user', async ({ assert, client }) => {
-  const user = await Factory.model('App/Models/User').create()
+  const user = await Factory.model('App/Models/User').create();
   await Factory.model('App/Models/BankAccount').create({
-    user_id: user.id
-  })
+    user_id: user.id,
+  });
   const bankaccount = await Factory.model('App/Models/BankAccount').create({
-    user_id: user.id
-  })
+    user_id: user.id,
+  });
 
   const response = await client
     .put(`/bankaccounts/${bankaccount.id}`)
     .loginVia(user)
-    .end()
+    .end();
 
-  const { bankaccounts } = response.body
-  response.assertStatus(200)
-  assert.exists(bankaccounts)
-})
+  const { bankaccounts } = response.body;
+  response.assertStatus(200);
+  assert.exists(bankaccounts);
+}).timeout(0);
 
 test('It should delete a account of a user', async ({ assert, client }) => {
-  const user = await Factory.model('App/Models/User').create()
+  const user = await Factory.model('App/Models/User').create();
   const bankaccount = await Factory.model('App/Models/BankAccount').create({
-    user_id: user.id
-  })
+    user_id: user.id,
+  });
 
   const response = await client
     .delete(`/bankaccounts/${bankaccount.id}`)
     .loginVia(user)
-    .end()
+    .end();
 
-  response.assertStatus(200)
-})
+  response.assertStatus(200);
+}).timeout(0);

@@ -2,18 +2,29 @@
     "env": {
         "browser": true,
         "commonjs": true,
-        "es6": true
+        "es6": true,
+        "node": true
     },
     "extends": [
         "airbnb-base"
     ],
     "globals": {
         "Atomics": "readonly",
-        "SharedArrayBuffer": "readonly"
+        "SharedArrayBuffer": "readonly",
+        "use":true
     },
     "parserOptions": {
         "ecmaVersion": 2018
-    },
+    },"plugins": ["eslint-plugin-import-helpers"],
     "rules": {
+      "class-methods-use-this":["error",
+        {"exceptMethods":["index","show","store","update","destroy"]}],
+      "no-unused-vars":"error",
+      "camelcase":["error",
+        {"ignoreDestructuring":true,"allow":["user_id","account_id","partner_id"]}],
+      "no-empty-pattern":"error",
+      "consistent-return":"off"
+
     }
+
 }
