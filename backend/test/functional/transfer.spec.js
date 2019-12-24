@@ -1,18 +1,18 @@
-const { test, trait } = use('Test/Suite')('Transfer');
+const { test, trait } = use("Test/Suite")("Transfer");
 
-const Factory = use('Factory');
+const Factory = use("Factory");
 
-trait('Test/ApiClient');
-trait('Auth/Client');
-trait('DatabaseTransactions');
+trait("Test/ApiClient");
+trait("Auth/Client");
+trait("DatabaseTransactions");
 
-test('it should realize a request of transfer for bank account', async ({ assert, client }) => {
-  const user = await Factory.model('App/Models/User').create();
-  const bankaccount = await Factory.model('App/Models/BankAccount').create({ user_id: user.id });
-  const transfer = await Factory.model('App/Models/Transfer').make();
+test("it should realize a request of transfer for bank account", async ({ client }) => {
+  const user = await Factory.model("App/Models/User").create();
+  const bankaccount = await Factory.model("App/Models/BankAccount").create({ user_id: user.id });
+  const transfer = await Factory.model("App/Models/Transfer").make();
 
   const response = await client
-    .post('/transfers')
+    .post("/transfers")
     .loginVia(user)
     .send({
       user_id: user.id,
@@ -24,13 +24,13 @@ test('it should realize a request of transfer for bank account', async ({ assert
   response.assertStatus(200);
 }).timeout(0);
 
-test('it should list all the request of transfer for bank account', async ({ assert, client }) => {
-  const user = await Factory.model('App/Models/User').create();
-  const bankaccount = await Factory.model('App/Models/BankAccount').create({ user_id: user.id });
-  await Factory.model('App/Models/Transfer').create({ user_id: user.id, account_id: bankaccount.id });
+test("it should list all the request of transfer for bank account", async ({ client }) => {
+  const user = await Factory.model("App/Models/User").create();
+  const bankaccount = await Factory.model("App/Models/BankAccount").create({ user_id: user.id });
+  await Factory.model("App/Models/Transfer").create({ user_id: user.id, account_id: bankaccount.id });
 
   const response = await client
-    .get('/transfers')
+    .get("/transfers")
     .loginVia(user)
     .send({
     })
@@ -38,16 +38,16 @@ test('it should list all the request of transfer for bank account', async ({ ass
   response.assertStatus(200);
 }).timeout(0);
 
-test('it confirme a transfer for bank account', async ({ assert, client }) => {
-  const user = await Factory.model('App/Models/User').create();
-  const bankaccount = await Factory.model('App/Models/BankAccount').create({ user_id: user.id });
-  const transfer = await Factory.model('App/Models/Transfer').create({ user_id: user.id, account_id: bankaccount.id });
+test("it confirme a transfer for bank account", async ({ client }) => {
+  const user = await Factory.model("App/Models/User").create();
+  const bankaccount = await Factory.model("App/Models/BankAccount").create({ user_id: user.id });
+  const transfer = await Factory.model("App/Models/Transfer").create({ user_id: user.id, account_id: bankaccount.id });
 
   const response = await client
     .put(`/transfers/${transfer.id}`)
     .loginVia(user)
     .send({
-      description: 'Transferência realizada',
+      description: "Transferência realizada",
       confirmed: 1,
     })
     .end();

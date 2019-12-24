@@ -1,23 +1,23 @@
-const { test, trait } = use('Test/Suite')('Accounts');
-const Factory = use('Factory');
-const Helpers = use('Helpers');
+const { test, trait } = use("Test/Suite")("Accounts");
+const Factory = use("Factory");
+const Helpers = use("Helpers");
 
-trait('Test/ApiClient');
-trait('Auth/Client');
-trait('DatabaseTransactions');
+trait("Test/ApiClient");
+trait("Auth/Client");
+trait("DatabaseTransactions");
 
-test('It should register a new bank account', async ({ assert, client }) => {
-  const user = await Factory.model('App/Models/User').create();
-  const bankaccount = await Factory.model('App/Models/BankAccount').make();
+test("It should register a new bank account", async ({ assert, client }) => {
+  const user = await Factory.model("App/Models/User").create();
+  const bankaccount = await Factory.model("App/Models/BankAccount").make();
   const response = await client
-    .post('/bankaccounts')
-    .loginVia(user, 'jwt')
-    .field('cod', bankaccount.cod)
-    .field('bank', bankaccount.bank)
-    .field('account', bankaccount.account)
-    .field('agency', bankaccount.agency)
-    .field('user_id', user.id)
-    .attach('thumbnail', Helpers.tmpPath('../assets/Inter.png'))
+    .post("/bankaccounts")
+    .loginVia(user, "jwt")
+    .field("cod", bankaccount.cod)
+    .field("bank", bankaccount.bank)
+    .field("account", bankaccount.account)
+    .field("agency", bankaccount.agency)
+    .field("user_id", user.id)
+    .attach("thumbnail", Helpers.tmpPath("../assets/Inter.png"))
     .end();
 
   const { bankaccounts } = response.body;
@@ -25,12 +25,12 @@ test('It should register a new bank account', async ({ assert, client }) => {
   assert.exists(bankaccounts);
 }).timeout(0);
 
-test('It should list all account of a user', async ({ assert, client }) => {
-  const user = await Factory.model('App/Models/User').create();
-  await Factory.model('App/Models/BankAccount').create({
+test("It should list all account of a user", async ({ assert, client }) => {
+  const user = await Factory.model("App/Models/User").create();
+  await Factory.model("App/Models/BankAccount").create({
     user_id: user.id,
   });
-  await Factory.model('App/Models/BankAccount').create({
+  await Factory.model("App/Models/BankAccount").create({
     user_id: user.id,
   });
 
@@ -44,12 +44,12 @@ test('It should list all account of a user', async ({ assert, client }) => {
   assert.exists(bankaccounts);
 }).timeout(0);
 
-test('It should update a account of a user', async ({ assert, client }) => {
-  const user = await Factory.model('App/Models/User').create();
-  await Factory.model('App/Models/BankAccount').create({
+test("It should update a account of a user", async ({ assert, client }) => {
+  const user = await Factory.model("App/Models/User").create();
+  await Factory.model("App/Models/BankAccount").create({
     user_id: user.id,
   });
-  const bankaccount = await Factory.model('App/Models/BankAccount').create({
+  const bankaccount = await Factory.model("App/Models/BankAccount").create({
     user_id: user.id,
   });
 
@@ -63,9 +63,9 @@ test('It should update a account of a user', async ({ assert, client }) => {
   assert.exists(bankaccounts);
 }).timeout(0);
 
-test('It should delete a account of a user', async ({ assert, client }) => {
-  const user = await Factory.model('App/Models/User').create();
-  const bankaccount = await Factory.model('App/Models/BankAccount').create({
+test("It should delete a account of a user", async ({ client }) => {
+  const user = await Factory.model("App/Models/User").create();
+  const bankaccount = await Factory.model("App/Models/BankAccount").create({
     user_id: user.id,
   });
 

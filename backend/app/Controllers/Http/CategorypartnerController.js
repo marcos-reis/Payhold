@@ -1,11 +1,11 @@
-const Categorypartner = use('App/Models/Categorypartner');
+const Categorypartner = use("App/Models/Categorypartner");
 
 class CategorypartnerController {
   async store({ request }) {
     const data = await request.only([
-      'category',
-      'percentage',
-      'partner_id',
+      "category",
+      "percentage",
+      "partner_id",
     ]);
 
     const category = await Categorypartner.create(data);
@@ -15,7 +15,7 @@ class CategorypartnerController {
   async index() {
     const category = await Categorypartner
       .query()
-      .select('*')
+      .select("*")
       .fetch();
 
     return { category };

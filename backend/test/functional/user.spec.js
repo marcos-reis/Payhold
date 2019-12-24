@@ -33,7 +33,7 @@ test('It should list all user', async ({ assert, client }) => {
   assert.exists(response.body.users);
 }).timeout(0);
 
-test('It not should list all user', async ({ assert, client }) => {
+test('It not should list all user', async ({ client }) => {
   const user = await Factory.model('App/Models/User').create({ profile: 3 });
   await Factory.model('App/Models/User').createMany(2);
   const response = await client
@@ -53,7 +53,7 @@ test('It should list a user by id', async ({ assert, client }) => {
   response.assertStatus(200);
   assert.exists(response.body.user);
 }).timeout(0);
-test('It not should list a user by id', async ({ assert, client }) => {
+test('It not should list a user by id', async ({ client }) => {
   const user = await Factory.model('App/Models/User').create({ profile: 3 });
   await Factory.model('App/Models/User').createMany(2);
   const response = await client
@@ -63,7 +63,7 @@ test('It not should list a user by id', async ({ assert, client }) => {
   response.assertStatus(403);
 }).timeout(0);
 
-test('It should delete a user', async ({ assert, client }) => {
+test('It should delete a user', async ({ client }) => {
   const user = await Factory.model('App/Models/User').create();
   const response = await client
     .delete(`/users/${user.id}`)
@@ -71,7 +71,7 @@ test('It should delete a user', async ({ assert, client }) => {
     .end();
   response.assertStatus(204);
 }).timeout(0);
-test('It not should delete a user', async ({ assert, client }) => {
+test('It not should delete a user', async ({ client }) => {
   const user = await Factory.model('App/Models/User').create({ profile: 3 });
   const response = await client
     .delete('/users/8')
@@ -96,7 +96,7 @@ test('It should update a user', async ({ assert, client }) => {
   response.assertStatus(200);
   assert.exists(response.body.user);
 }).timeout(0);
-test('It not should update a user', async ({ assert, client }) => {
+test('It not should update a user', async ({ client }) => {
   const user = await Factory.model('App/Models/User').create({ profile: 3 });
   const response = await client
     .put('/users/8')

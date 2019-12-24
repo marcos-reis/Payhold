@@ -1,6 +1,5 @@
 {
     "env": {
-        "browser": true,
         "commonjs": true,
         "es6": true,
         "node": true
@@ -17,13 +16,23 @@
         "ecmaVersion": 2018
     },"plugins": ["eslint-plugin-import-helpers"],
     "rules": {
+      "quotes":["error","double"],
+      "strict": "error",
       "class-methods-use-this":["error",
         {"exceptMethods":["index","show","store","update","destroy"]}],
       "no-unused-vars":"error",
       "camelcase":["error",
         {"ignoreDestructuring":true,"allow":["user_id","account_id","partner_id"]}],
       "no-empty-pattern":"error",
-      "consistent-return":"off"
+      "consistent-return":"error",
+
+      "array-bracket-newline":"error",
+      "array-element-newline":"error",
+      "array-bracket-spacing":"error",
+
+      "object-curly-newline":"error",
+      "object-curly-spacing":"error",
+      "object-property-newline":"error"
 
     }
 

@@ -1,33 +1,39 @@
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 
-const { validateAll } = use('Validator');
+const { validateAll } = use("Validator");
 
-const Helpers = use('Helpers');
-const BankAccount = use('App/Models/BankAccount');
-const Drive = use('Drive');
+const Helpers = use("Helpers");
+const BankAccount = use("App/Models/BankAccount");
+const Drive = use("Drive");
 
 class BankAccountController {
   async store({ request, response }) {
-    const data = request.only(['cod', 'bank', 'agency', 'account', 'user_id']);
+    const data = request.only([
+      "cod",
+      "bank",
+      "agency",
+      "account",
+      "user_id",
+    ]);
     const {
       bank, cod, agency, account, user_id,
     } = request.all();
 
     const rules = {
-      cod: 'required',
-      bank: 'required',
-      agency: 'required',
-      account: 'required',
-      user_id: 'required',
+      cod: "required",
+      bank: "required",
+      agency: "required",
+      account: "required",
+      user_id: "required",
     };
-    const file = request.file('thumbnail', {
-      types: ['image'],
-      size: '2mb',
+    const file = request.file("thumbnail", {
+      types: ["image"],
+      size: "2mb",
     });
     const validation = await validateAll(data, rules);
     const fileRenamed = `${new Date().getTime() + bank.toLowerCase()}.${file.subtype}`;
 
-    await file.move(Helpers.tmpPath('../uploads'), {
+    await file.move(Helpers.tmpPath("../uploads"), {
       name: fileRenamed,
       overwrite: true,
     });
@@ -53,15 +59,15 @@ class BankAccountController {
     const { id } = request.params;
 
     const bankaccounts = await BankAccount.query()
-      .select('*')
-      .where('user_id', id)
+      .select("*")
+      .where("user_id", id)
       .fetch();
     return response.status(200).json({ bankaccounts });
   }
 
   async update({ request }) {
     const data = await request.only([
-      'agency', 'account',
+      "agency", "account",
     ]);
 
     const { id } = request.params;
