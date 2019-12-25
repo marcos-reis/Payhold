@@ -21,7 +21,7 @@ export default function Partners({
             color: "#0bcdcdc",
             textDecoration: "none",
           }}
-          href={url}
+          href={`${url}?mdasc=${id}`}
         >
 Acessar
 

@@ -11,6 +11,7 @@ Route.get("/files/:thumbnail", ({ request, response }) => {
 });
 
 Route.get("/postback", "OrdercashbackController.store");
+Route.put("/postback/:id", "OrdercashbackController.update");
 Route.post("/sessions", "SessionController.store");
 Route.put("/sessions", "SessionController.update");
 Route.post("/forgotpassword", "ForgotPasswordController.store");
@@ -28,7 +29,7 @@ Route.group(() => {
   Route.put("/users/:id", "UserController.update");
   Route.delete("/users/:id", "UserController.destroy");
 
-  Route.post("/cashbacks", "CashbackController.store");
+  Route.post("/cashbacks/:id", "CashbackController.store");
   Route.get("/cashbacks/:id", "CashbackController.show");
 
   Route.post("/transfers", "TransferController.store");

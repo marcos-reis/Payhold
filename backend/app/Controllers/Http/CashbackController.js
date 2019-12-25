@@ -1,18 +1,13 @@
-
 const Cashback = use("App/Models/Cashback");
+const Ordercashback = use("App/Models/Ordercashback");
 
 class CashbackController {
-  async store({ request }) {
-    const data = await request.only([
-      "value",
-      "partner_id",
-      "user_id",
-      "description",
+  async store({ params }) {
+    const { id } = params;
+    const order = await Ordercashback.find(id);
+    const cash = await Cashback.create({ user_id: order.id, description: "Cashback", value: 10.5 });
 
-    ]);
-
-    const Cashbacks = await Cashback.create(data);
-    return { Cashbacks };
+    return { cash };
   }
 
   async show({ request }) {

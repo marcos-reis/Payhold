@@ -13,14 +13,17 @@ import Partners from "../../../Components/Client/Partners";
 export default function Dashboard() {
   const [partners, setPartners] = useState([]);
   const [Partner, setPartner] = useState(null);
+  const [user, setUser] = useState(null);
   const [indexPartners, setIndexPartner] = useState(null);
   const [showDetailPartner, setShowDetailPartner] = useState(false);
 
 
   useEffect(() => {
     async function loadData() {
-      const response = await api.get("/partners");
-      setPartners(response.data.partners);
+	  const response = await api.get("/partners");
+	  const response2 = await api.get("/users");
+	  setPartners(response.data.partners);
+	  setUser(response.data.users);
     }
     loadData();
   }, []);
@@ -55,6 +58,7 @@ export default function Dashboard() {
                     <span className="position-fixed m-2 bg-light  px-2 font-weight-bold rounded-circle ">x</span>
                   </div>
                   <Partners
+				  id={user.id}
                     url={Partner[indexPartners].url}
                     name={Partner[indexPartners].name}
                     thumbnail={Partner[indexPartners].url_thumbnail}

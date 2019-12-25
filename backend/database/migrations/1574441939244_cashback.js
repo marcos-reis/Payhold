@@ -17,8 +17,7 @@ class CashbackSchema extends Schema {
         .integer("partner_id")
         .unsigned()
         .references("id")
-        .inTable("partners")
-        .notNullable();
+        .inTable("partners");
 
       table.string("description").notNullable();
 
