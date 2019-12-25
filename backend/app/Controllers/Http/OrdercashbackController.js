@@ -4,8 +4,6 @@ class OrdercashbackController {
   async store({ request }) {
     const data = request.all();
     console.log(data);
-    const Orders = await Ordercashback.create(data);
-    console.log(Orders.$attributes);
     return {};
   }
 }
