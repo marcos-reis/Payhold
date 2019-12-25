@@ -1,7 +1,7 @@
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use("Model");
 
-class Categorypartner extends Model {
+class Ordercashback extends Model {
 }
 
-module.exports = Categorypartner;
+module.exports = Ordercashback;

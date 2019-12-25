@@ -1,4 +1,3 @@
-
 const {
   test,
   trait,
@@ -13,7 +12,6 @@ const { subHours, format } = require("date-fns");
 
 /** @type {import('@adonisjs/framework/src/Hash')} */
 const Hash = use("Hash");
-
 
 trait("Test/ApiClient");
 trait("Auth/Client");
@@ -34,7 +32,6 @@ test("It should send a new email with a token for reset a password", async ({ as
   const recentEmail = Mail.pullRecent();
 
   assert.equal(recentEmail.message.to[0].address, user.email);
-
 
   assert.include(token.toJSON(), {
     user_id: user.id,
