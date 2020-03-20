@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Encode+Sans:300,400,700&display=swap');
+
+p,h3{
+  font-family: 'Encode Sans', sans-serif;
+}
+*:focus{
+  border:none!important;
+}
