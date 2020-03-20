@@ -1,0 +1,17 @@
+.bg-gradPrimary{
+    background-color: #2B6BCB!important
+  }
+
+.btn-gradPrimary{
+    background-color:#3562A5;
+    color:#fff;
+    border:none;
+  }
+  .form-control::placeholder{
+    color: #a7a7a7;
+    font-weight: 400;
+}
+
+input#inThumbnail{
+display:none
+}
