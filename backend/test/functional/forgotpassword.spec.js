@@ -43,7 +43,7 @@ test("It should send a new email with a token for reset a password", async ({ as
 
 test("It should be able of reset a password", async ({ assert, client }) => {
   const email = "marcos@payhold.com.br";
-  const user = await Factory.model("App/Models/User").create({ email, password: "123455" });
+  const user = await Factory.model("App/Models/User").create({ email, password: "123455", id: 1 });
   const userToken = await Factory.model("App/Models/Token").make();
   await user.tokens().save(userToken);
 

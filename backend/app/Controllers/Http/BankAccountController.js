@@ -5,6 +5,7 @@ const { validateAll } = use("Validator");
 const Helpers = use("Helpers");
 const BankAccount = use("App/Models/BankAccount");
 const Drive = use("Drive");
+const Env = use("Env")
 
 class BankAccountController {
   async store({ request, response }) {
@@ -44,7 +45,11 @@ class BankAccountController {
     if (validation.fails()) {
       return response.status(401).json(validation.messages());
     }
-    await Drive.delete(`../uploads/${fileRenamed}`);
+
+    if (Env.get('NODE_ENV')=='testing'){
+      await Drive.delete(`../uploads/${fileRenamed}`);
+    }
+
 
     const thumbnail = `${file.fileName}`;
 

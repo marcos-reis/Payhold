@@ -2,23 +2,29 @@
 const Schema = use("Schema");
 
 class OrdercashbackSchema extends Schema {
-  up() {
-    this.create("ordercashbacks", (table) => {
-      table.increments();
-      table
-        .integer("user_id")
-        .unsigned()
-        .references("id")
-        .inTable("users");
-      table.string("anuncianteId");
-      table.string("codigoTransacao");
-      table.timestamps();
-    });
-  }
+	up() {
+		this.create("ordercashbacks", (table) => {
+			table.increments();
+			table
+				.integer("user_id")
+				.unsigned()
+				.references("id")
+				.inTable("users");
+			table.string("partnersId");
+			table.string("description");
+			table.string("orderNumber");
+			table.string("valueTotal");
+			table.string("commissTotal");
+			table.string("valueCashback");
+			table.string("percentCashback");
+			table.boolean("confirmed").defaultTo(0).notNullable();
+			table.timestamps();
+		});
+	}
 
-  down() {
-    this.drop("ordercashbacks");
-  }
+	down() {
+		this.drop("ordercashbacks");
+	}
 }
 
 module.exports = OrdercashbackSchema;

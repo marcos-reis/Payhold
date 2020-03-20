@@ -3,7 +3,7 @@ node_modules
 
 # Adonis directory for storing tmp files
 #tmp
-uploads
+#uploads
 
 # Environment variables, never commit this file
 #.env
@@ -13,3 +13,5 @@ uploads
 docker-compose.yml
 Dockerfile
 
+resources/.DS_Store
+resources/views/.DS_Store

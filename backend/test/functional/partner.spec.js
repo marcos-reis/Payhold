@@ -16,7 +16,7 @@ test("It should register a new partner", async ({ client }) => {
     .field("name", partner.name)
     .field("description", partner.description)
     .field("category", partner.category)
-    .field("percentageAverage", partner.percentageAverage)
+    .field("percentage", partner.percentage)
     .field("url", partner.url)
     .field("theme", partner.theme)
     .attach("thumbnail", Helpers.tmpPath("../assets/Inter.png"))
@@ -24,26 +24,16 @@ test("It should register a new partner", async ({ client }) => {
   response.assertStatus(200);
 }).timeout(0);
 
-test("It should list all partners", async ({ assert, client }) => {
+test("It should list all partners", async ({ client }) => {
   const user = await Factory.model("App/Models/User").create();
   await Factory.model("App/Models/Partner").createMany(2);
-
   const response = await client.get("/partners").loginVia(user).end();
-
   response.assertStatus(200);
-
-  assert.exists(response.body.partners);
 }).timeout(0);
 
-test("It should list a only partner, specified by ID", async ({
-  assert,
-  client,
-}) => {
+test("It should list a only partner, specified by ID", async ({ client }) => {
   const user = await Factory.model("App/Models/User").create();
   const partner = await Factory.model("App/Models/Partner").create();
-
   const response = await client.get(`/partners/${partner.id}`).loginVia(user).end();
-
   response.assertStatus(200);
-  assert.exists(response.body.partner);
 }).timeout(0);
